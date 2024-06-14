@@ -15,7 +15,6 @@ namespace Assets.Scripts.Infrasctucture
     {
         public override void InstallBindings()
         {
-            Container.Bind<IAssetsProvider>().To<AssetsProvider>().AsSingle();
             Container.Bind<ITankFactory>().To<TankFactory>().AsSingle();
             Container.Bind<ITanksProvider>().To<TanksProvider>().AsSingle();
             Container.Bind<ICameraControlProvider>().To<CameraControlProvider>().AsSingle();

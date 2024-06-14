@@ -28,16 +28,18 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
         {
             Transform[] spawnPoints = _levelSpawnPointsProvider.SpawnPoints.ToArray();
 
-            Tank tank1 = _tankFactory.CreateTank(spawnPoints[0], Color.blue, 1);
-            Tank tank2 = _tankFactory.CreateTank(spawnPoints[1], Color.red, 2);
+            Tank tank1 = _tankFactory.CreateTank(spawnPoints[1], Color.blue, 1);
+            Tank tank2 = _tankFactory.CreateTank(spawnPoints[0], Color.red, 2);
 
             _tanksProvider.AddTank(tank1);
             _tanksProvider.AddTank(tank2);
+
+            _gameplayStateMachine.EnterState<RoundStartingState>();
         }
 
         public void Exit()
         {
-            throw new NotImplementedException();
+
         }
     }
 }

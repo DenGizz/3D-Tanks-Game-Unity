@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Infrasctucture;
+using Assets.Scripts.Infrasctucture.Core;
 using Assets.Scripts.Infrasctucture.Gameplay.Providers;
 using Assets.Scripts.Infrasctucture.Ui;
 using Assets.Scripts.UI;
@@ -26,11 +27,13 @@ public class GameManager : MonoBehaviour
     private IUiProvider _uiProvider;
     private ICameraControlProvider _cameraControlProvider;
     private ILevelSpawnPointsProvider _levelSpawnPointsProvider;
+    private ICoroutineRunner _coroutineRunner;
 
     [Inject]
     public void Construct(ITankFactory tankFactory, ITanksProvider tanksProvider,
         IUiFactory uiFactory, IUiProvider uiProvider, 
-        ICameraControlProvider cameraControlProvider, ILevelSpawnPointsProvider levelSpawnPointsProvider)
+        ICameraControlProvider cameraControlProvider, 
+        ILevelSpawnPointsProvider levelSpawnPointsProvider, ICoroutineRunner coroutineRunner)
     {
         _tankFactory = tankFactory;
         _tanksProvider = tanksProvider;
@@ -38,6 +41,7 @@ public class GameManager : MonoBehaviour
         _uiProvider = uiProvider;
         _cameraControlProvider = cameraControlProvider;
         _levelSpawnPointsProvider = levelSpawnPointsProvider;
+        _coroutineRunner = coroutineRunner;
     }
 
 
