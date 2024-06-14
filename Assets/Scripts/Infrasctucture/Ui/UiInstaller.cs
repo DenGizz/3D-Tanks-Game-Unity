@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Infrasctucture.Ui;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,7 @@ namespace Assets.Scripts.Infrasctucture
         public override void InstallBindings()
         {
             Container.Bind<IUiFactory>().To<UiFactory>().AsSingle();
+            Container.Bind<IUiProvider>().To<UiProvider>().AsSingle();
         }
     }
 }
