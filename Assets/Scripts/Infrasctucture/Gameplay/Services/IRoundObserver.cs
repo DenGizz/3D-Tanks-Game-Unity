@@ -15,6 +15,5 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.Services
         int PerformedRounds { get; }
 
         void StartObserve();
-        void StopObserve();
     }
 }

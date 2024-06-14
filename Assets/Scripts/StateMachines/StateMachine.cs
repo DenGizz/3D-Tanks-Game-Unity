@@ -11,6 +11,11 @@ namespace Assets.Scripts.StateMachines
         private readonly Dictionary<Type, IState> _states;
         private IState _currentState;
 
+        public StateMachine()
+        {
+            _states = new Dictionary<Type, IState>();
+        }
+
         public void AddState<TState>(TState state) where TState : IState
         {
             _states.Add(typeof(TState), state);

@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Infrasctucture.Gameplay.Providers;
+using Assets.Scripts.Infrasctucture.Gameplay.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +16,7 @@ namespace Assets.Scripts.Infrasctucture
     {
         public override void InstallBindings()
         {
+            Container.Bind<IRoundObserver>().To<RoundObserver>().AsSingle();
             Container.Bind<ITankFactory>().To<TankFactory>().AsSingle();
             Container.Bind<ITanksProvider>().To<TanksProvider>().AsSingle();
             Container.Bind<ICameraControlProvider>().To<CameraControlProvider>().AsSingle();

@@ -18,6 +18,14 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
         private readonly IUiProvider _uiProvider;
         private readonly IRoundObserver _roundObserver;
 
+        public PerformRoundState(StateMachines.StateMachine stateMachine, ITanksProvider tanksProvider, IUiProvider uiProvider, IRoundObserver roundObserver)
+        {
+            _stateMachine = stateMachine;
+            _tanksProvider = tanksProvider;
+            _uiProvider = uiProvider;
+            _roundObserver = roundObserver;
+        }
+
         public void Enter()
         {
             EnableTankControl();

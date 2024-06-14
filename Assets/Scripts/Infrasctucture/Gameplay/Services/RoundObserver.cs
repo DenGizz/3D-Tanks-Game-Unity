@@ -10,7 +10,7 @@ using Zenject;
 
 namespace Assets.Scripts.Infrasctucture.Gameplay.Services
 {
-    public class BattleSessionObserver : IRoundObserver
+    public class RoundObserver : IRoundObserver
     {
         public int PerformedRounds {get; private set;}
 
@@ -26,7 +26,7 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.Services
         private readonly Dictionary<Tank, int> _roundWins = new Dictionary<Tank, int>();
         private bool _isObserving;
 
-        public BattleSessionObserver(ITanksProvider tanksProvider, ICoroutineRunner coroutineRunner)
+        public RoundObserver(ITanksProvider tanksProvider, ICoroutineRunner coroutineRunner)
         {
             _tanksProvider = tanksProvider;
             _coroutineRunner = coroutineRunner;
@@ -53,15 +53,6 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.Services
             _waitForOneTankLeftCoroutine = _coroutineRunner.StartCoroutine(WainForOneTankLeftEnumerator());
         }
 
-        public void StopObserve()
-        {
-            _isObserving = false;
-
-            _roundWins.Clear();
-
-            _coroutineRunner.StopCoroutine(_waitForOneTankLeftCoroutine);
-        }
-
         IEnumerator WainForOneTankLeftEnumerator()
         {
             while (!OneTankLeft())
@@ -70,6 +61,7 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.Services
             }
 
             Tank winner = GetRoundWinner();
+            _roundWins[winner]++;
             RoundWinner = winner;
             RoundWin?.Invoke(winner);
         }

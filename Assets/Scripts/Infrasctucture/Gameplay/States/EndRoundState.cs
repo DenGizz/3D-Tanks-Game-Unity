@@ -25,6 +25,17 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
         Tank m_RoundWinner;
         Tank m_GameWinner;
 
+        public EndRoundState(StateMachine stateMachine, IUiProvider uiProvider, ICoroutineRunner coroutineRunner, ITanksProvider tanksProvider, IStaticDataService staticDataService, IRoundObserver roundObserver)
+        {
+            _stateMachine = stateMachine;
+            _uiProvider = uiProvider;
+            _coroutineRunner = coroutineRunner;
+            _waitDelay = new WaitForSeconds(3f);
+            _tanksProvider = tanksProvider;
+            _staticDataService = staticDataService;
+            _roundObserver = roundObserver;
+        }
+
         public void Enter()
         {
             // Stop tanks from moving.
@@ -77,7 +88,7 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
             message += "\n\n\n\n";
 
             foreach (Tank tank in _tanksProvider.Tanks)
-                message += tank.m_ColoredPlayerText + ": " + tank.m_Wins + " WINS\n";
+                message += tank.m_ColoredPlayerText + ": " + _roundObserver.GetNumberOfRoundWins(tank) + " WINS\n";
 
             // If there is a game winner, change the entire message to reflect that.
             if (m_GameWinner != null)
@@ -88,7 +99,7 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
 
         private Tank GetGameWinner()
         {
-            return _tanksProvider.Tanks.FirstOrDefault(t => t.m_Wins == _staticDataService.BattleSessionConfig.NumRoundsToWin);
+            return _tanksProvider.Tanks.FirstOrDefault(t => _roundObserver.GetNumberOfRoundWins(t) == _staticDataService.BattleSessionConfig.NumRoundsToWin);
         }
     }
 }

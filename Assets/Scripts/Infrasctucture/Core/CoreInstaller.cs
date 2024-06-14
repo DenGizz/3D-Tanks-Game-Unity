@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Infrasctucture.Gameplay.Factories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ namespace Assets.Scripts.Infrasctucture.Core
     {
         public override void InstallBindings()
         {
+            Container.Bind<IStateFactory>().To<StateFactroy>().AsSingle();
             Container.Bind<IStaticDataService>().To<StaticDataService>().AsSingle();
             Container.Bind<IAssetsProvider>().To<AssetsProvider>().AsSingle();
             Container.Bind<ICoroutineRunner>().To<CoroutineRunner>().AsSingle();

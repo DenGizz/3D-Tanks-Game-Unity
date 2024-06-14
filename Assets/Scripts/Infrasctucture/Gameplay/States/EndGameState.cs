@@ -4,14 +4,21 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
 {
     public class EndGameState : IState
     {
+        public EndGameState(StateMachine s)
+        {
+        }
+
         public void Enter()
         {
-            throw new System.NotImplementedException();
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+            UnityEngine.Application.Quit();
+#endif
         }
 
         public void Exit()
         {
-            throw new System.NotImplementedException();
         }
     }
 }
