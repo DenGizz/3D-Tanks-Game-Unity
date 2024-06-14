@@ -8,9 +8,8 @@ using Zenject;
 
 public class GameManager : MonoBehaviour
 {
-    public int m_NumRoundsToWin = 5;            // The number of rounds a single player has to win to win the game.
-    public float m_StartDelay = 3f;             // The delay between the start of RoundStarting and RoundPlaying phases.
-    public float m_EndDelay = 3f;               // The delay between the end of RoundPlaying and RoundEnding phases.
+    [SerializeField] private BattleSessionConfig _battleSessionConfig;
+
     public CameraControl m_CameraControl;       // Reference to the CameraControl script for control during different phases.
     public Text m_MessageText;                  // Reference to the overlay Text to display winning text, etc.
     public GameObject m_TankPrefab;             // Reference to the prefab the players will control.
@@ -38,8 +37,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         // Create the delays so they only have to be made once.
-        m_StartWait = new WaitForSeconds (m_StartDelay);
-        m_EndWait = new WaitForSeconds (m_EndDelay);
+        m_StartWait = new WaitForSeconds (_battleSessionConfig.StartDelay);
+        m_EndWait = new WaitForSeconds (_battleSessionConfig.EndDelay);
 
         SpawnAllTanks();
         SetCameraTargets();
@@ -172,7 +171,7 @@ public class GameManager : MonoBehaviour
     // This function is to find out if there is a winner of the game.
     private Tank GetGameWinner()
     {
-        return _tanksProvider.Tanks.FirstOrDefault(t => t.m_Wins == m_NumRoundsToWin);
+        return _tanksProvider.Tanks.FirstOrDefault(t => t.m_Wins == _battleSessionConfig.NumRoundsToWin);
     }
 
 
