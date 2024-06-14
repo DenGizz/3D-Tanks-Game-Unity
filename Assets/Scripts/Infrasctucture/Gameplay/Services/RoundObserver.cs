@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Infrasctucture.Core;
+using Assets.Scripts.Tank;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,16 +15,16 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.Services
     {
         public int PerformedRounds {get; private set;}
 
-        public TankBehaviour RoundWinner { get; private set; }
+        public ITank RoundWinner { get; private set; }
 
-        public event Action<TankBehaviour> RoundWin;
+        public event Action<ITank> RoundWin;
 
         private readonly ITanksProvider _tanksProvider;
         private readonly ICoroutineRunner _coroutineRunner;
 
         private Coroutine _waitForOneTankLeftCoroutine;
 
-        private readonly Dictionary<TankBehaviour, int> _roundWins = new Dictionary<TankBehaviour, int>();
+        private readonly Dictionary<ITank, int> _roundWins = new Dictionary<ITank, int>();
         private bool _isObserving;
 
         public RoundObserver(ITanksProvider tanksProvider, ICoroutineRunner coroutineRunner)
@@ -32,7 +33,7 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.Services
             _coroutineRunner = coroutineRunner;
         }
 
-        public int GetNumberOfRoundWins(TankBehaviour tank)
+        public int GetNumberOfRoundWins(ITank tank)
         {
             return _roundWins[tank];
         }
@@ -57,7 +58,7 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.Services
                 yield return null;
             }
 
-            TankBehaviour winner = GetRoundWinner();
+            ITank winner = GetRoundWinner();
             PerformedRounds++;
             _roundWins[winner]++;
             RoundWinner = winner;
@@ -69,12 +70,12 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.Services
             return _tanksProvider.Tanks.Count(t => t.GameObjectInstance.activeSelf) <= 1;
         }
 
-        private TankBehaviour GetRoundWinner()
+        private ITank GetRoundWinner()
         {
             return _tanksProvider.Tanks.FirstOrDefault(t => t.GameObjectInstance.activeSelf);
         }
 
-        public void SetTanksToObserve(IEnumerable<TankBehaviour> tanks)
+        public void SetTanksToObserve(IEnumerable<ITank> tanks)
         {
             foreach (var tank in _tanksProvider.Tanks)
                 _roundWins.Add(tank, 0);

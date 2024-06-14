@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Tank;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace Assets.Scripts.Infrasctucture
 {
     public interface ITanksProvider
     {
-        IEnumerable<TankBehaviour> Tanks { get; }
-        void AddTank(TankBehaviour tank);
+        IEnumerable<ITank> Tanks { get; }
+        void AddTank(ITank tank);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Infrasctucture;
 using Assets.Scripts.Infrasctucture.Gameplay.Services;
+using Assets.Scripts.Tank;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,18 +38,18 @@ namespace Assets.Scripts.UI
             Text = "ROUND " + (roundNumber + 1);
         }
 
-        public void ShowRoundWinnerText(TankBehaviour winner)
+        public void ShowRoundWinnerText(ITank winner)
         {
             string message = GetColoredPlayerText(winner) + " WINS THE ROUND!";
             message += "\n\n\n\n";
 
-            foreach (TankBehaviour tank in _tanksProvider.Tanks)
+            foreach (ITank tank in _tanksProvider.Tanks)
                 message += GetColoredPlayerText(tank) + ": " + _roundObserver.GetNumberOfRoundWins(tank) + " WINS\n";
 
             Text = message;
         }
 
-        public void ShowGameWinnerText(TankBehaviour winner)
+        public void ShowGameWinnerText(ITank winner)
         {
             string  message = GetColoredPlayerText(winner) + " WINS THE GAME!";
             Text = message;
@@ -59,7 +60,7 @@ namespace Assets.Scripts.UI
             Text = string.Empty;
         }
 
-        private string GetColoredPlayerText(TankBehaviour tank)
+        private string GetColoredPlayerText(ITank tank)
         {
             return "<color=#" + ColorUtility.ToHtmlStringRGB(tank.PlayerColor) + ">PLAYER " + tank.PlayerNumber + "</color>";
         }

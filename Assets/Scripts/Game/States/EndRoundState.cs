@@ -2,6 +2,7 @@
 using Assets.Scripts.Infrasctucture.Gameplay.Services;
 using Assets.Scripts.Infrasctucture.Ui;
 using Assets.Scripts.StateMachines;
+using Assets.Scripts.Tank;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,8 +24,8 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
         private readonly IStaticDataService _staticDataService;
         private readonly IRoundObserver _roundObserver;
 
-        TankBehaviour m_RoundWinner;
-        TankBehaviour m_GameWinner;
+        ITank m_RoundWinner;
+        ITank m_GameWinner;
 
         public EndRoundState(StateMachine stateMachine, IUiProvider uiProvider, ICoroutineRunner coroutineRunner, ITanksProvider tanksProvider, IStaticDataService staticDataService, IRoundObserver roundObserver)
         {
@@ -62,7 +63,7 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
 
         private void DisableTankControl()
         {
-            foreach (TankBehaviour tank in _tanksProvider.Tanks)
+            foreach (ITank tank in _tanksProvider.Tanks)
                 tank.DisableControl();
         }
 
@@ -76,7 +77,7 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
                 _stateMachine.EnterState<StartRoundState>();
         }
 
-        private TankBehaviour GetGameWinner()
+        private ITank GetGameWinner()
         {
             return _tanksProvider.Tanks.FirstOrDefault(t => _roundObserver.GetNumberOfRoundWins(t) == _staticDataService.BattleSessionConfig.NumRoundsToWin);
         }

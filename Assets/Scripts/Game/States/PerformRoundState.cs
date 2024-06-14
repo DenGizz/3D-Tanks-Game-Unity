@@ -2,6 +2,7 @@
 using Assets.Scripts.Infrasctucture.Gameplay.Services;
 using Assets.Scripts.Infrasctucture.Ui;
 using Assets.Scripts.StateMachines;
+using Assets.Scripts.Tank;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,11 +41,11 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
 
         private void EnableTankControl()
         {
-            foreach (TankBehaviour tank in _tanksProvider.Tanks)
+            foreach (ITank tank in _tanksProvider.Tanks)
                 tank.EnableControl();
         }
 
-        private void OnRoundWin(TankBehaviour tank)
+        private void OnRoundWin(ITank tank)
         {
             _stateMachine.EnterState<EndRoundState>();
         }

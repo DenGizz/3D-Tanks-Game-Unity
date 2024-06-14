@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Tank;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +21,7 @@ namespace Assets.Scripts.Infrasctucture
         }
 
 
-        public TankBehaviour CreateTank(Vector3 position, Quaternion rotation, Color color, int playerNumber)
+        public ITank CreateTank(Vector3 position, Quaternion rotation, Color color, int playerNumber)
         {
             GameObject tankInstance = _instantiator.InstantiatePrefab(_assetsProvider.GetTankPrefab());
             TankBehaviour tank = tankInstance.GetComponent<TankBehaviour>();

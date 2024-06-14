@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Tank;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,13 +9,13 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.Services
 {
     public interface IRoundObserver
     {
-        event Action<TankBehaviour> RoundWin;
-        TankBehaviour RoundWinner { get; }
+        event Action<ITank> RoundWin;
+        ITank RoundWinner { get; }
 
-        int GetNumberOfRoundWins(TankBehaviour tank);
+        int GetNumberOfRoundWins(ITank tank);
         int PerformedRounds { get; }
 
         void StartObserve();
-        void SetTanksToObserve(IEnumerable<TankBehaviour> tanks);
+        void SetTanksToObserve(IEnumerable<ITank> tanks);
     }
 }

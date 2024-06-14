@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Infrasctucture.Gameplay.Providers;
 using Assets.Scripts.Infrasctucture.Gameplay.Services;
 using Assets.Scripts.StateMachines;
+using Assets.Scripts.Tank;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,8 +33,8 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
         {
             Transform[] spawnPoints = _levelSpawnPointsProvider.SpawnPoints.ToArray();
 
-            TankBehaviour tank1 = _tankFactory.CreateTank(spawnPoints[0].position, spawnPoints[0].rotation, Color.red, 2);
-            TankBehaviour tank2 = _tankFactory.CreateTank(spawnPoints[1].position, spawnPoints[1].rotation, Color.blue, 1);
+            ITank tank1 = _tankFactory.CreateTank(spawnPoints[0].position, spawnPoints[0].rotation, Color.red, 2);
+            ITank tank2 = _tankFactory.CreateTank(spawnPoints[1].position, spawnPoints[1].rotation, Color.blue, 1);
 
             _tanksProvider.AddTank(tank1);
             _tanksProvider.AddTank(tank2);
