@@ -39,7 +39,7 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.GameplayStateMachine.States
             _coroutineRunner.Initialize();
 
             _uiProvider.MessagesUi = _uiFactory.CreateMessagesUi();
-            _gameplayStateMachine.EnterState<CreateRoundState>();
+            _gameplayStateMachine.EnterState<CreateBattleSessionState>();
         }
 
         public void Exit()

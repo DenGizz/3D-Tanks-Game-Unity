@@ -11,6 +11,7 @@ namespace Assets.Scripts.Infrasctucture.Core
     public interface ICoroutineRunner
     {
         Coroutine StartCoroutine(IEnumerator routine);
+        void StopCoroutine(Coroutine routine);
 
         void Initialize();
     }

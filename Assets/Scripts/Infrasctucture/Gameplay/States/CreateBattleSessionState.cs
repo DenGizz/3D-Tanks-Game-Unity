@@ -9,14 +9,14 @@ using UnityEngine;
 
 namespace Assets.Scripts.Infrasctucture.Gameplay.States
 {
-    public class CreateRoundState : IState
+    public class CreateBattleSessionState : IState
     {
         private readonly StateMachine _gameplayStateMachine;
         private readonly ITanksProvider _tanksProvider;
         private readonly ITankFactory _tankFactory;
         private readonly ILevelSpawnPointsProvider _levelSpawnPointsProvider;
 
-        public CreateRoundState(StateMachine gameplayStateMachine, ITanksProvider tanksProvider, ITankFactory tankFactory, ILevelSpawnPointsProvider levelSpawnPointsProvider)
+        public CreateBattleSessionState(StateMachine gameplayStateMachine, ITanksProvider tanksProvider, ITankFactory tankFactory, ILevelSpawnPointsProvider levelSpawnPointsProvider)
         {
             _gameplayStateMachine = gameplayStateMachine;
             _tanksProvider = tanksProvider;
@@ -34,7 +34,7 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
             _tanksProvider.AddTank(tank1);
             _tanksProvider.AddTank(tank2);
 
-            _gameplayStateMachine.EnterState<RoundStartingState>();
+            _gameplayStateMachine.EnterState<StartRoundState>();
         }
 
         public void Exit()

@@ -18,6 +18,10 @@ namespace Assets.Scripts.Infrasctucture.Core
             return _coroutineRunnerBehaviour.StartCoroutine(routine);
         }
 
+        public void StopCoroutine(Coroutine routine)
+        {
+            _coroutineRunnerBehaviour.StopCoroutine(routine);
+        }
 
         public void Initialize()
         {

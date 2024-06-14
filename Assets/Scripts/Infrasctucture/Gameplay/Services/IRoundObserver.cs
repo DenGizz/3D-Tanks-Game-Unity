@@ -6,16 +6,15 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.Infrasctucture.Gameplay.Services
 {
-    public interface IBattleSessionObserver
+    public interface IRoundObserver
     {
         event Action<Tank> RoundWin;
-        event Action<Tank> GameWin;
+        Tank RoundWinner { get; }
 
         int GetNumberOfRoundWins(Tank tank);
         int PerformedRounds { get; }
 
         void StartObserve();
         void StopObserve();
-        void Reset();
     }
 }
