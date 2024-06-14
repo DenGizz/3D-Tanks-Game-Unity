@@ -3,17 +3,11 @@ using UnityEngine;
 
 public class Tank
 {
-    // This class is to manage various settings on a tank.
-    // It works with the GameManager class to control how the tanks behave
-    // and whether or not players have control of their tank in the 
-    // different phases of the game.
-
     private Color _playerColor;                           
     private Transform _spawnPoint;                          
     private int _playerNumber;           
     public string m_ColoredPlayerText;    // A string that represents the player with their number colored to match their tank.
     public GameObject GameObjectInstance { get; set; }         
-    public int m_Wins;                    // The number of wins this player has so far.
 
 
     private TankMoveControllerBehaviour m_Movement;                        // Reference to tank's movement script, used to disable and enable control.
