@@ -13,7 +13,6 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
 
         public void Enter()
         {
-            throw new NotImplementedException();
         }
 
         public void Exit()

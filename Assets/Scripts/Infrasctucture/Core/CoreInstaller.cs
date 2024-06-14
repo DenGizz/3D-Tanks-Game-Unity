@@ -9,7 +9,7 @@ using Zenject;
 namespace Assets.Scripts.Infrasctucture.Core
 {
     [CreateAssetMenu(fileName = "CoreInstaller", menuName = "Installers/CoreInstaller")]
-    public class CoreInstaller :MonoInstaller
+    public class CoreInstaller : MonoInstaller
     {
         public override void InstallBindings()
         {
