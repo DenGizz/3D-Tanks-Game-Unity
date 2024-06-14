@@ -61,6 +61,7 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.Services
             }
 
             Tank winner = GetRoundWinner();
+            PerformedRounds++;
             _roundWins[winner]++;
             RoundWinner = winner;
             RoundWin?.Invoke(winner);
