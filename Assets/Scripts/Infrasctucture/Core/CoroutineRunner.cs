@@ -13,15 +13,11 @@ namespace Assets.Scripts.Infrasctucture.Core
         private GameObject _coroutineRunnerGameObject;
         private CoroutineRunnerBehaviour _coroutineRunnerBehaviour;
 
-        public void StartCoroutine(IEnumerator routine)
+        public Coroutine StartCoroutine(IEnumerator routine)
         {
-            _coroutineRunnerBehaviour.StartCoroutine(routine);
+            return _coroutineRunnerBehaviour.StartCoroutine(routine);
         }
 
-        public void StopCoroutine(IEnumerator routine)
-        {
-            _coroutineRunnerBehaviour.StopCoroutine(routine);
-        }
 
         public void Initialize()
         {

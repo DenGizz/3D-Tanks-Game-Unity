@@ -54,13 +54,14 @@ public class GameManager : MonoBehaviour
         _uiProvider.MessagesUi = _uiFactory.CreateMessagesUi();
         _cameraControlProvider.Initialize();
         _levelSpawnPointsProvider.Initialize();
+        _coroutineRunner.Initialize();
 
 
         SpawnAllTanks();
         SetCameraTargets();
 
         // Once the tanks have been created and the camera is using them as targets, start the game.
-        StartCoroutine (GameLoop ());
+        _coroutineRunner.StartCoroutine(GameLoop ());
     }
 
 
@@ -84,13 +85,13 @@ public class GameManager : MonoBehaviour
     private IEnumerator GameLoop ()
     {
         // Start off by running the 'RoundStarting' coroutine but don't return until it's finished.
-        yield return StartCoroutine (RoundStarting ());
+        yield return _coroutineRunner.StartCoroutine(RoundStarting ());
 
         // Once the 'RoundStarting' coroutine is finished, run the 'RoundPlaying' coroutine but don't return until it's finished.
-        yield return StartCoroutine (RoundPlaying());
+        yield return _coroutineRunner.StartCoroutine(RoundPlaying());
 
         // Once execution has returned here, run the 'RoundEnding' coroutine, again don't return until it's finished.
-        yield return StartCoroutine (RoundEnding());
+        yield return _coroutineRunner.StartCoroutine (RoundEnding());
 
         // This code is not run until 'RoundEnding' has finished.  At which point, check if a game winner has been found.
         if (m_GameWinner != null)
@@ -102,7 +103,7 @@ public class GameManager : MonoBehaviour
         {
             // If there isn't a winner yet, restart this coroutine so the loop continues.
             // Note that this coroutine doesn't yield.  This means that the current version of the GameLoop will end.
-            StartCoroutine (GameLoop ());
+            _coroutineRunner.StartCoroutine (GameLoop ());
         }
     }
 
