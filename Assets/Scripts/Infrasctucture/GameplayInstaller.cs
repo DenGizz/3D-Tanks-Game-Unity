@@ -16,6 +16,7 @@ namespace Assets.Scripts.Infrasctucture
         {
             Container.Bind<IAssetsProvider>().To<AssetsProvider>().AsSingle();
             Container.Bind<ITankFactory>().To<TankFactory>().AsSingle();
+            Container.Bind<ITanksProvider>().To<TanksProvider>().AsSingle();
         }
     }
 }
