@@ -1,6 +1,9 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Infrasctucture;
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,7 +13,9 @@ public class GameManager : MonoBehaviour
     public CameraControl m_CameraControl;       // Reference to the CameraControl script for control during different phases.
     public Text m_MessageText;                  // Reference to the overlay Text to display winning text, etc.
     public GameObject m_TankPrefab;             // Reference to the prefab the players will control.
-    public Tank[] m_Tanks;               // A collection of managers for enabling and disabling different aspects of the tanks.
+    private Tank[] m_Tanks;
+
+    [SerializeField] private TankSpawnPreset[] _tankSpawnPresets;
 
 
     private int m_RoundNumber;                  // Which round the game is currently on.
@@ -18,6 +23,14 @@ public class GameManager : MonoBehaviour
     private WaitForSeconds m_EndWait;           // Used to have a delay whilst the round or game ends.
     private Tank m_RoundWinner;          // Reference to the winner of the current round.  Used to make an announcement of who won.
     private Tank m_GameWinner;           // Reference to the winner of the game.  Used to make an announcement of who won.
+
+    private ITankFactory _tankFactory;
+
+    [Inject]
+    public void Construct(ITankFactory tankFactory)
+    {
+        _tankFactory = tankFactory;
+    }
 
 
     private void Start()
@@ -36,14 +49,12 @@ public class GameManager : MonoBehaviour
 
     private void SpawnAllTanks()
     {
-        // For all the tanks...
-        for (int i = 0; i < m_Tanks.Length; i++)
+        m_Tanks = new Tank[_tankSpawnPresets.Length]; 
+        
+        for (int i = 0; i < _tankSpawnPresets.Length; i++)
         {
-            // ... create them, set their player number and references needed for control.
-            m_Tanks[i].GameObjectInstance =
-                Instantiate(m_TankPrefab, m_Tanks[i].m_SpawnPoint.position, m_Tanks[i].m_SpawnPoint.rotation) as GameObject;
-            m_Tanks[i].m_PlayerNumber = i + 1;
-            m_Tanks[i].Setup();
+            Tank tank = _tankFactory.CreateTank(_tankSpawnPresets[i].SpawnPoint, _tankSpawnPresets[i].Color, i + 1);
+            m_Tanks[i] = tank;
         }
     }
 
@@ -259,4 +270,14 @@ public class GameManager : MonoBehaviour
             m_Tanks[i].DisableControl();
         }
     }
+}
+
+[Serializable]
+public class TankSpawnPreset
+{
+    public Color Color => _color;
+    public Transform SpawnPoint => _spawnPoint;
+
+    [SerializeField] private Color _color;
+    [SerializeField] private Transform _spawnPoint;
 }
