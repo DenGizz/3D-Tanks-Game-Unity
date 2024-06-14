@@ -58,7 +58,6 @@ public class CameraControl : MonoBehaviour
             averagePos /= numTargets;
 
         averagePos.y = transform.position.y;
-
         _desiredPosition = averagePos;
     }
 
@@ -73,7 +72,6 @@ public class CameraControl : MonoBehaviour
     private float FindRequiredSize()
     {
         Vector3 desiredLocalPos = transform.InverseTransformPoint(_desiredPosition);
-
         float size = 0f;
 
         for (int i = 0; i < _targets.Length; i++)
@@ -82,16 +80,12 @@ public class CameraControl : MonoBehaviour
                 continue;
 
             Vector3 targetLocalPos = transform.InverseTransformPoint(_targets[i].Position);
-
             Vector3 desiredPosToTarget = targetLocalPos - desiredLocalPos;
-
             size = Mathf.Max (size, Mathf.Abs (desiredPosToTarget.y));
-
             size = Mathf.Max (size, Mathf.Abs (desiredPosToTarget.x) / _camera.aspect);
         }
         
         size += m_ScreenEdgeBuffer;
-
         size = Mathf.Max(size, m_MinSize);
 
         return size;
