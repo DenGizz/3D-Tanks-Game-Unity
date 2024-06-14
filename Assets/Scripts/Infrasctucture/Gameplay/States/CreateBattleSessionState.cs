@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Infrasctucture.Gameplay.Providers;
+using Assets.Scripts.Infrasctucture.Gameplay.Services;
 using Assets.Scripts.StateMachines;
 using System;
 using System.Collections.Generic;
@@ -15,13 +16,16 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
         private readonly ITanksProvider _tanksProvider;
         private readonly ITankFactory _tankFactory;
         private readonly ILevelSpawnPointsProvider _levelSpawnPointsProvider;
+        private readonly IRoundObserver _roundObserver;
 
-        public CreateBattleSessionState(StateMachine gameplayStateMachine, ITanksProvider tanksProvider, ITankFactory tankFactory, ILevelSpawnPointsProvider levelSpawnPointsProvider)
+        public CreateBattleSessionState(StateMachine gameplayStateMachine, ITanksProvider tanksProvider, 
+            ITankFactory tankFactory, ILevelSpawnPointsProvider levelSpawnPointsProvider, IRoundObserver roundObserver)
         {
             _gameplayStateMachine = gameplayStateMachine;
             _tanksProvider = tanksProvider;
             _tankFactory = tankFactory;
             _levelSpawnPointsProvider = levelSpawnPointsProvider;
+            _roundObserver = roundObserver;
         }
 
         public void Enter()
@@ -34,6 +38,7 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
             _tanksProvider.AddTank(tank1);
             _tanksProvider.AddTank(tank2);
 
+            _roundObserver.StartObserve();
             _gameplayStateMachine.EnterState<StartRoundState>();
         }
 

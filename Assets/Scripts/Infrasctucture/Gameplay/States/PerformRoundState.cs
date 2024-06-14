@@ -30,7 +30,6 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
         {
             EnableTankControl();
             _uiProvider.MessagesUi.Text = string.Empty;
-            _roundObserver.StartObserve();
             _roundObserver.RoundWin += OnRoundWin;
         }
 
