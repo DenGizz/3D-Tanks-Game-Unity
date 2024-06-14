@@ -22,7 +22,9 @@ namespace Assets.Scripts.Infrasctucture
         public Tank CreateTank()
         {
             GameObject tankInstance = _instantiator.InstantiatePrefab(_assetsProvider.GetTankPrefab());
-            return tankInstance.GetComponent<Tank>();
+            Tank tank = tankInstance.GetComponent<Tank>();
+            tank.GameObjectInstance = tankInstance;
+            return tank;
         }
     }
 }

@@ -13,7 +13,7 @@ public class Tank
     public Transform m_SpawnPoint;                          // The position and direction the tank will have when it spawns.
     [HideInInspector] public int m_PlayerNumber;            // This specifies which player this the manager for.
     [HideInInspector] public string m_ColoredPlayerText;    // A string that represents the player with their number colored to match their tank.
-    public GameObject Instance { get; set; }         
+    public GameObject GameObjectInstance { get; set; }         
     [HideInInspector] public int m_Wins;                    // The number of wins this player has so far.
 
 
@@ -25,9 +25,9 @@ public class Tank
     public void Setup ()
     {
         // Get references to the components.
-        m_Movement = Instance.GetComponent<TankMoveControllerBehaviour> ();
-        m_Shooting = Instance.GetComponent<TankShootingControlelrBehaviour> ();
-        m_CanvasGameObject = Instance.GetComponentInChildren<Canvas> ().gameObject;
+        m_Movement = GameObjectInstance.GetComponent<TankMoveControllerBehaviour> ();
+        m_Shooting = GameObjectInstance.GetComponent<TankShootingControlelrBehaviour> ();
+        m_CanvasGameObject = GameObjectInstance.GetComponentInChildren<Canvas> ().gameObject;
 
         // Set the player numbers to be consistent across the scripts.
         m_Movement.m_PlayerNumber = m_PlayerNumber;
@@ -37,7 +37,7 @@ public class Tank
         m_ColoredPlayerText = "<color=#" + ColorUtility.ToHtmlStringRGB(m_PlayerColor) + ">PLAYER " + m_PlayerNumber + "</color>";
 
         // Get all of the renderers of the tank.
-        MeshRenderer[] renderers = Instance.GetComponentsInChildren<MeshRenderer> ();
+        MeshRenderer[] renderers = GameObjectInstance.GetComponentsInChildren<MeshRenderer> ();
 
         // Go through all the renderers...
         for (int i = 0; i < renderers.Length; i++)
@@ -71,10 +71,10 @@ public class Tank
     // Used at the start of each round to put the tank into it's default state.
     public void Reset ()
     {
-        Instance.transform.position = m_SpawnPoint.position;
-        Instance.transform.rotation = m_SpawnPoint.rotation;
+        GameObjectInstance.transform.position = m_SpawnPoint.position;
+        GameObjectInstance.transform.rotation = m_SpawnPoint.rotation;
 
-        Instance.SetActive (false);
-        Instance.SetActive (true);
+        GameObjectInstance.SetActive (false);
+        GameObjectInstance.SetActive (true);
     }
 }

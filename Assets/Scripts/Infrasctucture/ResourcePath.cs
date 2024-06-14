@@ -8,6 +8,6 @@ namespace Assets.Scripts.Infrasctucture
 {
     public class ResourcePath
     {
-        public const string GameplayResourceBundle = "Resources/Bundles/GameplayResourceBundle";
+        public const string GameplayResourceBundle = "Bundles/GameplayResourceBundle";
     }
 }
