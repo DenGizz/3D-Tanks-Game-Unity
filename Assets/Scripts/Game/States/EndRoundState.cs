@@ -82,19 +82,24 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
 
             // If there is a winner then change the message to reflect that.
             if (m_RoundWinner != null)
-                message = m_RoundWinner.m_ColoredPlayerText + " WINS THE ROUND!";
+                message = GetColoredPlayerText(m_RoundWinner) + " WINS THE ROUND!";
 
             // Add some line breaks after the initial message.
             message += "\n\n\n\n";
 
             foreach (Tank tank in _tanksProvider.Tanks)
-                message += tank.m_ColoredPlayerText + ": " + _roundObserver.GetNumberOfRoundWins(tank) + " WINS\n";
+                message += GetColoredPlayerText(tank) + ": " + _roundObserver.GetNumberOfRoundWins(tank) + " WINS\n";
 
             // If there is a game winner, change the entire message to reflect that.
             if (m_GameWinner != null)
-                message = m_GameWinner.m_ColoredPlayerText + " WINS THE GAME!";
+                message = GetColoredPlayerText(m_GameWinner) + " WINS THE GAME!";
 
             return message;
+        }
+
+        private string GetColoredPlayerText(Tank tank)
+        {
+            return "<color=#" + ColorUtility.ToHtmlStringRGB(tank.PlayerColor) + ">PLAYER " + tank.PlayerNumber + "</color>";
         }
 
         private Tank GetGameWinner()

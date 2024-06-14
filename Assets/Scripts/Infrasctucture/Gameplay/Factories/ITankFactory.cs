@@ -9,6 +9,6 @@ namespace Assets.Scripts.Infrasctucture
 {
     public interface ITankFactory 
     {
-        Tank CreateTank(Transform spawnPoint, Color color, int playerNumber);
+        Tank CreateTank(Vector3 position,Quaternion rotation, Color color, int playerNumber);
     }
 }

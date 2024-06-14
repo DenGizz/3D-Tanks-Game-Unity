@@ -20,13 +20,13 @@ namespace Assets.Scripts.Infrasctucture
         }
 
 
-        public Tank CreateTank(Transform spawnPoint, Color color, int playerNumber)
+        public Tank CreateTank(Vector3 position, Quaternion rotation, Color color, int playerNumber)
         {
             GameObject tankInstance = _instantiator.InstantiatePrefab(_assetsProvider.GetTankPrefab());
             Tank tank = new Tank();
-            tankInstance.transform.position = spawnPoint.position;
-            tankInstance.transform.rotation = spawnPoint.rotation;
-            tank.Setup(tankInstance, color, spawnPoint, playerNumber);
+            tankInstance.transform.position = position;
+            tankInstance.transform.rotation = rotation;
+            tank.Setup(tankInstance, color, playerNumber);
             return tank;
         }
     }

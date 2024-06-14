@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Infrasctucture.Core;
+﻿using Assets.Scripts.Features;
+using Assets.Scripts.Infrasctucture.Core;
 using Assets.Scripts.Infrasctucture.Gameplay.Providers;
 using Assets.Scripts.Infrasctucture.Gameplay.Services;
 using Assets.Scripts.Infrasctucture.Ui;
@@ -24,11 +25,13 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
         private readonly ICoroutineRunner _coroutineRunner;
         private readonly IRoundObserver _roundObserver;
         private readonly WaitForSeconds _waitStartDelay;
+        private readonly ILevelSpawnPointsProvider _levelSpawnPointsProvider;
 
 
         public StartRoundState(StateMachine stateMachine, IRoundObserver battleSessionObserver, ITanksProvider tanksProvider, 
             ICameraControlProvider cameraControlProvider, IUiProvider uiProvider, IStaticDataService staticDataService,
-            ICoroutineRunner coroutineRunner, IRoundObserver roundObserver)
+            ICoroutineRunner coroutineRunner, IRoundObserver roundObserver,
+            ILevelSpawnPointsProvider levelSpawnPointsProvider)
         {
             _stateMachine = stateMachine;
             _battleSessionObserver = battleSessionObserver;
@@ -39,6 +42,7 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
             _coroutineRunner = coroutineRunner;
             _roundObserver = roundObserver;
             _waitStartDelay = new WaitForSeconds(_staticDataService.BattleSessionConfig.StartDelay);
+            _levelSpawnPointsProvider = levelSpawnPointsProvider;
         }
 
         public void Enter()
@@ -66,8 +70,17 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
 
         private void ResetAllTanks()
         {
+            int i = 0;
             foreach (Tank tank in _tanksProvider.Tanks)
-                tank.Reset();
+            {
+                Transform spawnPoint = _levelSpawnPointsProvider.SpawnPoints.ElementAt(i);
+                tank.GameObjectInstance.transform.position = spawnPoint.position;
+                tank.GameObjectInstance.transform.rotation = spawnPoint.rotation;
+
+                tank.GameObjectInstance.SetActive(false);
+                tank.GameObjectInstance.SetActive(true);
+                i++;
+            }
         }
 
         private void DisableTankControl()

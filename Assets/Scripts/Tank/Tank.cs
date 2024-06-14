@@ -3,10 +3,8 @@ using UnityEngine;
 
 public class Tank
 {
-    private Color _playerColor;                           
-    private Transform _spawnPoint;                          
-    private int _playerNumber;           
-    public string m_ColoredPlayerText;    // A string that represents the player with their number colored to match their tank.
+    public Color PlayerColor { get; private set; }                                                  
+    public int PlayerNumber { get; private set; }
     public GameObject GameObjectInstance { get; set; }         
 
 
@@ -14,11 +12,10 @@ public class Tank
     private TankShootingControlelrBehaviour m_Shooting;                        // Reference to tank's shooting script, used to disable and enable control.
     private GameObject m_CanvasGameObject;                  // Used to disable the world space UI during the Starting and Ending phases of each round.
 
-    public void Setup(GameObject tankInstance, Color color, Transform spawnPoint, int playerNumber)
+    public void Setup(GameObject tankInstance, Color color, int playerNumber)
     {
-        _playerColor = color;
-        _spawnPoint = spawnPoint;
-        _playerNumber = playerNumber;
+        PlayerColor = color;
+        PlayerNumber = playerNumber;
         GameObjectInstance = tankInstance;
 
         // Get references to the components.
@@ -27,11 +24,8 @@ public class Tank
         m_CanvasGameObject = GameObjectInstance.GetComponentInChildren<Canvas>().gameObject;
 
         // Set the player numbers to be consistent across the scripts.
-        m_Movement.m_PlayerNumber = _playerNumber;
-        m_Shooting.m_PlayerNumber = _playerNumber;
-
-        // Create a string using the correct color that says 'PLAYER 1' etc based on the tank's color and the player's number.
-        m_ColoredPlayerText = "<color=#" + ColorUtility.ToHtmlStringRGB(_playerColor) + ">PLAYER " + _playerNumber + "</color>";
+        m_Movement.m_PlayerNumber = PlayerNumber;
+        m_Shooting.m_PlayerNumber = PlayerNumber;
 
         // Get all of the renderers of the tank.
         MeshRenderer[] renderers = GameObjectInstance.GetComponentsInChildren<MeshRenderer>();
@@ -40,7 +34,7 @@ public class Tank
         for (int i = 0; i < renderers.Length; i++)
         {
             // ... set their material color to the color specific to this tank.
-            renderers[i].material.color = _playerColor;
+            renderers[i].material.color = PlayerColor;
         }
     }
 
@@ -62,16 +56,5 @@ public class Tank
         m_Shooting.enabled = true;
 
         m_CanvasGameObject.SetActive (true);
-    }
-
-
-    // Used at the start of each round to put the tank into it's default state.
-    public void Reset ()
-    {
-        GameObjectInstance.transform.position = _spawnPoint.position;
-        GameObjectInstance.transform.rotation = _spawnPoint.rotation;
-
-        GameObjectInstance.SetActive (false);
-        GameObjectInstance.SetActive (true);
     }
 }
