@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < m_Tanks.Length; i++)
         {
             // ... create them, set their player number and references needed for control.
-            m_Tanks[i].Instance =
+            m_Tanks[i].GameObjectInstance =
                 Instantiate(m_TankPrefab, m_Tanks[i].m_SpawnPoint.position, m_Tanks[i].m_SpawnPoint.rotation) as GameObject;
             m_Tanks[i].m_PlayerNumber = i + 1;
             m_Tanks[i].Setup();
@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < targets.Length; i++)
         {
             // ... set it to the appropriate tank transform.
-            targets[i] = m_Tanks[i].Instance.transform;
+            targets[i] = m_Tanks[i].GameObjectInstance.transform;
         }
 
         // These are the targets the camera should follow.
@@ -164,7 +164,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < m_Tanks.Length; i++)
         {
             // ... and if they are active, increment the counter.
-            if (m_Tanks[i].Instance.activeSelf)
+            if (m_Tanks[i].GameObjectInstance.activeSelf)
                 numTanksLeft++;
         }
 
@@ -181,7 +181,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < m_Tanks.Length; i++)
         {
             // ... and if one of them is active, it is the winner so return it.
-            if (m_Tanks[i].Instance.activeSelf)
+            if (m_Tanks[i].GameObjectInstance.activeSelf)
                 return m_Tanks[i];
         }
 
