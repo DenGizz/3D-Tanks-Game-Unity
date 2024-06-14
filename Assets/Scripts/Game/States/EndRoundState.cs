@@ -23,8 +23,8 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
         private readonly IStaticDataService _staticDataService;
         private readonly IRoundObserver _roundObserver;
 
-        Tank m_RoundWinner;
-        Tank m_GameWinner;
+        TankBehaviour m_RoundWinner;
+        TankBehaviour m_GameWinner;
 
         public EndRoundState(StateMachine stateMachine, IUiProvider uiProvider, ICoroutineRunner coroutineRunner, ITanksProvider tanksProvider, IStaticDataService staticDataService, IRoundObserver roundObserver)
         {
@@ -62,7 +62,7 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
 
         private void DisableTankControl()
         {
-            foreach (Tank tank in _tanksProvider.Tanks)
+            foreach (TankBehaviour tank in _tanksProvider.Tanks)
                 tank.DisableControl();
         }
 
@@ -76,7 +76,7 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
                 _stateMachine.EnterState<StartRoundState>();
         }
 
-        private Tank GetGameWinner()
+        private TankBehaviour GetGameWinner()
         {
             return _tanksProvider.Tanks.FirstOrDefault(t => _roundObserver.GetNumberOfRoundWins(t) == _staticDataService.BattleSessionConfig.NumRoundsToWin);
         }

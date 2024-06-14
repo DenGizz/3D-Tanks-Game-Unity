@@ -37,18 +37,18 @@ namespace Assets.Scripts.UI
             Text = "ROUND " + (roundNumber + 1);
         }
 
-        public void ShowRoundWinnerText(Tank winner)
+        public void ShowRoundWinnerText(TankBehaviour winner)
         {
             string message = GetColoredPlayerText(winner) + " WINS THE ROUND!";
             message += "\n\n\n\n";
 
-            foreach (Tank tank in _tanksProvider.Tanks)
+            foreach (TankBehaviour tank in _tanksProvider.Tanks)
                 message += GetColoredPlayerText(tank) + ": " + _roundObserver.GetNumberOfRoundWins(tank) + " WINS\n";
 
             Text = message;
         }
 
-        public void ShowGameWinnerText(Tank winner)
+        public void ShowGameWinnerText(TankBehaviour winner)
         {
             string  message = GetColoredPlayerText(winner) + " WINS THE GAME!";
             Text = message;
@@ -59,7 +59,7 @@ namespace Assets.Scripts.UI
             Text = string.Empty;
         }
 
-        private string GetColoredPlayerText(Tank tank)
+        private string GetColoredPlayerText(TankBehaviour tank)
         {
             return "<color=#" + ColorUtility.ToHtmlStringRGB(tank.PlayerColor) + ">PLAYER " + tank.PlayerNumber + "</color>";
         }

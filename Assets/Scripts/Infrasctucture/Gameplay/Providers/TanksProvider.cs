@@ -8,11 +8,11 @@ namespace Assets.Scripts.Infrasctucture
 {
     public class TanksProvider : ITanksProvider
     {
-        public IEnumerable<Tank> Tanks => _tanks;
+        public IEnumerable<TankBehaviour> Tanks => _tanks;
 
-        private readonly List<Tank> _tanks = new List<Tank>();  
+        private readonly List<TankBehaviour> _tanks = new List<TankBehaviour>();  
 
-        public void AddTank(Tank tank)
+        public void AddTank(TankBehaviour tank)
         {
             _tanks.Add(tank);
         }

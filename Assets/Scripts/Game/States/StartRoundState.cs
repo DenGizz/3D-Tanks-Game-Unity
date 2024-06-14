@@ -71,7 +71,7 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
         private void ResetAllTanks()
         {
             int i = 0;
-            foreach (Tank tank in _tanksProvider.Tanks)
+            foreach (TankBehaviour tank in _tanksProvider.Tanks)
             {
                 Transform spawnPoint = _levelSpawnPointsProvider.SpawnPoints.ElementAt(i);
                 tank.GameObjectInstance.transform.position = spawnPoint.position;
@@ -85,7 +85,7 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
 
         private void DisableTankControl()
         {
-            foreach (Tank tank in _tanksProvider.Tanks)
+            foreach (TankBehaviour tank in _tanksProvider.Tanks)
                 tank.DisableControl();
         }
     }

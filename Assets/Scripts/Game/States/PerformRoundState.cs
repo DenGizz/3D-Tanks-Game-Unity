@@ -40,11 +40,11 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
 
         private void EnableTankControl()
         {
-            foreach (Tank tank in _tanksProvider.Tanks)
+            foreach (TankBehaviour tank in _tanksProvider.Tanks)
                 tank.EnableControl();
         }
 
-        private void OnRoundWin(Tank tank)
+        private void OnRoundWin(TankBehaviour tank)
         {
             _stateMachine.EnterState<EndRoundState>();
         }

@@ -9,18 +9,18 @@ namespace Assets.Scripts.Teams
 {
     public class Team
     {
-        public IEnumerable<Tank> Tanks => _tanks;
+        public IEnumerable<TankBehaviour> Tanks => _tanks;
         public Color TeamColor { get;  }
 
-        private readonly List<Tank> _tanks;
+        private readonly List<TankBehaviour> _tanks;
 
         public Team(Color teamColor)
         {
             TeamColor = teamColor;
-            _tanks = new List<Tank>();
+            _tanks = new List<TankBehaviour>();
         }
 
-        public void AddTank(Tank tank)
+        public void AddTank(TankBehaviour tank)
         {
             _tanks.Add(tank);
         }

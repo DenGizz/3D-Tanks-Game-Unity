@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class Tank
+public class TankBehaviour : MonoBehaviour
 {
     public Color PlayerColor { get; private set; }                                                  
     public int PlayerNumber { get; private set; }

@@ -8,7 +8,7 @@ namespace Assets.Scripts.Infrasctucture
 {
     public interface ITanksProvider
     {
-        IEnumerable<Tank> Tanks { get; }
-        void AddTank(Tank tank);
+        IEnumerable<TankBehaviour> Tanks { get; }
+        void AddTank(TankBehaviour tank);
     }
 }
