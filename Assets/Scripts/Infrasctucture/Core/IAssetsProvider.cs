@@ -9,6 +9,7 @@ namespace Assets.Scripts.Infrasctucture
 {
     public interface IAssetsProvider
     {
+        BattleSessionConfig GetBattleSessionConfig();
         GameObject GetMessagesUiPrefab();
         GameObject GetTankPrefab();
     }

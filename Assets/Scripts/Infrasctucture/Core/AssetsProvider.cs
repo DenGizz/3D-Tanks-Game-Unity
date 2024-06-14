@@ -12,6 +12,15 @@ namespace Assets.Scripts.Infrasctucture
     {
         private  GameplayResourceBundle _gameplayResourceBundle;
         private UiResourceBundle _uiResourceBundle;
+        private BattleSessionConfig _battleSessionConfig;
+
+        public BattleSessionConfig GetBattleSessionConfig()
+        {
+            if (_battleSessionConfig == null)
+                _battleSessionConfig = UnityEngine.Resources.Load<BattleSessionConfig>(ResourcePath.BattleSessionConfig);
+        
+            return _battleSessionConfig ?? throw new Exception("BattleSessionConfig not found");
+        }
 
         public GameObject GetMessagesUiPrefab()
         {

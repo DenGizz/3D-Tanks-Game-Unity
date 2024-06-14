@@ -13,6 +13,7 @@ namespace Assets.Scripts.Infrasctucture.Core
     {
         public override void InstallBindings()
         {
+            Container.Bind<IStaticDataService>().To<StaticDataService>().AsSingle();
             Container.Bind<IAssetsProvider>().To<AssetsProvider>().AsSingle();
             Container.Bind<ICoroutineRunner>().To<CoroutineRunner>().AsSingle();
         }

@@ -12,7 +12,6 @@ using Zenject;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private BattleSessionConfig _battleSessionConfig;
     public GameObject m_TankPrefab;             // Reference to the prefab the players will control.
 
     private int m_RoundNumber;                  // Which round the game is currently on.
@@ -28,12 +27,14 @@ public class GameManager : MonoBehaviour
     private ICameraControlProvider _cameraControlProvider;
     private ILevelSpawnPointsProvider _levelSpawnPointsProvider;
     private ICoroutineRunner _coroutineRunner;
+    private IStaticDataService _staticDataService;
 
     [Inject]
     public void Construct(ITankFactory tankFactory, ITanksProvider tanksProvider,
         IUiFactory uiFactory, IUiProvider uiProvider, 
         ICameraControlProvider cameraControlProvider, 
-        ILevelSpawnPointsProvider levelSpawnPointsProvider, ICoroutineRunner coroutineRunner)
+        ILevelSpawnPointsProvider levelSpawnPointsProvider, 
+        ICoroutineRunner coroutineRunner, IStaticDataService staticDataService)
     {
         _tankFactory = tankFactory;
         _tanksProvider = tanksProvider;
@@ -42,14 +43,15 @@ public class GameManager : MonoBehaviour
         _cameraControlProvider = cameraControlProvider;
         _levelSpawnPointsProvider = levelSpawnPointsProvider;
         _coroutineRunner = coroutineRunner;
+        _staticDataService = staticDataService;
     }
 
 
     private void Start()
     {
         // Create the delays so they only have to be made once.
-        m_StartWait = new WaitForSeconds (_battleSessionConfig.StartDelay);
-        m_EndWait = new WaitForSeconds (_battleSessionConfig.EndDelay);
+        m_StartWait = new WaitForSeconds (_staticDataService.BattleSessionConfig.StartDelay);
+        m_EndWait = new WaitForSeconds (_staticDataService.BattleSessionConfig.EndDelay);
 
         _uiProvider.MessagesUi = _uiFactory.CreateMessagesUi();
         _cameraControlProvider.Initialize();
@@ -188,7 +190,7 @@ public class GameManager : MonoBehaviour
     // This function is to find out if there is a winner of the game.
     private Tank GetGameWinner()
     {
-        return _tanksProvider.Tanks.FirstOrDefault(t => t.m_Wins == _battleSessionConfig.NumRoundsToWin);
+        return _tanksProvider.Tanks.FirstOrDefault(t => t.m_Wins == _staticDataService.BattleSessionConfig.NumRoundsToWin);
     }
 
 
