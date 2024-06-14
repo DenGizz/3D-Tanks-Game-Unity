@@ -11,8 +11,12 @@ namespace Assets.Scripts.Tank
     {
         Color PlayerColor { get;  }
         int PlayerNumber { get; }
-        GameObject GameObjectInstance { get; }
+        bool IsAlive { get; }
+        Vector3 Position { get; }
 
+        void Revive();
+        void SetPosition(Vector3 position);
+        void SetRotation(Quaternion rotation);
         void EnableControl();
         void DisableControl();
     }

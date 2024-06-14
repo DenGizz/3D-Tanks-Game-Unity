@@ -50,7 +50,7 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
             ResetAllTanks();
             DisableTankControl();
 
-            _cameraControlProvider.CameraControl.m_Targets = _tanksProvider.Tanks.Select(t => t.GameObjectInstance.transform).ToArray();
+            _cameraControlProvider.CameraControl.m_Targets = _tanksProvider.Tanks.ToArray();
             _roundObserver.StartObserve();
             _cameraControlProvider.CameraControl.SetStartPositionAndSize();
             _uiProvider.MessagesUi.ShowRoundStartText(_battleSessionObserver.PerformedRounds);
@@ -74,11 +74,10 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
             foreach (TankBehaviour tank in _tanksProvider.Tanks)
             {
                 Transform spawnPoint = _levelSpawnPointsProvider.SpawnPoints.ElementAt(i);
-                tank.GameObjectInstance.transform.position = spawnPoint.position;
-                tank.GameObjectInstance.transform.rotation = spawnPoint.rotation;
+                tank.SetPosition(spawnPoint.position);
+                tank.SetRotation(spawnPoint.rotation);
 
-                tank.GameObjectInstance.SetActive(false);
-                tank.GameObjectInstance.SetActive(true);
+                tank.Revive();
                 i++;
             }
         }

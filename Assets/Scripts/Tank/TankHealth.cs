@@ -10,6 +10,7 @@ public class TankHealth : MonoBehaviour
     public Color m_ZeroHealthColor = Color.red;    
     public GameObject m_ExplosionPrefab;
     
+    public bool IsAlive => !m_Dead;
     private AudioSource m_ExplosionAudio;          
     private ParticleSystem m_ExplosionParticles;   
     private float m_CurrentHealth;  
@@ -25,7 +26,7 @@ public class TankHealth : MonoBehaviour
     }
 
 
-    private void OnEnable()
+    public void Revive()
     {
         m_CurrentHealth = m_StartingHealth;
         m_Dead = false;

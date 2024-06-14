@@ -67,12 +67,12 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.Services
 
         private bool OneTankLeft()
         {
-            return _tanksProvider.Tanks.Count(t => t.GameObjectInstance.activeSelf) <= 1;
+            return _tanksProvider.Tanks.Count(t => t.IsAlive) <= 1;
         }
 
         private ITank GetRoundWinner()
         {
-            return _tanksProvider.Tanks.FirstOrDefault(t => t.GameObjectInstance.activeSelf);
+            return _tanksProvider.Tanks.FirstOrDefault(t => t.IsAlive);
         }
 
         public void SetTanksToObserve(IEnumerable<ITank> tanks)

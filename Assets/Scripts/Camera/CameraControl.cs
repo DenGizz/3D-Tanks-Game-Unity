@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Tank;
+using UnityEngine;
 
 public class CameraControl : MonoBehaviour
 {
     public float m_DampTime = 0.2f;                 
     public float m_ScreenEdgeBuffer = 4f;           
     public float m_MinSize = 6.5f;                  
-    [HideInInspector] public Transform[] m_Targets; 
+    [HideInInspector] public ITank[] m_Targets; 
 
 
     private Camera m_Camera;                        
@@ -42,10 +43,10 @@ public class CameraControl : MonoBehaviour
 
         for (int i = 0; i < m_Targets.Length; i++)
         {
-            if (!m_Targets[i].gameObject.activeSelf)
+            if (!m_Targets[i].IsAlive)
                 continue;
 
-            averagePos += m_Targets[i].position;
+            averagePos += m_Targets[i].Position;
             numTargets++;
         }
 
@@ -73,10 +74,10 @@ public class CameraControl : MonoBehaviour
 
         for (int i = 0; i < m_Targets.Length; i++)
         {
-            if (!m_Targets[i].gameObject.activeSelf)
+            if (!m_Targets[i].IsAlive)
                 continue;
 
-            Vector3 targetLocalPos = transform.InverseTransformPoint(m_Targets[i].position);
+            Vector3 targetLocalPos = transform.InverseTransformPoint(m_Targets[i].Position);
 
             Vector3 desiredPosToTarget = targetLocalPos - desiredLocalPos;
 

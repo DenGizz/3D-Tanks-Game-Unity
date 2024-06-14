@@ -27,7 +27,7 @@ namespace Assets.Scripts.Infrasctucture
             TankBehaviour tank = tankInstance.GetComponent<TankBehaviour>();
             tankInstance.transform.position = position;
             tankInstance.transform.rotation = rotation;
-            tank.Setup(tankInstance, color, playerNumber);
+            tank.Setup( color, playerNumber);
             return tank;
         }
     }
