@@ -14,6 +14,8 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.Services
     {
         public int PerformedRounds {get; private set;}
 
+        public Tank RoundWinner { get; private set; }
+
         public event Action<Tank> RoundWin;
 
         private readonly ITanksProvider _tanksProvider;
@@ -68,7 +70,7 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.Services
             }
 
             Tank winner = GetRoundWinner();
-
+            RoundWinner = winner;
             RoundWin?.Invoke(winner);
         }
 
