@@ -11,6 +11,12 @@ namespace Assets.Scripts.Infrasctucture
     public class AssetsProvider : IAssetsProvider
     {
         private  GameplayResourceBundle _gameplayResourceBundle;
+        private UiResourceBundle _uiResourceBundle;
+
+        public GameObject GetMessagesUiPrefab()
+        {
+            return GetOrLoadAndGetUiResourceBundle().MessagesUiPrefab;
+        }
 
         public GameObject GetTankPrefab()
         {
@@ -23,6 +29,14 @@ namespace Assets.Scripts.Infrasctucture
                 _gameplayResourceBundle = UnityEngine.Resources.Load<GameplayResourceBundle>(ResourcePath.GameplayResourceBundle);
 
             return _gameplayResourceBundle ?? throw new Exception("GameplayResourceBundle not found");
+        }
+
+        private UiResourceBundle GetOrLoadAndGetUiResourceBundle()
+        {
+            if (_uiResourceBundle == null)
+                _uiResourceBundle = UnityEngine.Resources.Load<UiResourceBundle>(ResourcePath.UiResourceBundle);
+
+            return _uiResourceBundle ?? throw new Exception("UiResourceBundle not found");
         }
     }
 }

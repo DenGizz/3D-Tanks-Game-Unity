@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Infrasctucture;
+using Assets.Scripts.UI;
 using System;
 using System.Collections;
 using System.Linq;
@@ -11,7 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private BattleSessionConfig _battleSessionConfig;
 
     public CameraControl m_CameraControl;       // Reference to the CameraControl script for control during different phases.
-    public Text m_MessageText;                  // Reference to the overlay Text to display winning text, etc.
+    private MessagesUi _messagesUi;                  
     public GameObject m_TankPrefab;             // Reference to the prefab the players will control.
 
     [SerializeField] private TankSpawnPreset[] _tankSpawnPresets;
@@ -25,12 +26,14 @@ public class GameManager : MonoBehaviour
 
     private ITankFactory _tankFactory;
     private ITanksProvider _tanksProvider;
+    private IUiFactory _uiFactory;
 
     [Inject]
-    public void Construct(ITankFactory tankFactory, ITanksProvider tanksProvider)
+    public void Construct(ITankFactory tankFactory, ITanksProvider tanksProvider, IUiFactory uiFactory)
     {
         _tankFactory = tankFactory;
         _tanksProvider = tanksProvider;
+        _uiFactory = uiFactory;
     }
 
 
@@ -39,6 +42,8 @@ public class GameManager : MonoBehaviour
         // Create the delays so they only have to be made once.
         m_StartWait = new WaitForSeconds (_battleSessionConfig.StartDelay);
         m_EndWait = new WaitForSeconds (_battleSessionConfig.EndDelay);
+
+        _messagesUi = _uiFactory.CreateMessagesUi();
 
         SpawnAllTanks();
         SetCameraTargets();
@@ -102,7 +107,7 @@ public class GameManager : MonoBehaviour
 
         // Increment the round number and display text showing the players what round it is.
         m_RoundNumber++;
-        m_MessageText.text = "ROUND " + m_RoundNumber;
+        _messagesUi.Text = "ROUND " + m_RoundNumber;
 
         // Wait for the specified length of time until yielding control back to the game loop.
         yield return m_StartWait;
@@ -115,7 +120,7 @@ public class GameManager : MonoBehaviour
         EnableTankControl ();
 
         // Clear the text from the screen.
-        m_MessageText.text = string.Empty;
+        _messagesUi.Text = string.Empty;
 
         // While there is not one tank left...
         while (!OneTankLeft())
@@ -146,7 +151,7 @@ public class GameManager : MonoBehaviour
 
         // Get a message based on the scores and whether or not there is a game winner and display it.
         string message = EndMessage ();
-        m_MessageText.text = message;
+        _messagesUi.Text = message;
 
         // Wait for the specified length of time until yielding control back to the game loop.
         yield return m_EndWait;

@@ -9,5 +9,6 @@ namespace Assets.Scripts.Infrasctucture
     public class ResourcePath
     {
         public const string GameplayResourceBundle = "Bundles/GameplayResourceBundle";
+        public static string UiResourceBundle = "Bundles/UiResourceBundle";
     }
 }
