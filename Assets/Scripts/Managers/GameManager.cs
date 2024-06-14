@@ -10,14 +10,14 @@ public class GameManager : MonoBehaviour
     public CameraControl m_CameraControl;       // Reference to the CameraControl script for control during different phases.
     public Text m_MessageText;                  // Reference to the overlay Text to display winning text, etc.
     public GameObject m_TankPrefab;             // Reference to the prefab the players will control.
-    public TankManager[] m_Tanks;               // A collection of managers for enabling and disabling different aspects of the tanks.
+    public TankFacadeBehaviour[] m_Tanks;               // A collection of managers for enabling and disabling different aspects of the tanks.
 
 
     private int m_RoundNumber;                  // Which round the game is currently on.
     private WaitForSeconds m_StartWait;         // Used to have a delay whilst the round starts.
     private WaitForSeconds m_EndWait;           // Used to have a delay whilst the round or game ends.
-    private TankManager m_RoundWinner;          // Reference to the winner of the current round.  Used to make an announcement of who won.
-    private TankManager m_GameWinner;           // Reference to the winner of the game.  Used to make an announcement of who won.
+    private TankFacadeBehaviour m_RoundWinner;          // Reference to the winner of the current round.  Used to make an announcement of who won.
+    private TankFacadeBehaviour m_GameWinner;           // Reference to the winner of the game.  Used to make an announcement of who won.
 
 
     private void Start()
@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < m_Tanks.Length; i++)
         {
             // ... create them, set their player number and references needed for control.
-            m_Tanks[i].m_Instance =
+            m_Tanks[i].Instance =
                 Instantiate(m_TankPrefab, m_Tanks[i].m_SpawnPoint.position, m_Tanks[i].m_SpawnPoint.rotation) as GameObject;
             m_Tanks[i].m_PlayerNumber = i + 1;
             m_Tanks[i].Setup();
@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < targets.Length; i++)
         {
             // ... set it to the appropriate tank transform.
-            targets[i] = m_Tanks[i].m_Instance.transform;
+            targets[i] = m_Tanks[i].Instance.transform;
         }
 
         // These are the targets the camera should follow.
@@ -164,7 +164,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < m_Tanks.Length; i++)
         {
             // ... and if they are active, increment the counter.
-            if (m_Tanks[i].m_Instance.activeSelf)
+            if (m_Tanks[i].Instance.activeSelf)
                 numTanksLeft++;
         }
 
@@ -175,13 +175,13 @@ public class GameManager : MonoBehaviour
 
     // This function is to find out if there is a winner of the round.
     // This function is called with the assumption that 1 or fewer tanks are currently active.
-    private TankManager GetRoundWinner()
+    private TankFacadeBehaviour GetRoundWinner()
     {
         // Go through all the tanks...
         for (int i = 0; i < m_Tanks.Length; i++)
         {
             // ... and if one of them is active, it is the winner so return it.
-            if (m_Tanks[i].m_Instance.activeSelf)
+            if (m_Tanks[i].Instance.activeSelf)
                 return m_Tanks[i];
         }
 
@@ -191,7 +191,7 @@ public class GameManager : MonoBehaviour
 
 
     // This function is to find out if there is a winner of the game.
-    private TankManager GetGameWinner()
+    private TankFacadeBehaviour GetGameWinner()
     {
         // Go through all the tanks...
         for (int i = 0; i < m_Tanks.Length; i++)
