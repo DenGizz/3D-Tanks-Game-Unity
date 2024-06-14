@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [Serializable]
-public class TankFacadeBehaviour
+public class Tank
 {
     // This class is to manage various settings on a tank.
     // It works with the GameManager class to control how the tanks behave

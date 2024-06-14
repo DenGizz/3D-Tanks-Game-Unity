@@ -8,6 +8,6 @@ namespace Assets.Scripts.Infrasctucture
 {
     public interface ITankFactory 
     {
-        TankFacadeBehaviour CreateTank();
+        Tank CreateTank();
     }
 }

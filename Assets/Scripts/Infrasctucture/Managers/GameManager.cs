@@ -10,14 +10,14 @@ public class GameManager : MonoBehaviour
     public CameraControl m_CameraControl;       // Reference to the CameraControl script for control during different phases.
     public Text m_MessageText;                  // Reference to the overlay Text to display winning text, etc.
     public GameObject m_TankPrefab;             // Reference to the prefab the players will control.
-    public TankFacadeBehaviour[] m_Tanks;               // A collection of managers for enabling and disabling different aspects of the tanks.
+    public Tank[] m_Tanks;               // A collection of managers for enabling and disabling different aspects of the tanks.
 
 
     private int m_RoundNumber;                  // Which round the game is currently on.
     private WaitForSeconds m_StartWait;         // Used to have a delay whilst the round starts.
     private WaitForSeconds m_EndWait;           // Used to have a delay whilst the round or game ends.
-    private TankFacadeBehaviour m_RoundWinner;          // Reference to the winner of the current round.  Used to make an announcement of who won.
-    private TankFacadeBehaviour m_GameWinner;           // Reference to the winner of the game.  Used to make an announcement of who won.
+    private Tank m_RoundWinner;          // Reference to the winner of the current round.  Used to make an announcement of who won.
+    private Tank m_GameWinner;           // Reference to the winner of the game.  Used to make an announcement of who won.
 
 
     private void Start()
@@ -175,7 +175,7 @@ public class GameManager : MonoBehaviour
 
     // This function is to find out if there is a winner of the round.
     // This function is called with the assumption that 1 or fewer tanks are currently active.
-    private TankFacadeBehaviour GetRoundWinner()
+    private Tank GetRoundWinner()
     {
         // Go through all the tanks...
         for (int i = 0; i < m_Tanks.Length; i++)
@@ -191,7 +191,7 @@ public class GameManager : MonoBehaviour
 
 
     // This function is to find out if there is a winner of the game.
-    private TankFacadeBehaviour GetGameWinner()
+    private Tank GetGameWinner()
     {
         // Go through all the tanks...
         for (int i = 0; i < m_Tanks.Length; i++)

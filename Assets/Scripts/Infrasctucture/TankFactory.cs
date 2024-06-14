@@ -19,10 +19,10 @@ namespace Assets.Scripts.Infrasctucture
             _assetsProvider = assetsProvider;
         }
 
-        public TankFacadeBehaviour CreateTank()
+        public Tank CreateTank()
         {
             GameObject tankInstance = _instantiator.InstantiatePrefab(_assetsProvider.GetTankPrefab());
-            return tankInstance.GetComponent<TankFacadeBehaviour>();
+            return tankInstance.GetComponent<Tank>();
         }
     }
 }
