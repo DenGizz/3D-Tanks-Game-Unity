@@ -1,25 +1,33 @@
 ﻿using Assets.Scripts.Tank;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CameraControl : MonoBehaviour
 {
     public float m_DampTime = 0.2f;                 
     public float m_ScreenEdgeBuffer = 4f;           
-    public float m_MinSize = 6.5f;                  
-    [HideInInspector] public ITank[] m_Targets; 
+    public float m_MinSize = 6.5f;
+
+    private ITank[] _targets;
 
 
-    private Camera m_Camera;                        
-    private float m_ZoomSpeed;                      
-    private Vector3 m_MoveVelocity;                 
-    private Vector3 m_DesiredPosition;              
+    private Camera _camera;                        
+    private float _zoomSpeed;                      
+    private Vector3 _moveVelocity;                 
+    private Vector3 _desiredPosition;              
 
 
     private void Awake()
     {
-        m_Camera = GetComponentInChildren<Camera>();
+        _camera = GetComponentInChildren<Camera>();
     }
 
+
+    public void SetTargets(IEnumerable<ITank> targets)
+    {
+        _targets = targets.ToArray();
+    }
 
     private void FixedUpdate()
     {
@@ -32,7 +40,7 @@ public class CameraControl : MonoBehaviour
     {
         FindAveragePosition();
 
-        transform.position = Vector3.SmoothDamp(transform.position, m_DesiredPosition, ref m_MoveVelocity, m_DampTime);
+        transform.position = Vector3.SmoothDamp(transform.position, _desiredPosition, ref _moveVelocity, m_DampTime);
     }
 
 
@@ -41,12 +49,12 @@ public class CameraControl : MonoBehaviour
         Vector3 averagePos = new Vector3();
         int numTargets = 0;
 
-        for (int i = 0; i < m_Targets.Length; i++)
+        for (int i = 0; i < _targets.Length; i++)
         {
-            if (!m_Targets[i].IsAlive)
+            if (!_targets[i].IsAlive)
                 continue;
 
-            averagePos += m_Targets[i].Position;
+            averagePos += _targets[i].Position;
             numTargets++;
         }
 
@@ -55,35 +63,35 @@ public class CameraControl : MonoBehaviour
 
         averagePos.y = transform.position.y;
 
-        m_DesiredPosition = averagePos;
+        _desiredPosition = averagePos;
     }
 
 
     private void Zoom()
     {
         float requiredSize = FindRequiredSize();
-        m_Camera.orthographicSize = Mathf.SmoothDamp(m_Camera.orthographicSize, requiredSize, ref m_ZoomSpeed, m_DampTime);
+        _camera.orthographicSize = Mathf.SmoothDamp(_camera.orthographicSize, requiredSize, ref _zoomSpeed, m_DampTime);
     }
 
 
     private float FindRequiredSize()
     {
-        Vector3 desiredLocalPos = transform.InverseTransformPoint(m_DesiredPosition);
+        Vector3 desiredLocalPos = transform.InverseTransformPoint(_desiredPosition);
 
         float size = 0f;
 
-        for (int i = 0; i < m_Targets.Length; i++)
+        for (int i = 0; i < _targets.Length; i++)
         {
-            if (!m_Targets[i].IsAlive)
+            if (!_targets[i].IsAlive)
                 continue;
 
-            Vector3 targetLocalPos = transform.InverseTransformPoint(m_Targets[i].Position);
+            Vector3 targetLocalPos = transform.InverseTransformPoint(_targets[i].Position);
 
             Vector3 desiredPosToTarget = targetLocalPos - desiredLocalPos;
 
             size = Mathf.Max (size, Mathf.Abs (desiredPosToTarget.y));
 
-            size = Mathf.Max (size, Mathf.Abs (desiredPosToTarget.x) / m_Camera.aspect);
+            size = Mathf.Max (size, Mathf.Abs (desiredPosToTarget.x) / _camera.aspect);
         }
         
         size += m_ScreenEdgeBuffer;
@@ -97,9 +105,7 @@ public class CameraControl : MonoBehaviour
     public void SetStartPositionAndSize()
     {
         FindAveragePosition();
-
-        transform.position = m_DesiredPosition;
-
-        m_Camera.orthographicSize = FindRequiredSize();
+        transform.position = _desiredPosition;
+        _camera.orthographicSize = FindRequiredSize();
     }
 }

@@ -50,7 +50,7 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
             ResetAllTanks();
             DisableTankControl();
 
-            _cameraControlProvider.CameraControl.m_Targets = _tanksProvider.Tanks.ToArray();
+            _cameraControlProvider.CameraControl.SetTargets(_tanksProvider.Tanks);
             _roundObserver.StartObserve();
             _cameraControlProvider.CameraControl.SetStartPositionAndSize();
             _uiProvider.MessagesUi.ShowRoundStartText(_battleSessionObserver.PerformedRounds);
