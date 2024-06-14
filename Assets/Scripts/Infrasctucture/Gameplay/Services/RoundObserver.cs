@@ -47,9 +47,6 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.Services
         {
             _isObserving = true;
 
-            foreach (var tank in _tanksProvider.Tanks)
-                _roundWins.Add(tank, 0);
-
             _waitForOneTankLeftCoroutine = _coroutineRunner.StartCoroutine(WainForOneTankLeftEnumerator());
         }
 
@@ -75,6 +72,12 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.Services
         private Tank GetRoundWinner()
         {
             return _tanksProvider.Tanks.FirstOrDefault(t => t.GameObjectInstance.activeSelf);
+        }
+
+        public void SetTanksToObserve(IEnumerable<Tank> tanks)
+        {
+            foreach (var tank in _tanksProvider.Tanks)
+                _roundWins.Add(tank, 0);
         }
     }
 }

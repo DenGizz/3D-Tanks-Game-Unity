@@ -15,5 +15,6 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.Services
         int PerformedRounds { get; }
 
         void StartObserve();
+        void SetTanksToObserve(IEnumerable<Tank> tanks);
     }
 }

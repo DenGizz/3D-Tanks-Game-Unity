@@ -38,7 +38,7 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
             _tanksProvider.AddTank(tank1);
             _tanksProvider.AddTank(tank2);
 
-            _roundObserver.StartObserve();
+            _roundObserver.SetTanksToObserve(_tanksProvider.Tanks);
             _gameplayStateMachine.EnterState<StartRoundState>();
         }
 

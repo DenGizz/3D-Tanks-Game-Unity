@@ -22,12 +22,13 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
         private readonly IUiProvider _uiProvider;
         private readonly IStaticDataService _staticDataService;
         private readonly ICoroutineRunner _coroutineRunner;
+        private readonly IRoundObserver _roundObserver;
         private readonly WaitForSeconds _waitStartDelay;
 
 
         public StartRoundState(StateMachine stateMachine, IRoundObserver battleSessionObserver, ITanksProvider tanksProvider, 
             ICameraControlProvider cameraControlProvider, IUiProvider uiProvider, IStaticDataService staticDataService,
-            ICoroutineRunner coroutineRunner)
+            ICoroutineRunner coroutineRunner, IRoundObserver roundObserver)
         {
             _stateMachine = stateMachine;
             _battleSessionObserver = battleSessionObserver;
@@ -36,6 +37,7 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
             _uiProvider = uiProvider;
             _staticDataService = staticDataService;
             _coroutineRunner = coroutineRunner;
+            _roundObserver = roundObserver;
             _waitStartDelay = new WaitForSeconds(_staticDataService.BattleSessionConfig.StartDelay);
         }
 
@@ -45,7 +47,7 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
             DisableTankControl();
 
             _cameraControlProvider.CameraControl.m_Targets = _tanksProvider.Tanks.Select(t => t.GameObjectInstance.transform).ToArray();
-
+            _roundObserver.StartObserve();
             _cameraControlProvider.CameraControl.SetStartPositionAndSize();
             _uiProvider.MessagesUi.Text = "ROUND " + _battleSessionObserver.PerformedRounds;
             _coroutineRunner.StartCoroutine(StartRound());
