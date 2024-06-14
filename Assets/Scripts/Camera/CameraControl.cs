@@ -5,18 +5,15 @@ using UnityEngine;
 
 public class CameraControl : MonoBehaviour
 {
-    public float m_DampTime = 0.2f;                 
-    public float m_ScreenEdgeBuffer = 4f;           
-    public float m_MinSize = 6.5f;
+    [SerializeField] private float m_DampTime = 0.2f;
+    [SerializeField] private float m_ScreenEdgeBuffer = 4f;
+    [SerializeField] private float m_MinSize = 6.5f;
 
     private ITank[] _targets;
-
-
     private Camera _camera;                        
     private float _zoomSpeed;                      
     private Vector3 _moveVelocity;                 
     private Vector3 _desiredPosition;              
-
 
     private void Awake()
     {
@@ -39,7 +36,6 @@ public class CameraControl : MonoBehaviour
     private void Move()
     {
         FindAveragePosition();
-
         transform.position = Vector3.SmoothDamp(transform.position, _desiredPosition, ref _moveVelocity, m_DampTime);
     }
 
