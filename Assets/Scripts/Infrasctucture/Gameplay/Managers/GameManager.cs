@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Infrasctucture;
+using Assets.Scripts.Infrasctucture.Gameplay.Providers;
 using Assets.Scripts.Infrasctucture.Ui;
 using Assets.Scripts.UI;
 using System;
@@ -11,12 +12,7 @@ using Zenject;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private BattleSessionConfig _battleSessionConfig;
-
-    public CameraControl m_CameraControl;       // Reference to the CameraControl script for control during different phases.              
     public GameObject m_TankPrefab;             // Reference to the prefab the players will control.
-
-    [SerializeField] private TankSpawnPreset[] _tankSpawnPresets;
-
 
     private int m_RoundNumber;                  // Which round the game is currently on.
     private WaitForSeconds m_StartWait;         // Used to have a delay whilst the round starts.
@@ -28,14 +24,20 @@ public class GameManager : MonoBehaviour
     private ITanksProvider _tanksProvider;
     private IUiFactory _uiFactory;
     private IUiProvider _uiProvider;
+    private ICameraControlProvider _cameraControlProvider;
+    private ILevelSpawnPointsProvider _levelSpawnPointsProvider;
 
     [Inject]
-    public void Construct(ITankFactory tankFactory, ITanksProvider tanksProvider, IUiFactory uiFactory, IUiProvider uiProvider)
+    public void Construct(ITankFactory tankFactory, ITanksProvider tanksProvider,
+        IUiFactory uiFactory, IUiProvider uiProvider, 
+        ICameraControlProvider cameraControlProvider, ILevelSpawnPointsProvider levelSpawnPointsProvider)
     {
         _tankFactory = tankFactory;
         _tanksProvider = tanksProvider;
         _uiFactory = uiFactory;
         _uiProvider = uiProvider;
+        _cameraControlProvider = cameraControlProvider;
+        _levelSpawnPointsProvider = levelSpawnPointsProvider;
     }
 
 
@@ -46,6 +48,9 @@ public class GameManager : MonoBehaviour
         m_EndWait = new WaitForSeconds (_battleSessionConfig.EndDelay);
 
         _uiProvider.MessagesUi = _uiFactory.CreateMessagesUi();
+        _cameraControlProvider.Initialize();
+        _levelSpawnPointsProvider.Initialize();
+
 
         SpawnAllTanks();
         SetCameraTargets();
@@ -57,17 +62,17 @@ public class GameManager : MonoBehaviour
 
     private void SpawnAllTanks()
     {
-        for (int i = 0; i < _tankSpawnPresets.Length; i++)
-        {
-            Tank tank = _tankFactory.CreateTank(_tankSpawnPresets[i].SpawnPoint, _tankSpawnPresets[i].Color, i + 1);
-            _tanksProvider.AddTank(tank);
-        }
+        Tank tank1 = _tankFactory.CreateTank(_levelSpawnPointsProvider.SpawnPoints.ElementAt(1), Color.blue, 1);
+        Tank tank2 = _tankFactory.CreateTank(_levelSpawnPointsProvider.SpawnPoints.ElementAt(0), Color.red, 2);
+
+        _tanksProvider.AddTank(tank1);
+        _tanksProvider.AddTank(tank2);
     }
 
 
     private void SetCameraTargets()
     {
-        m_CameraControl.m_Targets = _tanksProvider.Tanks.Select(t => t.GameObjectInstance.transform).ToArray();
+        _cameraControlProvider.CameraControl.m_Targets = _tanksProvider.Tanks.Select(t => t.GameObjectInstance.transform).ToArray();
     }
 
 
@@ -105,7 +110,7 @@ public class GameManager : MonoBehaviour
         DisableTankControl ();
 
         // Snap the camera's zoom and position to something appropriate for the reset tanks.
-        m_CameraControl.SetStartPositionAndSize ();
+        _cameraControlProvider.CameraControl.SetStartPositionAndSize ();
 
         // Increment the round number and display text showing the players what round it is.
         m_RoundNumber++;
@@ -226,14 +231,4 @@ public class GameManager : MonoBehaviour
         foreach (Tank tank in _tanksProvider.Tanks)
             tank.DisableControl();
     }
-}
-
-[Serializable]
-public class TankSpawnPreset
-{
-    public Color Color => _color;
-    public Transform SpawnPoint => _spawnPoint;
-
-    [SerializeField] private Color _color;
-    [SerializeField] private Transform _spawnPoint;
 }

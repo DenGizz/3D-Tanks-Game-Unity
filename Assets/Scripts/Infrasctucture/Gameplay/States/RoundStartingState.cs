@@ -9,7 +9,7 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
 {
     public class RoundStartingState : IState
     {
-        private readonly GameplayStateMachine _gameplayStateMachine;
+
 
         public void Enter()
         {

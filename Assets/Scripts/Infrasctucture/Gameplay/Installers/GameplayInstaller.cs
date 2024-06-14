@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Infrasctucture.Gameplay.Providers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -17,6 +18,8 @@ namespace Assets.Scripts.Infrasctucture
             Container.Bind<IAssetsProvider>().To<AssetsProvider>().AsSingle();
             Container.Bind<ITankFactory>().To<TankFactory>().AsSingle();
             Container.Bind<ITanksProvider>().To<TanksProvider>().AsSingle();
+            Container.Bind<ICameraControlProvider>().To<CameraControlProvider>().AsSingle();
+            Container.Bind<ILevelSpawnPointsProvider>().To<LevelSpawnPointsProvider>().AsSingle();
         }
     }
 }
