@@ -53,7 +53,7 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
             _cameraControlProvider.CameraControl.m_Targets = _tanksProvider.Tanks.Select(t => t.GameObjectInstance.transform).ToArray();
             _roundObserver.StartObserve();
             _cameraControlProvider.CameraControl.SetStartPositionAndSize();
-            _uiProvider.MessagesUi.Text = "ROUND " + _battleSessionObserver.PerformedRounds;
+            _uiProvider.MessagesUi.ShowRoundStartText(_battleSessionObserver.PerformedRounds);
             _coroutineRunner.StartCoroutine(StartRound());
         }
 

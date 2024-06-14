@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using Zenject;
 
 namespace Assets.Scripts.Infrasctucture.Gameplay.States
 {
@@ -42,15 +43,15 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
             DisableTankControl();
 
             // See if there is a winner now the round is over.
-             m_RoundWinner = _roundObserver.RoundWinner;
-             m_GameWinner = GetGameWinner();
+            m_RoundWinner = _roundObserver.RoundWinner;
+            m_GameWinner = GetGameWinner();
 
+            if(m_GameWinner != null)
+                _uiProvider.MessagesUi.ShowGameWinnerText(m_GameWinner);
+            else
+                _uiProvider.MessagesUi.ShowRoundWinnerText(m_RoundWinner);
 
-            // Get a message based on the scores and whether or not there is a game winner and display it.
-            string message = EndMessage(m_RoundWinner, m_GameWinner);
-            _uiProvider.MessagesUi.Text = message;
-
-           _coroutineRunner.StartCoroutine(WaitDelay());
+            _coroutineRunner.StartCoroutine(WaitDelay());
         }
 
         public void Exit()
@@ -73,33 +74,6 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
                 _stateMachine.EnterState<EndGameState>();
             else
                 _stateMachine.EnterState<StartRoundState>();
-        }
-
-        private string EndMessage(Tank m_RoundWinner, Tank m_GameWinner)
-        {
-            // By default when a round ends there are no winners so the default end message is a draw.
-            string message = "DRAW!";
-
-            // If there is a winner then change the message to reflect that.
-            if (m_RoundWinner != null)
-                message = GetColoredPlayerText(m_RoundWinner) + " WINS THE ROUND!";
-
-            // Add some line breaks after the initial message.
-            message += "\n\n\n\n";
-
-            foreach (Tank tank in _tanksProvider.Tanks)
-                message += GetColoredPlayerText(tank) + ": " + _roundObserver.GetNumberOfRoundWins(tank) + " WINS\n";
-
-            // If there is a game winner, change the entire message to reflect that.
-            if (m_GameWinner != null)
-                message = GetColoredPlayerText(m_GameWinner) + " WINS THE GAME!";
-
-            return message;
-        }
-
-        private string GetColoredPlayerText(Tank tank)
-        {
-            return "<color=#" + ColorUtility.ToHtmlStringRGB(tank.PlayerColor) + ">PLAYER " + tank.PlayerNumber + "</color>";
         }
 
         private Tank GetGameWinner()

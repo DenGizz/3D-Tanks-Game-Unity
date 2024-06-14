@@ -29,7 +29,7 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
         public void Enter()
         {
             EnableTankControl();
-            _uiProvider.MessagesUi.Text = string.Empty;
+            _uiProvider.MessagesUi.ClearText();
             _roundObserver.RoundWin += OnRoundWin;
         }
 
