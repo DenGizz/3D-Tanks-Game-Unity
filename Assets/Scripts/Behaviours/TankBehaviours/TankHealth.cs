@@ -6,48 +6,31 @@ using Zenject;
 
 public class TankHealth : MonoBehaviour
 {
-    public float m_StartingHealth = 100f;          
-    public Slider m_Slider;                        
-    public Image m_FillImage;                      
-    public Color m_FullHealthColor = Color.green;  
-    public Color m_ZeroHealthColor = Color.red;    
-
+    public float MaxHealth { get; set; } = 100f;          
     public bool IsAlive => !m_Dead;
 
     public event Action OnDeath;
+    public event EventHandler<DamageEventArgs> OnDamaged;
 
-    private float m_CurrentHealth;  
+    public float CurrentHealth { get; private set; }  
     private bool m_Dead;
-
-
 
     public void Revive()
     {
-        m_CurrentHealth = m_StartingHealth;
+        CurrentHealth = MaxHealth;
         m_Dead = false;
-
-        SetHealthUI();
     }
     
-
     public void TakeDamage(float amount)
     {
         // Adjust the tank's current health, update the UI based on the new health and check whether or not the tank is dead.
-        m_CurrentHealth -= amount;
-        SetHealthUI();
+        CurrentHealth -= amount;
 
-        if(m_CurrentHealth <=0f && !m_Dead)
+        OnDamaged?.Invoke(this, new DamageEventArgs(amount));
+
+        if (CurrentHealth <=0f && !m_Dead)
             Death();
     }
-
-
-    private void SetHealthUI()
-    {
-        // Adjust the value and colour of the slider.
-        m_Slider.value = m_CurrentHealth;
-        m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, m_CurrentHealth/m_StartingHealth);
-    }
-
 
     private void Death()
     {
