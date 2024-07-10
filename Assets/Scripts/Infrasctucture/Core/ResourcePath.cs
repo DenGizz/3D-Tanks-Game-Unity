@@ -11,5 +11,8 @@ namespace Assets.Scripts.Infrasctucture
         public const string GameplayResourceBundle = "Bundles/GameplayResourceBundle";
         public static string UiResourceBundle = "Bundles/UiResourceBundle";
         public static string BattleSessionConfig = "Configs/BattleSessionConfig";
+
+        public static string ShellExplosionPrefab = "VFX/ShellExplosion";
+        public static string TankExplosionPrefab = "VFX/TankExplosion";
     }
 }

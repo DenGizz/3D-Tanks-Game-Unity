@@ -22,6 +22,12 @@ namespace Assets.Scripts.Infrasctucture
             return _battleSessionConfig ?? throw new Exception("BattleSessionConfig not found");
         }
 
+        public GameObject GetTankExplosionPrefab()
+        {
+            return UnityEngine.Resources.Load<GameObject>(ResourcePath.TankExplosionPrefab)
+                ?? throw new Exception($"Tank explosion asset not found at {ResourcePath.TankExplosionPrefab}");
+        }
+
         public GameObject GetMessagesUiPrefab()
         {
             return GetOrLoadAndGetUiResourceBundle().MessagesUiPrefab;

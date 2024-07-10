@@ -12,5 +12,6 @@ namespace Assets.Scripts.Infrasctucture
         BattleSessionConfig GetBattleSessionConfig();
         GameObject GetMessagesUiPrefab();
         GameObject GetTankPrefab();
+        GameObject GetTankExplosionPrefab();
     }
 }

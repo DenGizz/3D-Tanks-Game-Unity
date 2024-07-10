@@ -1,5 +1,8 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Infrasctucture;
+using System;
+using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class TankHealth : MonoBehaviour
 {
@@ -9,21 +12,13 @@ public class TankHealth : MonoBehaviour
     public Color m_FullHealthColor = Color.green;  
     public Color m_ZeroHealthColor = Color.red;    
     public GameObject m_ExplosionPrefab;
-    
     public bool IsAlive => !m_Dead;
-    private AudioSource m_ExplosionAudio;          
-    private ParticleSystem m_ExplosionParticles;   
+
+    public event Action OnDeath;
+
     private float m_CurrentHealth;  
-    private bool m_Dead;            
+    private bool m_Dead;
 
-
-    private void Awake()
-    {
-        m_ExplosionParticles = Instantiate(m_ExplosionPrefab).GetComponent<ParticleSystem>();
-        m_ExplosionAudio = m_ExplosionParticles.GetComponent<AudioSource>();
-
-        m_ExplosionParticles.gameObject.SetActive(false);
-    }
 
 
     public void Revive()
@@ -41,9 +36,8 @@ public class TankHealth : MonoBehaviour
         m_CurrentHealth -= amount;
         SetHealthUI();
 
-        if(m_CurrentHealth <=0f && !m_Dead){
-            OnDeath();
-        }
+        if(m_CurrentHealth <=0f && !m_Dead)
+            Death();
     }
 
 
@@ -55,16 +49,11 @@ public class TankHealth : MonoBehaviour
     }
 
 
-    private void OnDeath()
+    private void Death()
     {
-        // Play the effects for the death of the tank and deactivate it.
         m_Dead = true;
-        m_ExplosionParticles.transform.position=transform.position;
-        m_ExplosionParticles.gameObject.SetActive(true);
-
-        m_ExplosionParticles.Play();
-        m_ExplosionAudio.Play();
-
         gameObject.SetActive(false);
+
+        OnDeath?.Invoke();
     }
 }
