@@ -51,11 +51,6 @@ public class TankMoveControllerBehaviour : MonoBehaviour
 
     private void Update()
     {
-
-        m_MovementInputValue = Input.GetAxis(m_MovementAxisName);
-        m_TurnInputValue = Input.GetAxis(m_TurnAxisName);
-
-        
         m_MovementInputValue = 0;
         m_TurnInputValue = 0;
 

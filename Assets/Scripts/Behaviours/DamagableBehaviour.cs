@@ -19,6 +19,7 @@ public class DamagableBehaviour : MonoBehaviour, IDamagable, IInitializable
     public void Initialize()
     {
         HealthPoints = MaxHealthPoints;
+        _isAlive = true;
     }
 
     public void Revive()
@@ -28,7 +29,7 @@ public class DamagableBehaviour : MonoBehaviour, IDamagable, IInitializable
     }
     
     public void TakeDamage(float amount)
-    {
+      {
         // Adjust the tank's current health, update the UI based on the new health and check whether or not the tank is dead.
         HealthPoints -= amount;
 

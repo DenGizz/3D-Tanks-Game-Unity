@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-[RequireComponent(typeof(IDamagable))]
 public class Damagable3DCircleSliderView : MonoBehaviour, IInitializable
 {
     private IDamagable _damagable;
