@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-[RequireComponent(typeof(TankHealth))]
+[RequireComponent(typeof(DamagableBehaviour))]
 public class TankExplosionBehaviour : MonoBehaviour
 {
     private IAssetsProvider _assetsProvider;
 
-    private TankHealth _health;
+    private DamagableBehaviour _health;
 
     [Inject]
     public void Construct(IAssetsProvider assetsProvider)
@@ -19,7 +19,7 @@ public class TankExplosionBehaviour : MonoBehaviour
 
     private void Awake()
     { 
-        _health = GetComponent<TankHealth>();
+        _health = GetComponent<DamagableBehaviour>();
         _health.OnDeath += OnDeathEventHandler;
     }
 

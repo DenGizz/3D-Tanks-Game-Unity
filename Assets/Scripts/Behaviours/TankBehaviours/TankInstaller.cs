@@ -7,6 +7,6 @@ public class TankInstaller : MonoInstaller
 {
     public override void InstallBindings()
     {
-        Container.Bind<TankHealth>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<DamagableBehaviour>().FromComponentInHierarchy().AsSingle();
     }
 }
