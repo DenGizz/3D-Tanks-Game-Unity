@@ -10,4 +10,5 @@ public interface IDamagable
     float HealthPoints { get; }
     void TakeDamage(float amount);
     event Action OnDeath;
+    event EventHandler<DamageEventArgs> OnDamaged;
 }

@@ -5,10 +5,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-[RequireComponent(typeof(DamagableBehaviour))]
-public class TankHealthView : MonoBehaviour, IInitializable
+[RequireComponent(typeof(IDamagable))]
+public class Damagable3DCircleSliderView : MonoBehaviour, IInitializable
 {
-    private DamagableBehaviour _health;
+    private IDamagable _damagable;
 
     [SerializeField] private Slider m_Slider;
     [SerializeField] private Image m_FillImage;
@@ -16,23 +16,23 @@ public class TankHealthView : MonoBehaviour, IInitializable
     [SerializeField] private Color m_ZeroHealthColor = Color.red;
 
     [Inject]
-    public void Construct(DamagableBehaviour health)
+    public void Construct(IDamagable damagable)
     {
-        _health = health;
+        _damagable = damagable;
     }
 
     [Inject]
     public void Initialize()
     {
         UpdateHealthUI();
-        _health.OnDamaged += OnDamagedEventHandler;
+        _damagable.OnDamaged += OnDamagedEventHandler;
     }
 
     private void UpdateHealthUI()
     {
         // Adjust the value and colour of the slider.
-        m_Slider.value = _health.HealthPoints;
-        m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, _health.HealthPoints / _health.MaxHealthPoints);
+        m_Slider.value = _damagable.HealthPoints;
+        m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, _damagable.HealthPoints / _damagable.MaxHealthPoints);
     }
 
     private void OnDamagedEventHandler(object sender, DamageEventArgs e)

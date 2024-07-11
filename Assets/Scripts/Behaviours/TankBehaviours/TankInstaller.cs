@@ -7,6 +7,6 @@ public class TankInstaller : MonoInstaller
 {
     public override void InstallBindings()
     {
-        Container.Bind<DamagableBehaviour>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<IDamagable>().FromComponentInHierarchy().AsSingle();
     }
 }
