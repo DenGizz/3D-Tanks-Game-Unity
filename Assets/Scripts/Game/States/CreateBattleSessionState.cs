@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Infrasctucture.Gameplay.Providers;
+﻿using Assets.Scripts.Features.InputSources;
+using Assets.Scripts.Infrasctucture.Gameplay.Providers;
 using Assets.Scripts.Infrasctucture.Gameplay.Services;
 using Assets.Scripts.StateMachines;
 using Assets.Scripts.Tank;
@@ -18,15 +19,18 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
         private readonly ITankFactory _tankFactory;
         private readonly ILevelSpawnPointsProvider _levelSpawnPointsProvider;
         private readonly IRoundObserver _roundObserver;
+        private readonly IInputSourceServiceAssing _assingInputSourceService;
 
         public CreateBattleSessionState(StateMachine gameplayStateMachine, ITanksProvider tanksProvider, 
-            ITankFactory tankFactory, ILevelSpawnPointsProvider levelSpawnPointsProvider, IRoundObserver roundObserver)
+            ITankFactory tankFactory, ILevelSpawnPointsProvider levelSpawnPointsProvider,
+            IRoundObserver roundObserver, IInputSourceServiceAssing assingInputSourceService)
         {
             _gameplayStateMachine = gameplayStateMachine;
             _tanksProvider = tanksProvider;
             _tankFactory = tankFactory;
             _levelSpawnPointsProvider = levelSpawnPointsProvider;
             _roundObserver = roundObserver;
+            _assingInputSourceService = assingInputSourceService;
         }
 
         public void Enter()
@@ -38,6 +42,14 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
 
             _tanksProvider.AddTank(tank1);
             _tanksProvider.AddTank(tank2);
+
+            IInputSource inputSource2 = new DeviceAxesInputSource($"Vertical{1}", $"Horizontal{1}");
+            IInputSource inputSource1 = new DeviceAxesInputSource($"Vertical{2}", $"Horizontal{2}");
+
+            _assingInputSourceService.AssignInputSource(tank1 , inputSource1);
+            _assingInputSourceService.AssignInputSource(tank2, inputSource2);
+
+
 
             _roundObserver.SetTanksToObserve(_tanksProvider.Tanks);
             _gameplayStateMachine.EnterState<StartRoundState>();

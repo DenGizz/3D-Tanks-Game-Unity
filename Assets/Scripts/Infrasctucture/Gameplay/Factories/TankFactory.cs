@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Tank;
+﻿using Assets.Scripts.Infrasctucture.Gameplay.Providers;
+using Assets.Scripts.Tank;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +14,13 @@ namespace Assets.Scripts.Infrasctucture
     {
         private readonly IInstantiator _instantiator;
         private readonly IAssetsProvider _assetsProvider;
+        private readonly ITanksGameObjectsRegistry _gameObjectsRegistry;
 
-        public TankFactory(IInstantiator instantiator, IAssetsProvider assetsProvider)
+        public TankFactory(IInstantiator instantiator, IAssetsProvider assetsProvider, ITanksGameObjectsRegistry gameObjectsRegistry)
         {
             _instantiator = instantiator;
             _assetsProvider = assetsProvider;
+            _gameObjectsRegistry = gameObjectsRegistry; 
         }
 
 
@@ -28,6 +31,8 @@ namespace Assets.Scripts.Infrasctucture
             tankInstance.transform.position = position;
             tankInstance.transform.rotation = rotation;
             tank.Setup( color, playerNumber);
+
+            _gameObjectsRegistry.RegisterGameObject(tank, tankInstance);
             return tank;
         }
     }

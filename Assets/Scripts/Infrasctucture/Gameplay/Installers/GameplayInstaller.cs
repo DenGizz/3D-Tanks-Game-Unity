@@ -22,6 +22,8 @@ namespace Assets.Scripts.Infrasctucture
             Container.Bind<ITanksProvider>().To<TanksProvider>().AsSingle();
             Container.Bind<ICameraControlProvider>().To<CameraControlProvider>().AsSingle();
             Container.Bind<ILevelSpawnPointsProvider>().To<LevelSpawnPointsProvider>().AsSingle();
+            Container.Bind<ITanksGameObjectsRegistry>().To<TanksGameObjectsRegistry>().AsSingle();
+            Container.Bind<IInputSourceServiceAssing>().To<InputSourceAssingService>().AsSingle();
         }
     }
 }
