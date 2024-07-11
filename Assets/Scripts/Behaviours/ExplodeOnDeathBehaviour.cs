@@ -5,21 +5,21 @@ using UnityEngine;
 using Zenject;
 
 [RequireComponent(typeof(IDamagable))]
-public class ExplodeOnDeathBehaviour : MonoBehaviour, IInitializable
+public class ExplodeOnDeathBehaviour : MonoBehaviour
 {
     private IAssetsProvider _assetsProvider;
     private IDamagable _damagable;
 
     [Inject]
-    public void Construct(IAssetsProvider assetsProvider, IDamagable damagable)
+    public void Construct(IAssetsProvider assetsProvider)
     {
         _assetsProvider = assetsProvider;
-        _damagable = damagable;
     }
 
-    [Inject]
-    public void Initialize()
+
+    private void Awake()
     {
+        _damagable = GetComponent<IDamagable>();
         _damagable.OnDeath += OnDeathEventHandler;
     }
 

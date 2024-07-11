@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public class DamagableBehaviour : MonoBehaviour, IDamagable, IInitializable
+public class DamagableBehaviour : MonoBehaviour, IDamagable
 {
     public float MaxHealthPoints { get; private set; } = 100f;          
     public bool IsAlive => _isAlive;
@@ -15,8 +15,7 @@ public class DamagableBehaviour : MonoBehaviour, IDamagable, IInitializable
     public float HealthPoints { get; private set; }  
     private bool _isAlive;
 
-    [Inject]
-    public void Initialize()
+    private void Awake()
     {
         HealthPoints = MaxHealthPoints;
     }

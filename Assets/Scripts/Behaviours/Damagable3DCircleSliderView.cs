@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using Zenject;
 
 [RequireComponent(typeof(IDamagable))]
-public class Damagable3DCircleSliderView : MonoBehaviour, IInitializable
+public class Damagable3DCircleSliderView : MonoBehaviour
 {
     private IDamagable _damagable;
 
@@ -15,14 +15,13 @@ public class Damagable3DCircleSliderView : MonoBehaviour, IInitializable
     [SerializeField] private Color m_FullHealthColor = Color.green;
     [SerializeField] private Color m_ZeroHealthColor = Color.red;
 
-    [Inject]
-    public void Construct(IDamagable damagable)
+
+    private void Awake()
     {
-        _damagable = damagable;
+        _damagable = GetComponent<IDamagable>();
     }
 
-    [Inject]
-    public void Initialize()
+    private void Start()
     {
         UpdateHealthUI();
         _damagable.OnDamaged += OnDamagedEventHandler;
