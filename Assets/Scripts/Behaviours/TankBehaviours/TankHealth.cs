@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public class TankHealth : MonoBehaviour
+public class TankHealth : MonoBehaviour, IInitializable
 {
     public float MaxHealth { get; set; } = 100f;          
     public bool IsAlive => !m_Dead;
@@ -14,6 +14,12 @@ public class TankHealth : MonoBehaviour
 
     public float CurrentHealth { get; private set; }  
     private bool m_Dead;
+
+    [Inject]
+    public void Initialize()
+    {
+        CurrentHealth = MaxHealth;
+    }
 
     public void Revive()
     {

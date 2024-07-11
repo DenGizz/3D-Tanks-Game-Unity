@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 [RequireComponent(typeof(TankHealth))]
-public class TankHealthView : MonoBehaviour
+public class TankHealthView : MonoBehaviour, IInitializable
 {
     private TankHealth _health;
 
@@ -14,9 +15,15 @@ public class TankHealthView : MonoBehaviour
     [SerializeField] private Color m_FullHealthColor = Color.green;
     [SerializeField] private Color m_ZeroHealthColor = Color.red;
 
-    private void Start()
+    [Inject]
+    public void Construct(TankHealth health)
     {
-        _health = GetComponent<TankHealth>();
+        _health = health;
+    }
+
+    [Inject]
+    public void Initialize()
+    {
         UpdateHealthUI();
         _health.OnDamaged += OnDamagedEventHandler;
     }
