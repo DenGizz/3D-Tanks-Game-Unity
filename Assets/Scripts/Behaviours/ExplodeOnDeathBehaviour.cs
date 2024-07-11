@@ -4,23 +4,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-[RequireComponent(typeof(DamagableBehaviour))]
-public class TankExplosionBehaviour : MonoBehaviour
+[RequireComponent(typeof(IDamagable))]
+public class ExplodeOnDeathBehaviour : MonoBehaviour, IInitializable
 {
     private IAssetsProvider _assetsProvider;
-
-    private DamagableBehaviour _health;
+    private IDamagable _damagable;
 
     [Inject]
-    public void Construct(IAssetsProvider assetsProvider)
+    public void Construct(IAssetsProvider assetsProvider, IDamagable damagable)
     {
         _assetsProvider = assetsProvider;
+        _damagable = damagable;
     }
 
-    private void Awake()
-    { 
-        _health = GetComponent<DamagableBehaviour>();
-        _health.OnDeath += OnDeathEventHandler;
+    [Inject]
+    public void Initialize()
+    {
+        _damagable.OnDeath += OnDeathEventHandler;
     }
 
     private void OnDeathEventHandler()
