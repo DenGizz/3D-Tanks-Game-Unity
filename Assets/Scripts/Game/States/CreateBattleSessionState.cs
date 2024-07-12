@@ -1,4 +1,7 @@
-﻿using Assets.Scripts.Features.InputSources;
+﻿using Assets.Scripts.Configs;
+using Assets.Scripts.Features.InputSources;
+using Assets.Scripts.Infrasctucture.Core;
+using Assets.Scripts.Infrasctucture.Gameplay.Factories;
 using Assets.Scripts.Infrasctucture.Gameplay.Providers;
 using Assets.Scripts.Infrasctucture.Gameplay.Services;
 using Assets.Scripts.StateMachines;
@@ -20,10 +23,13 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
         private readonly ILevelSpawnPointsProvider _levelSpawnPointsProvider;
         private readonly IRoundObserver _roundObserver;
         private readonly IInputSourceServiceAssing _assingInputSourceService;
+        private readonly IInputSourceFactory _inputSourceFactory;
+        private readonly IStaticDataService _staticDataService;
 
         public CreateBattleSessionState(StateMachine gameplayStateMachine, ITanksProvider tanksProvider, 
             ITankFactory tankFactory, ILevelSpawnPointsProvider levelSpawnPointsProvider,
-            IRoundObserver roundObserver, IInputSourceServiceAssing assingInputSourceService)
+            IRoundObserver roundObserver, IInputSourceServiceAssing assingInputSourceService, IStaticDataService staticDataService,
+            IInputSourceFactory inputSourceFactory)
         {
             _gameplayStateMachine = gameplayStateMachine;
             _tanksProvider = tanksProvider;
@@ -31,6 +37,8 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
             _levelSpawnPointsProvider = levelSpawnPointsProvider;
             _roundObserver = roundObserver;
             _assingInputSourceService = assingInputSourceService;
+            _inputSourceFactory = inputSourceFactory;
+            _staticDataService = staticDataService;
         }
 
         public void Enter()
@@ -43,11 +51,15 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
             _tanksProvider.AddTank(tank1);
             _tanksProvider.AddTank(tank2);
 
-            IInputSource inputSource2 = new DeviceAxesInputSource($"Vertical{1}", $"Horizontal{1}",$"Fire{1}");
-            IInputSource inputSource1 = new DeviceAxesInputSource($"Vertical{2}", $"Horizontal{2}", $"Fire{2}");
+            LocalInputSchemesConfig inputsConfig = _staticDataService.LocalInputSchemesConfig;
+            LocalInputSchemeConfiguration tank1InputConfig = inputsConfig.LocalInputConfigurations.ElementAt(0);
+            LocalInputSchemeConfiguration tank2InputConfig = inputsConfig.LocalInputConfigurations.ElementAt(1);
 
-            _assingInputSourceService.AssignInputSource(tank1 , inputSource1);
-            _assingInputSourceService.AssignInputSource(tank2, inputSource2);
+            IInputSource inputSource1 = _inputSourceFactory.CreateLocalInputSource(tank1InputConfig);
+            IInputSource inputSource2 = _inputSourceFactory.CreateLocalInputSource(tank2InputConfig);
+
+            _assingInputSourceService.AssignInputSource(tank1 , inputSource2);
+            _assingInputSourceService.AssignInputSource(tank2, inputSource1);
 
 
 

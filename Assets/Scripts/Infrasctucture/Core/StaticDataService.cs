@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Configs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,5 +17,7 @@ namespace Assets.Scripts.Infrasctucture.Core
         }
 
         public BattleSessionConfig BattleSessionConfig => _assetsProvider.GetBattleSessionConfig();
+
+        public LocalInputSchemesConfig LocalInputSchemesConfig => _assetsProvider.GetLocalInputSchemesConfig();
     }
 }

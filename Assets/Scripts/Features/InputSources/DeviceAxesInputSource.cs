@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Configs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,9 @@ namespace Assets.Scripts.Features.InputSources
             _turnAxisName = turnAxisName;
             _fireButtonName = fireButtonName;
         }
+
+        public DeviceAxesInputSource(LocalInputSchemeConfiguration config) 
+            : this (config.MoveAxisName, config.TurnAxisName, config.FireButtonName) { }
 
         public float MovementInputValue => Input.GetAxis(_movementAxisName);
         public float TurnInputValue => Input.GetAxis(_turnAxisName);

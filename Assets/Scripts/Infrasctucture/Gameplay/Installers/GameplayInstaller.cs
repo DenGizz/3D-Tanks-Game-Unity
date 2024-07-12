@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Infrasctucture.Gameplay.Providers;
+﻿using Assets.Scripts.Infrasctucture.Gameplay.Factories;
+using Assets.Scripts.Infrasctucture.Gameplay.Providers;
 using Assets.Scripts.Infrasctucture.Gameplay.Services;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,7 @@ namespace Assets.Scripts.Infrasctucture
             Container.Bind<ILevelSpawnPointsProvider>().To<LevelSpawnPointsProvider>().AsSingle();
             Container.Bind<ITanksGameObjectsRegistry>().To<TanksGameObjectsRegistry>().AsSingle();
             Container.Bind<IInputSourceServiceAssing>().To<InputSourceAssingService>().AsSingle();
+            Container.Bind<IInputSourceFactory>().To<InputSourceFactory>().AsSingle();
         }
     }
 }

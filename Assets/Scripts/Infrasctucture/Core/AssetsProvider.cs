@@ -1,31 +1,29 @@
-﻿using Assets.Scripts.Resources;
+﻿using Assets.Scripts.Configs;
+using Assets.Scripts.Resources;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets.Scripts.Infrasctucture
 {
     public class AssetsProvider : IAssetsProvider
     {
-        private  GameplayResourceBundle _gameplayResourceBundle;
-        private UiResourceBundle _uiResourceBundle;
-        private BattleSessionConfig _battleSessionConfig;
-
         public BattleSessionConfig GetBattleSessionConfig()
         {
-            if (_battleSessionConfig == null)
-                _battleSessionConfig = UnityEngine.Resources.Load<BattleSessionConfig>(ResourcePath.BattleSessionConfig);
         
-            return _battleSessionConfig ?? throw new Exception("BattleSessionConfig not found");
+            return UnityEngine.Resources.Load<BattleSessionConfig>(ResourcePath.BattleSessionConfig) 
+                ?? throw new Exception("BattleSessionConfig not found");
         }
 
         public GameObject GetTankExplosionPrefab()
         {
             return UnityEngine.Resources.Load<GameObject>(ResourcePath.TankExplosionPrefab)
                 ?? throw new Exception($"Tank explosion asset not found at {ResourcePath.TankExplosionPrefab}");
+        }
+
+        public LocalInputSchemesConfig GetLocalInputSchemesConfig()
+        {
+            return UnityEngine.Resources.Load<LocalInputSchemesConfig>(ResourcePath.LocalInputSchemesConfig)
+                ?? throw new Exception($"LocalInputSchemesConfig asset not found at {ResourcePath.LocalInputSchemesConfig}");
         }
 
         public GameObject GetMessagesUiPrefab()
@@ -38,20 +36,17 @@ namespace Assets.Scripts.Infrasctucture
             return GetOrLoadAndGetGameplayResourceBundle().TankPrefab;
         }
 
+
+
         private GameplayResourceBundle GetOrLoadAndGetGameplayResourceBundle()
         {
-            if (_gameplayResourceBundle == null)
-                _gameplayResourceBundle = UnityEngine.Resources.Load<GameplayResourceBundle>(ResourcePath.GameplayResourceBundle);
-
-            return _gameplayResourceBundle ?? throw new Exception("GameplayResourceBundle not found");
+            return UnityEngine.Resources.Load<GameplayResourceBundle>(ResourcePath.GameplayResourceBundle)
+                ?? throw new Exception("GameplayResourceBundle not found");
         }
 
         private UiResourceBundle GetOrLoadAndGetUiResourceBundle()
         {
-            if (_uiResourceBundle == null)
-                _uiResourceBundle = UnityEngine.Resources.Load<UiResourceBundle>(ResourcePath.UiResourceBundle);
-
-            return _uiResourceBundle ?? throw new Exception("UiResourceBundle not found");
+            return UnityEngine.Resources.Load<UiResourceBundle>(ResourcePath.UiResourceBundle) ?? throw new Exception("UiResourceBundle not found");
         }
     }
 }
