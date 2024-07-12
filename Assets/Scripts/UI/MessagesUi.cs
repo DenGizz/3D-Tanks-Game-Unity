@@ -17,8 +17,7 @@ namespace Assets.Scripts.UI
     {
         [SerializeField] private Text _messagesUiText;
 
-        private ITanksProvider _tanksProvider;
-        private IRoundObserver _roundObserver;
+        private IBattleProvider _battleProvider;
 
         private string Text
         {
@@ -27,10 +26,9 @@ namespace Assets.Scripts.UI
         }
 
         [Inject]
-        public void Construct(ITanksProvider tanksProvider, IRoundObserver roundObserver)
+        public void Construct(IBattleProvider battleProvider)
         {
-            _tanksProvider = tanksProvider;
-            _roundObserver = roundObserver;
+            _battleProvider = battleProvider;
         }
 
         public void ShowRoundStartText(int roundNumber)
@@ -43,13 +41,15 @@ namespace Assets.Scripts.UI
             string message = GetColoredPlayerText(winner) + " WINS THE ROUND!";
             message += "\n\n\n\n";
 
-            foreach (ITank tank in _tanksProvider.Tanks)
-                message += GetColoredPlayerText(tank) + ": " + _roundObserver.GetNumberOfRoundWins(tank) + " WINS\n";
+            ITank tank1 = _battleProvider.CurrentBattle.Tank1;
+            ITank tank2 = _battleProvider.CurrentBattle.Tank2;
+            message += GetColoredPlayerText(tank1) + ": " + _battleProvider.CurrentBattle.GetNumberOfWinnedRounds(tank1) + " WINS\n";
+            message += GetColoredPlayerText(tank2) + ": " + _battleProvider.CurrentBattle.GetNumberOfWinnedRounds(tank2) + " WINS\n";
 
             Text = message;
         }
 
-        public void ShowGameWinnerText(ITank winner)
+        public void ShowBattleWinnerText(ITank winner)
         {
             string  message = GetColoredPlayerText(winner) + " WINS THE GAME!";
             Text = message;

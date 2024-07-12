@@ -21,7 +21,7 @@ namespace Assets.Scripts.Game
             _stateMachine = new StateMachine();
             _stateMachine.AddState(_stateFactory.CreateState<StartGameState>(_stateMachine));
             _stateMachine.AddState(_stateFactory.CreateState<CreateBattleSessionState>(_stateMachine));
-            _stateMachine.AddState(_stateFactory.CreateState<StartRoundState>(_stateMachine));
+            _stateMachine.AddState(_stateFactory.CreateState<PrepareNewRoundState>(_stateMachine));
             _stateMachine.AddState(_stateFactory.CreateState<PerformRoundState>(_stateMachine));
             _stateMachine.AddState(_stateFactory.CreateState<EndRoundState>(_stateMachine));
             _stateMachine.AddState(_stateFactory.CreateState<EndGameState>(_stateMachine));

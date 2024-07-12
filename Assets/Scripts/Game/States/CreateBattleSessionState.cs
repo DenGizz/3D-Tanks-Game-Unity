@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Configs;
+using Assets.Scripts.Domain;
 using Assets.Scripts.Features.InputSources;
 using Assets.Scripts.Infrasctucture.Core;
 using Assets.Scripts.Infrasctucture.Gameplay.Factories;
@@ -18,24 +19,22 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
     public class CreateBattleSessionState : IState
     {
         private readonly StateMachine _gameplayStateMachine;
-        private readonly ITanksProvider _tanksProvider;
         private readonly ITankFactory _tankFactory;
         private readonly ILevelSpawnPointsProvider _levelSpawnPointsProvider;
-        private readonly IRoundObserver _roundObserver;
+        private readonly IBattleProvider _battleProvider;
         private readonly IInputSourceServiceAssing _assingInputSourceService;
         private readonly IInputSourceFactory _inputSourceFactory;
         private readonly IStaticDataService _staticDataService;
 
-        public CreateBattleSessionState(StateMachine gameplayStateMachine, ITanksProvider tanksProvider, 
+        public CreateBattleSessionState(StateMachine gameplayStateMachine,
             ITankFactory tankFactory, ILevelSpawnPointsProvider levelSpawnPointsProvider,
-            IRoundObserver roundObserver, IInputSourceServiceAssing assingInputSourceService, IStaticDataService staticDataService,
+            IBattleProvider battleProvider, IInputSourceServiceAssing assingInputSourceService, IStaticDataService staticDataService,
             IInputSourceFactory inputSourceFactory)
         {
             _gameplayStateMachine = gameplayStateMachine;
-            _tanksProvider = tanksProvider;
             _tankFactory = tankFactory;
             _levelSpawnPointsProvider = levelSpawnPointsProvider;
-            _roundObserver = roundObserver;
+            _battleProvider = battleProvider;
             _assingInputSourceService = assingInputSourceService;
             _inputSourceFactory = inputSourceFactory;
             _staticDataService = staticDataService;
@@ -48,9 +47,6 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
             ITank tank1 = _tankFactory.CreateTank(spawnPoints[0].position, spawnPoints[0].rotation, Color.red, 2);
             ITank tank2 = _tankFactory.CreateTank(spawnPoints[1].position, spawnPoints[1].rotation, Color.blue, 1);
 
-            _tanksProvider.AddTank(tank1);
-            _tanksProvider.AddTank(tank2);
-
             LocalInputSchemesConfig inputsConfig = _staticDataService.LocalInputSchemesConfig;
             LocalInputSchemeConfiguration tank1InputConfig = inputsConfig.LocalInputConfigurations.ElementAt(0);
             LocalInputSchemeConfiguration tank2InputConfig = inputsConfig.LocalInputConfigurations.ElementAt(1);
@@ -61,10 +57,11 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
             _assingInputSourceService.AssignInputSource(tank1 , inputSource2);
             _assingInputSourceService.AssignInputSource(tank2, inputSource1);
 
+            BattleRulesConfig battleRulesConfig = _staticDataService.BattleSessionConfig;
+            Battle battle = new Battle(tank1,tank2, battleRulesConfig.NumRoundsToWin);
 
-
-            _roundObserver.SetTanksToObserve(_tanksProvider.Tanks);
-            _gameplayStateMachine.EnterState<StartRoundState>();
+            _battleProvider.CurrentBattle = battle;
+            _gameplayStateMachine.EnterState<PrepareNewRoundState>();
         }
 
         public void Exit()

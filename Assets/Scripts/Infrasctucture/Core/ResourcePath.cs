@@ -10,7 +10,7 @@ namespace Assets.Scripts.Infrasctucture
     {
         public const string GameplayResourceBundle = "Bundles/GameplayResourceBundle";
         public const string UiResourceBundle = "Bundles/UiResourceBundle";
-        public const string BattleSessionConfig = "Configs/BattleSessionConfig";
+        public const string BattleRulesConfig = "Configs/BattleRulesConfig";
 
         public const string ShellExplosionPrefab = "VFX/ShellExplosion";
         public const string TankExplosionPrefab = "VFX/TankExplosion";

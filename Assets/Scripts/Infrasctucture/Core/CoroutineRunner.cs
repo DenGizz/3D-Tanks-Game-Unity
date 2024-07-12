@@ -29,5 +29,16 @@ namespace Assets.Scripts.Infrasctucture.Core
             _coroutineRunnerBehaviour = _coroutineRunnerGameObject.AddComponent<CoroutineRunnerBehaviour>();
             MonoBehaviour.DontDestroyOnLoad(_coroutineRunnerGameObject);
         }
+
+        public void DoAfterDelay(Action action, float delay)
+        {
+            StartCoroutine(DoAfterDelayCoroutine(action, delay));
+        }
+
+        private IEnumerator DoAfterDelayCoroutine(Action action, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            action.Invoke();
+        }
     }
 }

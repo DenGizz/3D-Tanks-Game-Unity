@@ -14,6 +14,8 @@ namespace Assets.Scripts.Tank
         bool IsAlive { get; }
         Vector3 Position { get; }
 
+        event Action<ITank> OnDeath;
+
         void Revive();
         void SetPosition(Vector3 position);
         void SetRotation(Quaternion rotation);

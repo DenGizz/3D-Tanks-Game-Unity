@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Infrasctucture.Core;
+﻿using Assets.Scripts.Domain;
+using Assets.Scripts.Infrasctucture.Core;
 using Assets.Scripts.Infrasctucture.Gameplay.Services;
 using Assets.Scripts.Infrasctucture.Ui;
 using Assets.Scripts.StateMachines;
@@ -15,39 +16,61 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
     public class PerformRoundState : IState
     {
         private readonly StateMachines.StateMachine _stateMachine;
-        private readonly ITanksProvider _tanksProvider;
         private readonly IUiProvider _uiProvider;
-        private readonly IRoundObserver _roundObserver;
+        private readonly IBattleProvider _battleProvider;
 
-        public PerformRoundState(StateMachines.StateMachine stateMachine, ITanksProvider tanksProvider, IUiProvider uiProvider, IRoundObserver roundObserver)
+        Battle _battle;
+
+        public PerformRoundState(StateMachines.StateMachine stateMachine, IUiProvider uiProvider, IBattleProvider battleProvider)
         {
             _stateMachine = stateMachine;
-            _tanksProvider = tanksProvider;
             _uiProvider = uiProvider;
-            _roundObserver = roundObserver;
+            _battleProvider = battleProvider;
         }
 
         public void Enter()
         {
+            //Wait
+            _battle = _battleProvider.CurrentBattle;
+
+            _battle.StartNewRound();
+
             EnableTankControl();
             _uiProvider.MessagesUi.ClearText();
-            _roundObserver.RoundWin += OnRoundWin;
+
+            _battle.Tank1.OnDeath += OnTankDeath;
+            _battle.Tank2.OnDeath += OnTankDeath;
+
         }
 
         public void Exit()
         {
-            _roundObserver.RoundWin -= OnRoundWin;
+            _battle.Tank1.OnDeath -= OnTankDeath;
+            _battle.Tank2.OnDeath -= OnTankDeath;
         }
 
         private void EnableTankControl()
         {
-            foreach (ITank tank in _tanksProvider.Tanks)
-                tank.EnableControl();
+            _battle.Tank1.EnableControl();
+            _battle.Tank2.EnableControl();
         }
 
-        private void OnRoundWin(ITank tank)
+        private void OnTankDeath(ITank deadTank)
         {
-            _stateMachine.EnterState<EndRoundState>();
+            ITank winner = null;
+
+            if(deadTank == _battle.Tank1)
+                winner = _battle.Tank2;
+
+            if(deadTank == _battle.Tank2)
+                winner = _battle.Tank1;
+
+            _battle.EndRound(winner);
+
+            if(_battle.BattleWinner == null)
+                _stateMachine.EnterState<EndRoundState>();
+            else
+                _stateMachine.EnterState<EndGameState>();
         }
     }
 }

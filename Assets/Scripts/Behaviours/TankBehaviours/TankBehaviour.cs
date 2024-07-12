@@ -13,8 +13,10 @@ public class TankBehaviour : MonoBehaviour, ITank
 
     private TankMoveControllerBehaviour m_Movement;                        // Reference to tank's movement script, used to disable and enable control.
     private TankShootingControlelrBehaviour m_Shooting;                        // Reference to tank's shooting script, used to disable and enable control.
-   private DamagableBehaviour m_Health;                        // Reference to tank's health script, used to disable and enable control.
+    private DamagableBehaviour m_Health;                        // Reference to tank's health script, used to disable and enable control.
     private GameObject m_CanvasGameObject;                  // Used to disable the world space UI during the Starting and Ending phases of each round.
+
+    public event Action<ITank> OnDeath;
 
     public void Setup(Color color, int playerNumber)
     {
@@ -26,6 +28,8 @@ public class TankBehaviour : MonoBehaviour, ITank
         m_Shooting = GetComponent<TankShootingControlelrBehaviour>();
         m_Health = GetComponent<DamagableBehaviour>();
         m_CanvasGameObject = GetComponentInChildren<Canvas>().gameObject;
+
+        m_Health.OnDeath += OnDeathEventHandler;
 
         // Get all of the renderers of the tank.
         MeshRenderer[] renderers = GetComponentsInChildren<MeshRenderer>();
@@ -72,5 +76,10 @@ public class TankBehaviour : MonoBehaviour, ITank
     {
         gameObject.SetActive(true);
         m_Health.Revive();
+    }
+
+    private void OnDeathEventHandler()
+    {
+        OnDeath?.Invoke(this);
     }
 }

@@ -7,8 +7,8 @@ using UnityEngine;
 
 namespace Assets.Scripts.Infrasctucture
 {
-    [CreateAssetMenu(fileName = "BattleSessionConfig", menuName = "Configs/BattleSessionConfig")]
-    public class BattleSessionConfig : ScriptableObject
+    [CreateAssetMenu(fileName = "BattleRulesConfig", menuName = "Configs/BattleRulesConfig")]
+    public class BattleRulesConfig : ScriptableObject
     {
         public int NumRoundsToWin => numRoundsToWin;
         public float StartDelay => _startDelay;

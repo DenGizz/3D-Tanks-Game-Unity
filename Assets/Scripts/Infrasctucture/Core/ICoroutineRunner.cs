@@ -12,6 +12,7 @@ namespace Assets.Scripts.Infrasctucture.Core
     {
         Coroutine StartCoroutine(IEnumerator routine);
         void StopCoroutine(Coroutine routine);
+        void DoAfterDelay(Action action, float delay);
 
         void Initialize();
     }

@@ -7,10 +7,10 @@ namespace Assets.Scripts.Infrasctucture
 {
     public class AssetsProvider : IAssetsProvider
     {
-        public BattleSessionConfig GetBattleSessionConfig()
+        public BattleRulesConfig GetBattleSessionConfig()
         {
         
-            return UnityEngine.Resources.Load<BattleSessionConfig>(ResourcePath.BattleSessionConfig) 
+            return UnityEngine.Resources.Load<BattleRulesConfig>(ResourcePath.BattleRulesConfig) 
                 ?? throw new Exception("BattleSessionConfig not found");
         }
 

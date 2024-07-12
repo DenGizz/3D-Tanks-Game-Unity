@@ -9,7 +9,7 @@ namespace Assets.Scripts.Infrasctucture.Core
 {
     public interface IStaticDataService
     {
-        BattleSessionConfig BattleSessionConfig { get; }
+        BattleRulesConfig BattleSessionConfig { get; }
         LocalInputSchemesConfig LocalInputSchemesConfig { get; }
     }
 }
