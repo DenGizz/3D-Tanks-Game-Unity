@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Infrasctucture.Gameplay.Providers;
+﻿using Assets.Scripts.Features.InputSources;
+using Assets.Scripts.Infrasctucture.Gameplay.Providers;
 using Assets.Scripts.Tank;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,9 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.Services
         public void AssignInputSource(ITank tank, IInputSource inputSource)
         {
             GameObject tankGameObject = _tanksGameObjectsRegistry.GetTankGameObject(tank);
-            tankGameObject.GetComponent<TankMoveControllerBehaviour>().SetInputSource(inputSource);
+            
+            foreach(IInputReader reader in tankGameObject.GetComponentsInChildren<IInputReader>())
+                reader.SetInputSource(inputSource);
         }
     }
 }

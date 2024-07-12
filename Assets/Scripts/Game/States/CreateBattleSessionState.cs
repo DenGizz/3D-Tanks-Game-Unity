@@ -43,8 +43,8 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
             _tanksProvider.AddTank(tank1);
             _tanksProvider.AddTank(tank2);
 
-            IInputSource inputSource2 = new DeviceAxesInputSource($"Vertical{1}", $"Horizontal{1}");
-            IInputSource inputSource1 = new DeviceAxesInputSource($"Vertical{2}", $"Horizontal{2}");
+            IInputSource inputSource2 = new DeviceAxesInputSource($"Vertical{1}", $"Horizontal{1}",$"Fire{1}");
+            IInputSource inputSource1 = new DeviceAxesInputSource($"Vertical{2}", $"Horizontal{2}", $"Fire{2}");
 
             _assingInputSourceService.AssignInputSource(tank1 , inputSource1);
             _assingInputSourceService.AssignInputSource(tank2, inputSource2);

@@ -1,18 +1,15 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Features.InputSources;
+using UnityEngine;
 
-public class TankMoveControllerBehaviour : MonoBehaviour
-{
-    public int m_PlayerNumber = 1;         
+public class TankMoveControllerBehaviour : MonoBehaviour, IInputReader
+{       
     public float m_Speed = 12f;            
     public float m_TurnSpeed = 180f;       
     public AudioSource m_MovementAudio;    
     public AudioClip m_EngineIdling;       
     public AudioClip m_EngineDriving;      
     public float m_PitchRange = 0.2f;
-
-    
-    private string m_MovementAxisName;     
-    private string m_TurnAxisName;         
+      
     private Rigidbody m_Rigidbody;         
     private float m_MovementInputValue;    
     private float m_TurnInputValue;        
@@ -25,7 +22,6 @@ public class TankMoveControllerBehaviour : MonoBehaviour
         m_Rigidbody = GetComponent<Rigidbody>();
     }
 
-
     private void OnEnable ()
     {
         m_Rigidbody.isKinematic = false;
@@ -33,22 +29,16 @@ public class TankMoveControllerBehaviour : MonoBehaviour
         m_TurnInputValue = 0f;
     }
 
-
     private void OnDisable ()
     {
         m_Rigidbody.isKinematic = true;
     }
 
-
     private void Start()
     {
-        m_MovementAxisName = "Vertical" + m_PlayerNumber;
-        m_TurnAxisName = "Horizontal" + m_PlayerNumber;
-
         m_OriginalPitch = m_MovementAudio.pitch;
     }
     
-
     private void Update()
     {
         m_MovementInputValue = 0;
@@ -60,8 +50,6 @@ public class TankMoveControllerBehaviour : MonoBehaviour
             m_TurnInputValue = _inputSource.TurnInputValue;
         }
         
-
-
          EngineAudio();
     }
 
@@ -104,10 +92,6 @@ public class TankMoveControllerBehaviour : MonoBehaviour
         }
     }
 
-
-
-
-
     private void Move()
     {
         // Adjust the position of the tank based on the player's input.
@@ -117,7 +101,6 @@ public class TankMoveControllerBehaviour : MonoBehaviour
         // Apply this movement to the rigidbody's position.
         m_Rigidbody.MovePosition(m_Rigidbody.position + movement);
     }
-
 
     private void Turn()
     {

@@ -1,9 +1,9 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Features.InputSources;
+using UnityEngine;
 using UnityEngine.UI;
 
-public class TankShootingControlelrBehaviour : MonoBehaviour
+public class TankShootingControlelrBehaviour : MonoBehaviour, IInputReader
 {
-    public int m_PlayerNumber = 1;              // Used to identify the different players.
     public Rigidbody m_Shell;                   // Prefab of the shell.
     public Transform m_FireTransform;           // A child of the tank where the shells are spawned.
     public Slider m_AimSlider;                  // A child of the tank that displays the current launch force.
@@ -14,12 +14,11 @@ public class TankShootingControlelrBehaviour : MonoBehaviour
     public float m_MaxLaunchForce = 30f;        // The force given to the shell if the fire button is held for the max charge time.
     public float m_MaxChargeTime = 0.75f;       // How long the shell can charge for before it is fired at max force.
 
-
-    private string m_FireButton;                // The input axis that is used for launching shells.
     private float m_CurrentLaunchForce;         // The force that will be given to the shell when the fire button is released.
     private float m_ChargeSpeed;                // How fast the launch force increases, based on the max charge time.
     private bool m_Fired;                       // Whether or not the shell has been launched with this button press.
 
+    private IInputSource m_InputSource;
 
     private void OnEnable()
     {
@@ -28,16 +27,11 @@ public class TankShootingControlelrBehaviour : MonoBehaviour
         m_AimSlider.value = m_MinLaunchForce;
     }
 
-
     private void Start ()
     {
-        // The fire axis is based on the player number.
-        m_FireButton = "Fire" + m_PlayerNumber;
-
         // The rate that the launch force charges up is the range of possible forces by the max charge time.
         m_ChargeSpeed = (m_MaxLaunchForce - m_MinLaunchForce) / m_MaxChargeTime;
     }
-
 
     private void Update ()
     {
@@ -52,7 +46,7 @@ public class TankShootingControlelrBehaviour : MonoBehaviour
             Fire ();
         }
         // Otherwise, if the fire button has just started being pressed...
-        else if (Input.GetButtonDown (m_FireButton))
+        else if (m_InputSource.GetFireButtonDown)
         {
             // ... reset the fired flag and reset the launch force.
             m_Fired = false;
@@ -63,7 +57,7 @@ public class TankShootingControlelrBehaviour : MonoBehaviour
             m_ShootingAudio.Play ();
         }
         // Otherwise, if the fire button is being held and the shell hasn't been launched yet...
-        else if (Input.GetButton (m_FireButton) && !m_Fired)
+        else if (m_InputSource.GetFireButton && !m_Fired)
         {
             // Increment the launch force and update the slider.
             m_CurrentLaunchForce += m_ChargeSpeed * Time.deltaTime;
@@ -71,13 +65,17 @@ public class TankShootingControlelrBehaviour : MonoBehaviour
             m_AimSlider.value = m_CurrentLaunchForce;
         }
         // Otherwise, if the fire button is released and the shell hasn't been launched yet...
-        else if (Input.GetButtonUp (m_FireButton) && !m_Fired)
+        else if (m_InputSource.GetFireButtonUp && !m_Fired)
         {
             // ... launch the shell.
             Fire ();
         }
     }
 
+    public void SetInputSource(IInputSource inputSource)
+    {
+        m_InputSource = inputSource;
+    }
 
     private void Fire ()
     {
