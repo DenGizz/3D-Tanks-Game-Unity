@@ -11,6 +11,7 @@ public class DamagableBehaviour : MonoBehaviour, IDamagable, IInitializable
 
     public event Action OnDeath;
     public event EventHandler<DamageEventArgs> OnDamaged;
+    public event Action<float> OnHealed;
 
     public float HealthPoints { get; private set; }  
     private bool _isAlive;
@@ -25,6 +26,7 @@ public class DamagableBehaviour : MonoBehaviour, IDamagable, IInitializable
     public void Revive()
     {
         HealthPoints = MaxHealthPoints;
+        OnHealed?.Invoke(HealthPoints);
         _isAlive = true;
     }
     

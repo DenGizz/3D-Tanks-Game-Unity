@@ -25,6 +25,7 @@ public class Damagable3DCircleSliderView : MonoBehaviour, IInitializable
     {
         UpdateHealthUI();
         _damagable.OnDamaged += OnDamagedEventHandler;
+        _damagable.OnHealed += OnHealedEventHandler;
     }
 
     private void UpdateHealthUI()
@@ -35,6 +36,11 @@ public class Damagable3DCircleSliderView : MonoBehaviour, IInitializable
     }
 
     private void OnDamagedEventHandler(object sender, DamageEventArgs e)
+    {
+        UpdateHealthUI();
+    }
+
+    private void OnHealedEventHandler(float heal)
     {
         UpdateHealthUI();
     }

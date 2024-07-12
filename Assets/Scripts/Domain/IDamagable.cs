@@ -11,4 +11,5 @@ public interface IDamagable
     void TakeDamage(float amount);
     event Action OnDeath;
     event EventHandler<DamageEventArgs> OnDamaged;
+    event Action<float> OnHealed;
 }
