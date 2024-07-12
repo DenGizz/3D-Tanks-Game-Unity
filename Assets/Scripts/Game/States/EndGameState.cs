@@ -1,15 +1,22 @@
 ﻿using Assets.Scripts.Infrasctucture.Core;
+using Assets.Scripts.Infrasctucture.Gameplay.Services;
+using Assets.Scripts.Infrasctucture.Ui;
 using Assets.Scripts.StateMachines;
+using Zenject;
 
 namespace Assets.Scripts.Infrasctucture.Gameplay.States
 {
     public class EndGameState : IState
     {
+        private readonly IUiProvider _uiProvider;
+        private readonly IBattleProvider _battleProvider;
         private readonly IStaticDataService _staticDataService;
         private readonly ICoroutineRunner _coroutineRunner;
 
-        public EndGameState(StateMachine s, ICoroutineRunner coroutineRunner, IStaticDataService staticDataService)
+        public EndGameState(StateMachine s, IBattleProvider battleProvider, IUiProvider uiProvider,ICoroutineRunner coroutineRunner, IStaticDataService staticDataService)
         {
+            _uiProvider = uiProvider;
+            _battleProvider = battleProvider;
             _coroutineRunner = coroutineRunner;
             _staticDataService = staticDataService;
         }
@@ -17,6 +24,7 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
         public void Enter()
         {
             BattleRulesConfig config = _staticDataService.BattleSessionConfig;
+            _uiProvider.MessagesUi.ShowBattleWinnerText(_battleProvider.CurrentBattle.BattleWinner);
             _coroutineRunner.DoAfterDelay(CloseGame, config.EndDelay);
         }
 
