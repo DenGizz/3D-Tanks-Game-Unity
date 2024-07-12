@@ -33,7 +33,7 @@ public class DamagableBehaviour : MonoBehaviour, IDamagable, IInitializable
         // Adjust the tank's current health, update the UI based on the new health and check whether or not the tank is dead.
         HealthPoints -= amount;
 
-        OnDamaged?.Invoke(this, new DamageEventArgs(amount));
+         OnDamaged?.Invoke(this, new DamageEventArgs(amount));
 
         if (HealthPoints <=0f && _isAlive)
             Death();
