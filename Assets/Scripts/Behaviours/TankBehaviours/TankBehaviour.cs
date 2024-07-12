@@ -27,10 +27,6 @@ public class TankBehaviour : MonoBehaviour, ITank
         m_Health = GetComponent<DamagableBehaviour>();
         m_CanvasGameObject = GetComponentInChildren<Canvas>().gameObject;
 
-        // Set the player numbers to be consistent across the scripts.
-        m_Movement.m_PlayerNumber = PlayerNumber;
-        m_Shooting.m_PlayerNumber = PlayerNumber;
-
         // Get all of the renderers of the tank.
         MeshRenderer[] renderers = GetComponentsInChildren<MeshRenderer>();
 
