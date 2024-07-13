@@ -92,7 +92,7 @@ public class CameraControl : MonoBehaviour
     }
 
 
-    public void SetStartPositionAndSize()
+    public void SetToStartPositionAndSize()
     {
         FindAveragePosition();
         transform.position = _desiredPosition;
