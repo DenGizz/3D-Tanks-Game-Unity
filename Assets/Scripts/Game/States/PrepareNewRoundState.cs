@@ -43,6 +43,8 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
         {
             _battle = _battleProvider.CurrentBattle;
 
+            _battle.StartNewRound();
+
             ResetAllTanks();
             DisableTankControl();
 
