@@ -4,7 +4,7 @@ using Assets.Scripts.Infrasctucture.Gameplay.Services;
 using UnityEngine;
 using Zenject;
 
-namespace Assets.Scripts.Infrasctucture
+namespace Assets.Scripts.Infrasctucture.Gameplay.Installers
 {
     [CreateAssetMenu(fileName = "GameplayInstaller", menuName = "Infrasctucture/Installers/GameplayInstaller")]
     public class GameplayInstaller : MonoInstaller

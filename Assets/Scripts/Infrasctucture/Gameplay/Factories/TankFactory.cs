@@ -1,14 +1,11 @@
-﻿using Assets.Scripts.Infrasctucture.Gameplay.Providers;
-using Assets.Scripts.Tank;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Assets.Scripts.Behaviours.TankBehaviours;
+using Assets.Scripts.Domain;
+using Assets.Scripts.Infrasctucture.Core;
+using Assets.Scripts.Infrasctucture.Gameplay.Providers;
 using UnityEngine;
 using Zenject;
 
-namespace Assets.Scripts.Infrasctucture
+namespace Assets.Scripts.Infrasctucture.Gameplay.Factories
 {
     public class TankFactory : ITankFactory
     {

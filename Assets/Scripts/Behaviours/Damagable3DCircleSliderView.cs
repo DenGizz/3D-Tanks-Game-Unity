@@ -1,46 +1,47 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using Assets.Scripts.Domain;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public class Damagable3DCircleSliderView : MonoBehaviour, IInitializable
+namespace Assets.Scripts.Behaviours
 {
-    private IDamagable _damagable;
-
-    [SerializeField] private Slider m_Slider;
-    [SerializeField] private Image m_FillImage;
-    [SerializeField] private Color m_FullHealthColor = Color.green;
-    [SerializeField] private Color m_ZeroHealthColor = Color.red;
-
-    [Inject]
-    public void Construct(IDamagable damagable)
+    public class Damagable3DCircleSliderView : MonoBehaviour, IInitializable
     {
-        _damagable = damagable;
-    }
+        private IDamagable _damagable;
 
-    [Inject]
-    public void Initialize()
-    {
-        UpdateHealthUI();
-        _damagable.OnDamaged += OnDamagedEventHandler;
-        _damagable.OnHealed += OnHealedEventHandler;
-    }
+        [SerializeField] private Slider m_Slider;
+        [SerializeField] private Image m_FillImage;
+        [SerializeField] private Color m_FullHealthColor = Color.green;
+        [SerializeField] private Color m_ZeroHealthColor = Color.red;
 
-    private void UpdateHealthUI()
-    {
-        m_Slider.value = _damagable.HealthPoints;
-        m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, _damagable.HealthPoints / _damagable.MaxHealthPoints);
-    }
+        [Inject]
+        public void Construct(IDamagable damagable)
+        {
+            _damagable = damagable;
+        }
 
-    private void OnDamagedEventHandler(object sender, DamageEventArgs e)
-    {
-        UpdateHealthUI();
-    }
+        [Inject]
+        public void Initialize()
+        {
+            UpdateHealthUI();
+            _damagable.OnDamaged += OnDamagedEventHandler;
+            _damagable.OnHealed += OnHealedEventHandler;
+        }
 
-    private void OnHealedEventHandler(float heal)
-    {
-        UpdateHealthUI();
+        private void UpdateHealthUI()
+        {
+            m_Slider.value = _damagable.HealthPoints;
+            m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, _damagable.HealthPoints / _damagable.MaxHealthPoints);
+        }
+
+        private void OnDamagedEventHandler(object sender, DamageEventArgs e)
+        {
+            UpdateHealthUI();
+        }
+
+        private void OnHealedEventHandler(float heal)
+        {
+            UpdateHealthUI();
+        }
     }
 }

@@ -1,9 +1,5 @@
-﻿using Assets.Scripts.Tank;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Assets.Scripts.Domain;
+using Assets.Scripts.Features.InputSources;
 
 namespace Assets.Scripts.Infrasctucture.Gameplay.Services
 {

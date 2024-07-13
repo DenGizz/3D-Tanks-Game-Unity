@@ -1,9 +1,5 @@
-﻿using Assets.Scripts.Tank;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Assets.Scripts.Domain;
 using UnityEngine;
 
 namespace Assets.Scripts.Infrasctucture.Gameplay.Providers

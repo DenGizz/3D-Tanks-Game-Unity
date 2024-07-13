@@ -1,12 +1,6 @@
-﻿using Assets.Scripts.Infrasctucture.Gameplay.Factories;
-using Assets.Scripts.Infrasctucture.Gameplay.GameplayStateMachine.States;
-using Assets.Scripts.Infrasctucture.Gameplay.States;
-using Assets.Scripts.StateMachines;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Assets.Scripts.StateMachines;
+using Assets.Scripts.Game.States;
+using Assets.Scripts.Infrasctucture.Core;
 
 namespace Assets.Scripts.Game
 {

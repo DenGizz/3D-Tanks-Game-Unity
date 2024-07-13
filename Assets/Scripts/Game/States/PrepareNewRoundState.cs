@@ -1,16 +1,13 @@
-﻿using Assets.Scripts.Domain;
-using Assets.Scripts.Features;
+﻿using System.Linq;
+using Assets.Scripts.Configs;
+using Assets.Scripts.Domain;
 using Assets.Scripts.Infrasctucture.Core;
 using Assets.Scripts.Infrasctucture.Gameplay.Providers;
-using Assets.Scripts.Infrasctucture.Gameplay.Services;
 using Assets.Scripts.Infrasctucture.Ui;
 using Assets.Scripts.StateMachines;
-using Assets.Scripts.Tank;
-using System.Collections;
-using System.Linq;
 using UnityEngine;
 
-namespace Assets.Scripts.Infrasctucture.Gameplay.States
+namespace Assets.Scripts.Game.States
 {
     public class PrepareNewRoundState : IState
     {

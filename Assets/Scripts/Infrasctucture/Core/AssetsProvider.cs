@@ -1,9 +1,9 @@
-﻿using Assets.Scripts.Configs;
+﻿using System;
+using Assets.Scripts.Configs;
 using Assets.Scripts.Resources;
-using System;
 using UnityEngine;
 
-namespace Assets.Scripts.Infrasctucture
+namespace Assets.Scripts.Infrasctucture.Core
 {
     public class AssetsProvider : IAssetsProvider
     {

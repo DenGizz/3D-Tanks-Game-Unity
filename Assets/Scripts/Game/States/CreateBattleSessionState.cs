@@ -1,20 +1,16 @@
-﻿using Assets.Scripts.Configs;
+﻿using System.Linq;
+using Assets.Scripts.Configs;
 using Assets.Scripts.Domain;
+using Assets.Scripts.Features;
 using Assets.Scripts.Features.InputSources;
 using Assets.Scripts.Infrasctucture.Core;
 using Assets.Scripts.Infrasctucture.Gameplay.Factories;
 using Assets.Scripts.Infrasctucture.Gameplay.Providers;
 using Assets.Scripts.Infrasctucture.Gameplay.Services;
 using Assets.Scripts.StateMachines;
-using Assets.Scripts.Tank;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Assets.Scripts.Infrasctucture.Gameplay.States
+namespace Assets.Scripts.Game.States
 {
     public class CreateBattleSessionState : IState
     {

@@ -1,15 +1,15 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public interface IDamagable
+namespace Assets.Scripts.Domain
 {
-    bool IsAlive { get; }
-    float MaxHealthPoints { get; }
-    float HealthPoints { get; }
-    void TakeDamage(float amount);
-    event Action OnDeath;
-    event EventHandler<DamageEventArgs> OnDamaged;
-    event Action<float> OnHealed;
+    public interface IDamagable
+    {
+        bool IsAlive { get; }
+        float MaxHealthPoints { get; }
+        float HealthPoints { get; }
+        void TakeDamage(float amount);
+        event Action OnDeath;
+        event EventHandler<DamageEventArgs> OnDamaged;
+        event Action<float> OnHealed;
+    }
 }

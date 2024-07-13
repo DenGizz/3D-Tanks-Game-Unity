@@ -1,11 +1,14 @@
 ﻿using System;
 
-public class DamageEventArgs : EventArgs
+namespace Assets.Scripts.Domain
 {
-    public float DamageTaken { get; }
-
-    public DamageEventArgs(float damageTaken)
+    public class DamageEventArgs : EventArgs
     {
-        DamageTaken = damageTaken;
+        public float DamageTaken { get; }
+
+        public DamageEventArgs(float damageTaken)
+        {
+            DamageTaken = damageTaken;
+        }
     }
 }

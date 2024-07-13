@@ -1,13 +1,7 @@
 ﻿using Assets.Scripts.Infrasctucture.Core;
-using Assets.Scripts.Infrasctucture.Gameplay.Services;
 using Assets.Scripts.Infrasctucture.Ui;
 using Assets.Scripts.StateMachines;
-using Assets.Scripts.Tank;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Assets.Scripts.Infrasctucture.Gameplay.Providers;
 
 namespace Assets.Scripts.Game.States
 {

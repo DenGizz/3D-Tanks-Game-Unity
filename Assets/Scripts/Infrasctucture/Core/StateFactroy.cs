@@ -1,12 +1,7 @@
 ﻿using Assets.Scripts.StateMachines;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Zenject;
 
-namespace Assets.Scripts.Infrasctucture.Gameplay.Factories
+namespace Assets.Scripts.Infrasctucture.Core
 {
     public class StateFactroy : IStateFactory
     {

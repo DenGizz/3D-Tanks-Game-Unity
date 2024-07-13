@@ -1,12 +1,7 @@
-﻿using Assets.Scripts.Tank;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Assets.Scripts.Domain;
 using UnityEngine;
 
-namespace Assets.Scripts.Infrasctucture
+namespace Assets.Scripts.Infrasctucture.Gameplay.Factories
 {
     public interface ITankFactory 
     {

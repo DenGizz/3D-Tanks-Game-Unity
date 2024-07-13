@@ -1,10 +1,10 @@
-﻿using Assets.Scripts.Infrasctucture.Core;
-using Assets.Scripts.Infrasctucture.Gameplay.Services;
+﻿using Assets.Scripts.Configs;
+using Assets.Scripts.Infrasctucture.Core;
+using Assets.Scripts.Infrasctucture.Gameplay.Providers;
 using Assets.Scripts.Infrasctucture.Ui;
 using Assets.Scripts.StateMachines;
-using Zenject;
 
-namespace Assets.Scripts.Infrasctucture.Gameplay.States
+namespace Assets.Scripts.Game.States
 {
     public class EndGameState : IState
     {

@@ -1,13 +1,7 @@
-﻿using Assets.Scripts.Infrasctucture.Ui;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
-namespace Assets.Scripts.Infrasctucture
+namespace Assets.Scripts.Infrasctucture.Ui
 {
     [CreateAssetMenu(fileName = "UiInstaller", menuName = "Infrasctucture/Installers/UiInstaller")]
     public class UiInstaller : MonoInstaller

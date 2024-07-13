@@ -1,15 +1,9 @@
 ﻿using Assets.Scripts.Infrasctucture.Core;
 using Assets.Scripts.Infrasctucture.Gameplay.Providers;
-using Assets.Scripts.Infrasctucture.Gameplay.States;
 using Assets.Scripts.Infrasctucture.Ui;
 using Assets.Scripts.StateMachines;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Assets.Scripts.Infrasctucture.Gameplay.GameplayStateMachine.States
+namespace Assets.Scripts.Game.States
 {
     public class InitializeGameState : IState
     {

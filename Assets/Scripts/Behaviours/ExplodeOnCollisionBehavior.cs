@@ -1,22 +1,25 @@
 using UnityEngine;
 
-public class ExplodeOnCollisionBehavior : MonoBehaviour
+namespace Assets.Scripts.Behaviours
 {
-    [SerializeField] private ParticleSystem m_ExplosionParticles;        
-    [SerializeField] private AudioSource m_ExplosionAudio;
-
-    private void OnTriggerEnter(Collider other)
+    public class ExplodeOnCollisionBehavior : MonoBehaviour
     {
-        PlayExplosion();
-    }
+        [SerializeField] private ParticleSystem m_ExplosionParticles;        
+        [SerializeField] private AudioSource m_ExplosionAudio;
 
-    private void PlayExplosion()
-    {
-        m_ExplosionParticles.transform.parent = null;
+        private void OnTriggerEnter(Collider other)
+        {
+            PlayExplosion();
+        }
 
-        m_ExplosionParticles.Play();
-        m_ExplosionAudio.Play();
+        private void PlayExplosion()
+        {
+            m_ExplosionParticles.transform.parent = null;
 
-        Destroy(m_ExplosionParticles.gameObject, m_ExplosionParticles.duration);
+            m_ExplosionParticles.Play();
+            m_ExplosionAudio.Play();
+
+            Destroy(m_ExplosionParticles.gameObject, m_ExplosionParticles.duration);
+        }
     }
 }

@@ -1,13 +1,6 @@
 ﻿using Assets.Scripts.Domain;
-using Assets.Scripts.Infrasctucture;
-using Assets.Scripts.Infrasctucture.Gameplay.Services;
-using Assets.Scripts.Tank;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEditor.VersionControl;
+using Assets.Scripts.Features;
+using Assets.Scripts.Infrasctucture.Gameplay.Providers;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;

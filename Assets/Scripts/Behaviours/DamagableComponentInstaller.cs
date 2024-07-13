@@ -1,12 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Assets.Scripts.Domain;
 using Zenject;
 
-public class DamagableComponentInstaller : MonoInstaller
+namespace Assets.Scripts.Behaviours
 {
-    public override void InstallBindings()
+    public class DamagableComponentInstaller : MonoInstaller
     {
-        Container.Bind<IDamagable>().FromComponentInHierarchy().AsSingle();
+        public override void InstallBindings()
+        {
+            Container.Bind<IDamagable>().FromComponentInHierarchy().AsSingle();
+        }
     }
 }
