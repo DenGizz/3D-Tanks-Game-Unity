@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class TankBehaviour : MonoBehaviour, ITank
 {
-    public string PlayerName { get; private set; }
-    public Color PlayerColor { get; private set; }                                                  
 
     public bool IsAlive => m_Health.IsAlive;
 
@@ -18,11 +16,8 @@ public class TankBehaviour : MonoBehaviour, ITank
 
     public event Action<ITank> OnDeath;
 
-    public void Setup(string name, Color color)
+    public void Awake()
     {
-        PlayerName = name;
-        PlayerColor = color;
-
         // Get references to the components.
         m_Movement = GetComponent<TankMoveControllerBehaviour>();
         m_Shooting = GetComponent<TankShootingControlelrBehaviour>();
@@ -30,16 +25,6 @@ public class TankBehaviour : MonoBehaviour, ITank
         m_CanvasGameObject = GetComponentInChildren<Canvas>().gameObject;
 
         m_Health.OnDeath += OnDeathEventHandler;
-
-        // Get all of the renderers of the tank.
-        MeshRenderer[] renderers = GetComponentsInChildren<MeshRenderer>();
-
-        // Go through all the renderers...
-        for (int i = 0; i < renderers.Length; i++)
-        {
-            // ... set their material color to the color specific to this tank.
-            renderers[i].material.color = PlayerColor;
-        }
     }
 
 

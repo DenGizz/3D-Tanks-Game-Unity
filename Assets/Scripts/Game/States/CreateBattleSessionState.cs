@@ -25,11 +25,13 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
         private readonly IInputSourceServiceAssing _assingInputSourceService;
         private readonly IInputSourceFactory _inputSourceFactory;
         private readonly IStaticDataService _staticDataService;
+        private readonly ITankDisplayDataProvider _tankDisplayDataProvider;
+        private readonly ITankColorizer _tankColorizer;
 
         public CreateBattleSessionState(StateMachine gameplayStateMachine,
             ITankFactory tankFactory, ILevelSpawnPointsProvider levelSpawnPointsProvider,
             IBattleProvider battleProvider, IInputSourceServiceAssing assingInputSourceService, IStaticDataService staticDataService,
-            IInputSourceFactory inputSourceFactory)
+            IInputSourceFactory inputSourceFactory, ITankDisplayDataProvider ankDisplayDataProvider, ITankColorizer colorizer)
         {
             _gameplayStateMachine = gameplayStateMachine;
             _tankFactory = tankFactory;
@@ -38,14 +40,25 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
             _assingInputSourceService = assingInputSourceService;
             _inputSourceFactory = inputSourceFactory;
             _staticDataService = staticDataService;
+            _tankDisplayDataProvider = ankDisplayDataProvider;
+            _tankColorizer = colorizer;
         }
 
         public void Enter()
         {
             Transform[] spawnPoints = _levelSpawnPointsProvider.SpawnPoints.ToArray();
 
-            ITank tank1 = _tankFactory.CreateTank(spawnPoints[0].position, spawnPoints[0].rotation,"Player 1", Color.red);
-            ITank tank2 = _tankFactory.CreateTank(spawnPoints[1].position, spawnPoints[1].rotation, "Player 2", Color.blue);
+            ITank tank1 = _tankFactory.CreateTank(spawnPoints[0].position, spawnPoints[0].rotation);
+            ITank tank2 = _tankFactory.CreateTank(spawnPoints[1].position, spawnPoints[1].rotation);
+
+            TankDisplayData tank1DisplayData = new TankDisplayData("Player 1", Color.red);
+            TankDisplayData tank2DisplayData = new TankDisplayData("Player 2", Color.blue);
+
+            _tankDisplayDataProvider.AddDisplayData(tank1, tank1DisplayData);
+            _tankDisplayDataProvider.AddDisplayData(tank2, tank2DisplayData);
+
+            _tankColorizer.ColorizeTank(tank1, tank1DisplayData.Color);
+            _tankColorizer.ColorizeTank(tank2, tank2DisplayData.Color);
 
             LocalInputSchemesConfig inputsConfig = _staticDataService.LocalInputSchemesConfig;
             LocalInputSchemeConfiguration tank1InputConfig = inputsConfig.LocalInputConfigurations.ElementAt(0);

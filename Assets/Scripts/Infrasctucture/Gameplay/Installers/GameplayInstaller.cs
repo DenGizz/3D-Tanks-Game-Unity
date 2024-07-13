@@ -19,6 +19,8 @@ namespace Assets.Scripts.Infrasctucture
             Container.Bind<ITanksGameObjectsRegistry>().To<TanksGameObjectsRegistry>().AsSingle();
             Container.Bind<IInputSourceServiceAssing>().To<InputSourceAssingService>().AsSingle();
             Container.Bind<IInputSourceFactory>().To<InputSourceFactory>().AsSingle();
+            Container.Bind<ITankDisplayDataProvider>().To<TankDisplayDataProvider>().AsSingle();
+            Container.Bind<ITankColorizer>().To<TankColorizer>().AsSingle();
         }
     }
 }

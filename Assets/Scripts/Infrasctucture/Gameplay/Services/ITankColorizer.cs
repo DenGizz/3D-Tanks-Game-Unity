@@ -6,10 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Assets.Scripts.Infrasctucture
+namespace Assets.Scripts.Infrasctucture.Gameplay.Services
 {
-    public interface ITankFactory 
+    public interface ITankColorizer
     {
-        ITank CreateTank(Vector3 position,Quaternion rotation);
+        public void ColorizeTank(ITank tank, Color color);
     }
 }

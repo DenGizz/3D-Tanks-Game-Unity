@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Infrasctucture;
+﻿using Assets.Scripts.Domain;
+using Assets.Scripts.Infrasctucture;
 using Assets.Scripts.Infrasctucture.Gameplay.Services;
 using Assets.Scripts.Tank;
 using System;
@@ -18,6 +19,7 @@ namespace Assets.Scripts.UI
         [SerializeField] private Text _messagesUiText;
 
         private IBattleProvider _battleProvider;
+        private ITankDisplayDataProvider _tankDisplayDataProvider;
 
         private string Text
         {
@@ -26,9 +28,10 @@ namespace Assets.Scripts.UI
         }
 
         [Inject]
-        public void Construct(IBattleProvider battleProvider)
+        public void Construct(IBattleProvider battleProvider, ITankDisplayDataProvider tankDisplayDataProvider)
         {
             _battleProvider = battleProvider;
+            _tankDisplayDataProvider = tankDisplayDataProvider;
         }
 
         public void ShowRoundStartText(int roundNumber)
@@ -62,7 +65,9 @@ namespace Assets.Scripts.UI
 
         private string GetColoredPlayerText(ITank tank)
         {
-            return "<color=#" + ColorUtility.ToHtmlStringRGB(tank.PlayerColor) + ">" + tank.PlayerName + "</color>";
+            TankDisplayData displayData  = _tankDisplayDataProvider.GetDisplayData(tank);
+
+            return "<color=#" + ColorUtility.ToHtmlStringRGB(displayData.Color) + ">" + displayData.Name + "</color>";
         }
     }
 }
