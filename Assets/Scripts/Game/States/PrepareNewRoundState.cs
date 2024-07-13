@@ -52,18 +52,13 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
 
             BattleRulesConfig battleRulesConfig = _staticDataService.BattleSessionConfig;
 
-            _coroutineRunner.StartCoroutine(DelayedEnterPerformRoundState(battleRulesConfig.StartDelay));
+            _coroutineRunner.DoAfterDelay(
+                () => _stateMachine.EnterState<PerformRoundState>(), battleRulesConfig.StartDelay);
         }
 
         public void Exit()
         {
 
-        }
-
-        private IEnumerator DelayedEnterPerformRoundState(float delay)
-        {
-            yield return new WaitForSeconds(delay);
-            _stateMachine.EnterState<PerformRoundState>(); ;
         }
 
         private void ResetAllTanks()
