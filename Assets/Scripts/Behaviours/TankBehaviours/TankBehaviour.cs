@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class TankBehaviour : MonoBehaviour, ITank
 {
+    public string PlayerName { get; private set; }
     public Color PlayerColor { get; private set; }                                                  
-    public int PlayerNumber { get; private set; }
 
     public bool IsAlive => m_Health.IsAlive;
 
@@ -18,8 +18,9 @@ public class TankBehaviour : MonoBehaviour, ITank
 
     public event Action<ITank> OnDeath;
 
-    public void Setup(Color color)
+    public void Setup(string name, Color color)
     {
+        PlayerName = name;
         PlayerColor = color;
 
         // Get references to the components.

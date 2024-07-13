@@ -10,6 +10,6 @@ namespace Assets.Scripts.Infrasctucture
 {
     public interface ITankFactory 
     {
-        ITank CreateTank(Vector3 position,Quaternion rotation, Color color);
+        ITank CreateTank(Vector3 position,Quaternion rotation,string name, Color color);
     }
 }

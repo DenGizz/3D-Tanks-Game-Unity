@@ -9,8 +9,8 @@ namespace Assets.Scripts.Tank
 {
     public interface ITank
     {
+        string PlayerName { get; }
         Color PlayerColor { get;  }
-        int PlayerNumber { get; }
         bool IsAlive { get; }
         Vector3 Position { get; }
 

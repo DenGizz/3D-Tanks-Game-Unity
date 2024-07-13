@@ -62,7 +62,7 @@ namespace Assets.Scripts.UI
 
         private string GetColoredPlayerText(ITank tank)
         {
-            return "<color=#" + ColorUtility.ToHtmlStringRGB(tank.PlayerColor) + ">PLAYER " + tank.PlayerNumber + "</color>";
+            return "<color=#" + ColorUtility.ToHtmlStringRGB(tank.PlayerColor) + ">" + tank.PlayerName + "</color>";
         }
     }
 }
