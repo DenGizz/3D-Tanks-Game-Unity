@@ -12,7 +12,7 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.Factories
     {
         public IInputSource CreateLocalInputSource(LocalInputSchemeConfiguration config)
         {
-            return new DeviceAxesInputSource(config);
+            return new LocalDeviceInputSource(config);
         }
     }
 }

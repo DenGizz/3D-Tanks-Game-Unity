@@ -61,6 +61,7 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
             _tankColorizer.ColorizeTank(tank2, tank2DisplayData.Color);
 
             LocalInputSchemesConfig inputsConfig = _staticDataService.LocalInputSchemesConfig;
+
             LocalInputSchemeConfiguration tank1InputConfig = inputsConfig.LocalInputConfigurations.ElementAt(0);
             LocalInputSchemeConfiguration tank2InputConfig = inputsConfig.LocalInputConfigurations.ElementAt(1);
 
@@ -71,9 +72,11 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
             _assingInputSourceService.AssignInputSource(tank2, inputSource1);
 
             BattleRulesConfig battleRulesConfig = _staticDataService.BattleSessionConfig;
+
             Battle battle = new Battle(tank1,tank2, battleRulesConfig.NumRoundsToWin);
 
             _battleProvider.CurrentBattle = battle;
+
             _gameplayStateMachine.EnterState<PrepareNewRoundState>();
         }
 

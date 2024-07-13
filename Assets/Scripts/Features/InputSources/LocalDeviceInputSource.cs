@@ -8,23 +8,23 @@ using UnityEngine;
 
 namespace Assets.Scripts.Features.InputSources
 {
-    public class DeviceAxesInputSource : IInputSource
+    public class LocalDeviceInputSource : IInputSource
     {
         private readonly string _movementAxisName;
         private readonly string _turnAxisName;
 
         private readonly string _fireButtonName;
 
-        private DeviceAxesInputSource() { }
+        private LocalDeviceInputSource() { }
 
-        public DeviceAxesInputSource(string movementAxisName, string turnAxisName, string fireButtonName)
+        public LocalDeviceInputSource(string movementAxisName, string turnAxisName, string fireButtonName)
         {
             _movementAxisName = movementAxisName;
             _turnAxisName = turnAxisName;
             _fireButtonName = fireButtonName;
         }
 
-        public DeviceAxesInputSource(LocalInputSchemeConfiguration config) 
+        public LocalDeviceInputSource(LocalInputSchemeConfiguration config) 
             : this (config.MoveAxisName, config.TurnAxisName, config.FireButtonName) { }
 
         public float MovementInputValue => Input.GetAxis(_movementAxisName);
