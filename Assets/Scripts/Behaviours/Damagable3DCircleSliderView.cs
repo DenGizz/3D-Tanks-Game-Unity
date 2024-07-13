@@ -30,7 +30,6 @@ public class Damagable3DCircleSliderView : MonoBehaviour, IInitializable
 
     private void UpdateHealthUI()
     {
-        // Adjust the value and colour of the slider.
         m_Slider.value = _damagable.HealthPoints;
         m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, _damagable.HealthPoints / _damagable.MaxHealthPoints);
     }

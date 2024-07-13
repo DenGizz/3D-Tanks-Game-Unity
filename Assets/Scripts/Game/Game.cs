@@ -19,7 +19,7 @@ namespace Assets.Scripts.Game
         {
             _stateFactory = stateFactory;
             _stateMachine = new StateMachine();
-            _stateMachine.AddState(_stateFactory.CreateState<StartGameState>(_stateMachine));
+            _stateMachine.AddState(_stateFactory.CreateState<InitializeGameState>(_stateMachine));
             _stateMachine.AddState(_stateFactory.CreateState<CreateBattleSessionState>(_stateMachine));
             _stateMachine.AddState(_stateFactory.CreateState<PrepareNewRoundState>(_stateMachine));
             _stateMachine.AddState(_stateFactory.CreateState<PerformRoundState>(_stateMachine));
@@ -31,7 +31,7 @@ namespace Assets.Scripts.Game
 
         public void Start()
         {
-            _stateMachine.EnterState<StartGameState>();
+            _stateMachine.EnterState<InitializeGameState>();
         }
     }
 }

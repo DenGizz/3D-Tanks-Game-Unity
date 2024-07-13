@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.Infrasctucture.Gameplay.GameplayStateMachine.States
 {
-    public class StartGameState : IState
+    public class InitializeGameState : IState
     {
         private readonly StateMachine _gameplayStateMachine;
         private readonly IUiProvider _uiProvider;
@@ -20,7 +20,7 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.GameplayStateMachine.States
         private readonly ICameraControlProvider _cameraControlProvider;
         private readonly ICoroutineRunner _coroutineRunner;
 
-        public StartGameState(StateMachine gameplayStateMachine, IUiProvider uiProvider, 
+        public InitializeGameState(StateMachine gameplayStateMachine, IUiProvider uiProvider, 
             IUiFactory uiFactory, ILevelSpawnPointsProvider levelSpawnPointsProvider,
             ICameraControlProvider cameraControlProvider, ICoroutineRunner coroutineRunner)
         {

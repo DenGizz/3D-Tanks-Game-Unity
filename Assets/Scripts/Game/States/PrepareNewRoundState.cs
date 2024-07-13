@@ -24,7 +24,8 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
 
         private Battle _battle;
 
-        public PrepareNewRoundState(StateMachine stateMachine, IBattleProvider battleProvider, 
+        public PrepareNewRoundState(StateMachine stateMachine, 
+            IBattleProvider battleProvider, 
             ICameraControlProvider cameraControlProvider, IUiProvider uiProvider,
             ILevelSpawnPointsProvider levelSpawnPointsProvider, IStaticDataService staticDataService, 
             ICoroutineRunner coroutineRunner)

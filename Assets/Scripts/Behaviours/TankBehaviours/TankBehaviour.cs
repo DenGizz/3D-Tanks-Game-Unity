@@ -18,10 +18,9 @@ public class TankBehaviour : MonoBehaviour, ITank
 
     public event Action<ITank> OnDeath;
 
-    public void Setup(Color color, int playerNumber)
+    public void Setup(Color color)
     {
         PlayerColor = color;
-        PlayerNumber = playerNumber;
 
         // Get references to the components.
         m_Movement = GetComponent<TankMoveControllerBehaviour>();
