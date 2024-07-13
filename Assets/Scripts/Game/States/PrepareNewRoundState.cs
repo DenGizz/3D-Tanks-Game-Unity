@@ -47,7 +47,7 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
             DisableTankControl();
 
             _cameraControlProvider.CameraControl.SetTargets(new ITank[] { _battle.Tank1, _battle.Tank2 });
-            _cameraControlProvider.CameraControl.SetStartPositionAndSize();
+            _cameraControlProvider.CameraControl.SetToStartPositionAndSize();
             _uiProvider.MessagesUi.ShowRoundStartText(_battleProvider.CurrentBattle.CurrentRound);
 
             BattleRulesConfig battleRulesConfig = _staticDataService.BattleSessionConfig;
