@@ -30,7 +30,6 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.States
 
         public void Enter()
         {
-            //Wait
             _battle = _battleProvider.CurrentBattle;
 
             EnableTankControl();
