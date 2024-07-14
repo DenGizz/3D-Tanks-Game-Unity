@@ -34,21 +34,15 @@ namespace Assets.Scripts.Behaviours.TankBehaviours
 
         private void Update()
         {
-            m_MovementInputValue = 0;
-            m_TurnInputValue = 0;
-
-            if(_inputSource != null)
-            {
-                m_MovementInputValue = _inputSource.MovementInputValue;
-                m_TurnInputValue = _inputSource.TurnInputValue;
-            }
+            m_MovementInputValue = _inputSource == null ? 0 : _inputSource.MovementInputValue;
+            m_TurnInputValue = _inputSource == null ? 0 : _inputSource.TurnInputValue;
         }
 
         private void FixedUpdate()
         {
             // Move and turn the tank.
-            Move();
-            Turn();
+            HandleMove();
+            HandleTurn();
         }
 
         public void SetInputSource(IInputSource inputSource)
@@ -56,7 +50,7 @@ namespace Assets.Scripts.Behaviours.TankBehaviours
             _inputSource = inputSource;
         }
 
-        private void Move()
+        private void HandleMove()
         {
             // Adjust the position of the tank based on the player's input.
             // Create a vector in the direction the tank is facing with a magnitude based on the input, speed and the time between frames.
@@ -66,7 +60,7 @@ namespace Assets.Scripts.Behaviours.TankBehaviours
             m_Rigidbody.MovePosition(m_Rigidbody.position + movement);
         }
 
-        private void Turn()
+        private void HandleTurn()
         {
             // Adjust the rotation of the tank based on the player's input.
             // Determine the number of degrees to be turned based on the input, speed and time between frames.
