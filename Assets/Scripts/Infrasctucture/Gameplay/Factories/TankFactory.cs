@@ -25,8 +25,8 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.Factories
         {
             GameObject tankInstance = _instantiator.InstantiatePrefab(_assetsProvider.GetTankPrefab());
             TankBehaviour tank = tankInstance.GetComponent<TankBehaviour>();
-            tankInstance.transform.position = position;
-            tankInstance.transform.rotation = rotation;
+            tank.Position = position;
+            tank.Rotation = rotation;
 
             _gameObjectsRegistry.RegisterGameObject(tank, tankInstance);
             return tank;

@@ -9,7 +9,16 @@ namespace Assets.Scripts.Behaviours.TankBehaviours
 
         public bool IsAlive => m_Health.IsAlive;
 
-        public Vector3 Position => transform.position;
+        public Vector3 Position
+        {
+            get => transform.position;
+            set => transform.position = value;
+        }
+        public Quaternion Rotation
+        {
+            get => transform.rotation;
+            set => transform.rotation = value;
+        }
 
         private TankMoveControllerBehaviour m_Movement;                        // Reference to tank's movement script, used to disable and enable control.
         private TankShootingControlelrBehaviour m_Shooting;                        // Reference to tank's shooting script, used to disable and enable control.
@@ -49,16 +58,6 @@ namespace Assets.Scripts.Behaviours.TankBehaviours
             m_CanvasGameObject.SetActive (true);
         }
 
-        public void SetPosition(Vector3 position)
-        {
-            transform.position = position;
-        }
-
-        public void SetRotation(Quaternion rotation)
-        {
-            transform.rotation = rotation;
-        }
-
         public void Revive()
         {
             gameObject.SetActive(true);
@@ -68,6 +67,16 @@ namespace Assets.Scripts.Behaviours.TankBehaviours
         private void OnDeathEventHandler()
         {
             OnDeath?.Invoke(this);
+        }
+
+        public void SetPosition(Vector3 position)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetRotation(Quaternion rotation)
+        {
+            throw new NotImplementedException();
         }
     }
 }

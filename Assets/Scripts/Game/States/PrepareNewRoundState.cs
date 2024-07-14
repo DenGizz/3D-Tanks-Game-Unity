@@ -68,8 +68,8 @@ namespace Assets.Scripts.Game.States
 
         private void ResetTank(ITank tank, Transform spawnPoint)
         {
-            tank.SetPosition(spawnPoint.position);
-            tank.SetRotation(spawnPoint.rotation);
+            tank.Position = spawnPoint.position;
+            tank.Rotation = spawnPoint.rotation;
             tank.Revive();
         }
 
