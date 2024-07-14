@@ -1,15 +1,12 @@
-﻿using System;
+﻿using Assets.Scripts.Features.InputSources;
+using System;
 using UnityEngine;
 
 namespace Assets.Scripts.Domain
 {
-    public interface ITank : ITransformable
+    public interface ITank : ITransformable, IDamagable
     {
-        bool IsAlive { get; }
-
-        event Action<ITank> OnDeath;
-
-        void Revive();
+        void SetInputSource(IInputSource inputSource);
         void EnableControl();
         void DisableControl();
     }

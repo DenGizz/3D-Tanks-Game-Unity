@@ -44,7 +44,7 @@ namespace Assets.Scripts.Game.States
             _battle.Tank2.EnableControl();
         }
 
-        private void OnTankDeath(ITank deadTank)
+        private void OnTankDeath(IDamagable deadTank)
         {
             ITank winner = null;
 

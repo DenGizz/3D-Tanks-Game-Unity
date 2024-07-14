@@ -79,6 +79,7 @@ namespace Assets.Scripts.Behaviours.TankBehaviours
             m_InputSource = inputSource;
         }
 
+
         private void Fire ()
         {
             // Set the fired flag so only Fire is only called once.

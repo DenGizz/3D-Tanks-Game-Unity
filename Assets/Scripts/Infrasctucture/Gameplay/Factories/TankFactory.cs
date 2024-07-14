@@ -24,9 +24,10 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.Factories
         public ITank CreateTank(Vector3 position, Quaternion rotation)
         {
             GameObject tankInstance = _instantiator.InstantiatePrefab(_assetsProvider.GetTankPrefab());
-            TankBehaviour tank = tankInstance.GetComponent<TankBehaviour>();
-            tank.Position = position;
-            tank.Rotation = rotation;
+
+            TankData tankData = new TankData();
+
+            TankController tank = new TankController(tankData, tankInstance);
 
             _gameObjectsRegistry.RegisterGameObject(tank, tankInstance);
             return tank;

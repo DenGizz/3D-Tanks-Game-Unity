@@ -24,7 +24,7 @@ namespace Assets.Scripts.Behaviours
             _damagable.OnDeath += OnDeathEventHandler;
         }
 
-        private void OnDeathEventHandler()
+        private void OnDeathEventHandler(IDamagable deadDamageable)
         {
             GameObject explosionInstance = Instantiate(_assetsProvider.GetTankExplosionPrefab());
             ParticleSystem m_ExplosionParticles = explosionInstance.GetComponent<ParticleSystem>();

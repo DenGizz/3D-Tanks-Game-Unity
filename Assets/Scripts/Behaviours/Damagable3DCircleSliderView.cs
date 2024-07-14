@@ -30,8 +30,8 @@ namespace Assets.Scripts.Behaviours
 
         private void UpdateHealthUI()
         {
-            m_Slider.value = _damagable.HealthPoints;
-            m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, _damagable.HealthPoints / _damagable.MaxHealthPoints);
+            m_Slider.value = _damagable.Health;
+            m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, _damagable.Health / _damagable.MaxHealth);
         }
 
         private void OnDamagedEventHandler(object sender, DamageEventArgs e)

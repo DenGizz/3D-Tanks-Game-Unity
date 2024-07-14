@@ -14,7 +14,10 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.Providers
         }
 
         public TankDisplayData GetDisplayData(ITank tank)
-        {
+         {
+            if (tank == null)
+                throw new System.ArgumentNullException();
+
             return _tankToDataMap[tank];
         }
     }
