@@ -26,6 +26,4 @@ public class Shoot3DChargeAimSliderView : MonoBehaviour
     {
         _aimSlider.value = _shootable.CurrentLaunchForce;
     }
-
-
 }
