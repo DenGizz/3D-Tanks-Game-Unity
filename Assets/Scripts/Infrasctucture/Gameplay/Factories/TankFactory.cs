@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Behaviours.TankBehaviours;
-using Assets.Scripts.Domain;
+﻿using Assets.Scripts.Domain;
 using Assets.Scripts.Infrasctucture.Core;
 using Assets.Scripts.Infrasctucture.Gameplay.Providers;
 using UnityEngine;

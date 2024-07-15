@@ -1,13 +1,7 @@
 ﻿using Assets.Scripts.Domain;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Zenject;
 
-namespace Assets.Scripts.Behaviours
+namespace Assets.Scripts.Features.Behaviours
 {
     internal class ShootableComponentInstaller : MonoInstaller
     {

@@ -3,7 +3,7 @@ using Assets.Scripts.Infrasctucture.Core;
 using UnityEngine;
 using Zenject;
 
-namespace Assets.Scripts.Behaviours
+namespace Assets.Scripts.Features.Behaviours
 {
     [RequireComponent(typeof(IDamagable))]
     public class ExplodeOnDeathBehaviour : MonoBehaviour, IInitializable

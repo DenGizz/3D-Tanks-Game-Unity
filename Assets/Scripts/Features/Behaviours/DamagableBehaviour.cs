@@ -3,7 +3,7 @@ using Assets.Scripts.Domain;
 using UnityEngine;
 using Zenject;
 
-namespace Assets.Scripts.Behaviours
+namespace Assets.Scripts.Features.Behaviours
 {
     public class DamagableBehaviour : MonoBehaviour, IDamagable, IInitializable
     {

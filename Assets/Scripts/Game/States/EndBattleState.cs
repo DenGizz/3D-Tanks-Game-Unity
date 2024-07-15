@@ -1,6 +1,6 @@
-﻿using Assets.Scripts.Infrasctucture.Core;
+﻿using Assets.Scripts.Features.StateMachines;
+using Assets.Scripts.Infrasctucture.Core;
 using Assets.Scripts.Infrasctucture.Ui;
-using Assets.Scripts.StateMachines;
 using Assets.Scripts.Infrasctucture.Gameplay.Providers;
 
 namespace Assets.Scripts.Game.States

@@ -1,12 +1,11 @@
-﻿using Assets.Scripts.Domain;
+﻿using System;
+using Assets.Scripts.Domain;
 using Assets.Scripts.Features.InputSources;
 using Assets.Scripts.Infrasctucture.Gameplay.Factories;
-using System;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
-namespace Assets.Scripts.Behaviours.TankBehaviours
+namespace Assets.Scripts.Features.Behaviours.TankBehaviours
 {
     public class TankShootingControlelrBehaviour : MonoBehaviour, IInputReader, IShootable
     {

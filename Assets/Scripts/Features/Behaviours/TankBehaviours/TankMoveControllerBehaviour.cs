@@ -1,7 +1,7 @@
 ﻿using Assets.Scripts.Features.InputSources;
 using UnityEngine;
 
-namespace Assets.Scripts.Behaviours.TankBehaviours
+namespace Assets.Scripts.Features.Behaviours.TankBehaviours
 {
     public class TankMoveControllerBehaviour : MonoBehaviour, IInputReader
     {       

@@ -1,8 +1,6 @@
-﻿using Assets.Scripts.Features.InputSources;
-using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Assets.Scripts.Behaviours.TankBehaviours
+namespace Assets.Scripts.Features.Behaviours.TankBehaviours
 {
     [RequireComponent(typeof(TankMoveControllerBehaviour))]
     public class MoveAudioPlayerBehaviour : MonoBehaviour

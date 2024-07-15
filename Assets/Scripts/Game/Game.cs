@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.StateMachines;
+﻿using Assets.Scripts.Features.StateMachines;
 using Assets.Scripts.Game.States;
 using Assets.Scripts.Infrasctucture.Core;
 

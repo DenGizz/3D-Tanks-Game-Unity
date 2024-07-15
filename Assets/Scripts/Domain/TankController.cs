@@ -1,10 +1,10 @@
-﻿using Assets.Scripts.Behaviours.TankBehaviours;
-using Assets.Scripts.Features.InputSources;
+﻿using Assets.Scripts.Features.InputSources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Assets.Scripts.Features.Behaviours.TankBehaviours;
 using UnityEngine;
 
 namespace Assets.Scripts.Domain

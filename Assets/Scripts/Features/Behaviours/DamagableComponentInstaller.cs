@@ -1,7 +1,7 @@
 using Assets.Scripts.Domain;
 using Zenject;
 
-namespace Assets.Scripts.Behaviours
+namespace Assets.Scripts.Features.Behaviours
 {
     public class DamagableComponentInstaller : MonoInstaller
     {

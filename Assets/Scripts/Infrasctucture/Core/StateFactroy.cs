@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.StateMachines;
+﻿using Assets.Scripts.Features.StateMachines;
 using Zenject;
 
 namespace Assets.Scripts.Infrasctucture.Core

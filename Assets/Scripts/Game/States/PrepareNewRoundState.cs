@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 using Assets.Scripts.Configs;
 using Assets.Scripts.Domain;
+using Assets.Scripts.Features.StateMachines;
 using Assets.Scripts.Infrasctucture.Core;
 using Assets.Scripts.Infrasctucture.Gameplay.Providers;
 using Assets.Scripts.Infrasctucture.Ui;
-using Assets.Scripts.StateMachines;
 using UnityEngine;
 
 namespace Assets.Scripts.Game.States

@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Camera;
+﻿using Assets.Scripts.Features.Camera;
 
 namespace Assets.Scripts.Infrasctucture.Gameplay.Providers
 {

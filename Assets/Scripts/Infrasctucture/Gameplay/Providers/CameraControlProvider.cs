@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Camera;
+﻿using Assets.Scripts.Features.Camera;
 using UnityEngine;
 
 namespace Assets.Scripts.Infrasctucture.Gameplay.Providers

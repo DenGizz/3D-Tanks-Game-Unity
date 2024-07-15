@@ -1,7 +1,7 @@
 using Assets.Scripts.Domain;
 using UnityEngine;
 
-namespace Assets.Scripts.Behaviours
+namespace Assets.Scripts.Features.Behaviours
 {
     public class DealSplashDamageOnCollisionBehavior : MonoBehaviour
     {
