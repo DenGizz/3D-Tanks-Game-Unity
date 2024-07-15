@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Domain;
 using Assets.Scripts.Features.InputSources;
 using Assets.Scripts.Infrasctucture.Gameplay.Factories;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -9,11 +10,13 @@ namespace Assets.Scripts.Behaviours.TankBehaviours
 {
     public class TankShootingControlelrBehaviour : MonoBehaviour, IInputReader
     {
+        public event Action OnFiered;
+        public event Action OnStartCharge;
+
         [SerializeField] private Transform _fireTransform;
         [SerializeField] private Slider _aimSlider;
 
-        [SerializeField] private AudioClip _chargeAudioClip;
-        [SerializeField] private AudioClip _fireAudioClip;
+ 
         [SerializeField] private float m_MinLaunchForce = 15f;       
         [SerializeField] private float m_MaxLaunchForce = 30f; 
         [SerializeField] private float m_MaxChargeTime = 0.75f;
@@ -24,7 +27,7 @@ namespace Assets.Scripts.Behaviours.TankBehaviours
 
         private IShellFactory _shellFactory;
         private IInputSource _inputSource;
-        private AudioSource _audioSource;
+ 
 
         [Inject]
         public void Construct(IShellFactory shellFactory)
@@ -37,11 +40,6 @@ namespace Assets.Scripts.Behaviours.TankBehaviours
             // When the tank is turned on, reset the launch force and the UI
             _currentLaunchForce = m_MinLaunchForce;
             _aimSlider.value = m_MinLaunchForce;
-        }
-
-        private void Awake()
-        {
-            _audioSource = GetComponent<AudioSource>();
         }
 
         private void Start ()
@@ -69,9 +67,7 @@ namespace Assets.Scripts.Behaviours.TankBehaviours
                 _isFired = false;
                 _currentLaunchForce = m_MinLaunchForce;
 
-                // Change the clip to the charging clip and start it playing.
-                _audioSource.clip = _chargeAudioClip;
-                _audioSource.Play ();
+                OnStartCharge?.Invoke();
             }
             // Otherwise, if the fire button is being held and the shell hasn't been launched yet...
             else if (_inputSource.GetFireButton && !_isFired)
@@ -97,19 +93,14 @@ namespace Assets.Scripts.Behaviours.TankBehaviours
 
         private void Fire ()
         {
-            // Set the fired flag so only Fire is only called once.
             _isFired = true;
-
 
             IShell shell = _shellFactory.CreateShell(_fireTransform.position, _fireTransform.rotation);
             shell.Lunch(_fireTransform.forward, _currentLaunchForce);
 
-            // Change the clip to the firing clip and play it.
-            _audioSource.clip = _fireAudioClip;
-            _audioSource.Play ();
-
-            // Reset the launch force.  This is a precaution in case of missing button events.
             _currentLaunchForce = m_MinLaunchForce;
+
+            OnFiered?.Invoke();
         }
     }
 }
