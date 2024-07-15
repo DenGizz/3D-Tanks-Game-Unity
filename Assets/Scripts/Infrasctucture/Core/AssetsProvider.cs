@@ -36,6 +36,11 @@ namespace Assets.Scripts.Infrasctucture.Core
             return GetOrLoadAndGetGameplayResourceBundle().TankPrefab;
         }
 
+        public GameObject GetShellPrefab()
+        {
+            return GetOrLoadAndGetGameplayResourceBundle().ShellPrefab;
+        }
+
 
 
         private GameplayResourceBundle GetOrLoadAndGetGameplayResourceBundle()

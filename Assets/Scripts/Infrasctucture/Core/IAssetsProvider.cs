@@ -10,5 +10,6 @@ namespace Assets.Scripts.Infrasctucture.Core
         GameObject GetTankPrefab();
         GameObject GetTankExplosionPrefab();
         LocalInputSchemesConfig GetLocalInputSchemesConfig();
+        GameObject GetShellPrefab();
     }
 }

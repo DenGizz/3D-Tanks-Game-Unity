@@ -1,6 +1,9 @@
-﻿using Assets.Scripts.Features.InputSources;
+﻿using Assets.Scripts.Domain;
+using Assets.Scripts.Features.InputSources;
+using Assets.Scripts.Infrasctucture.Gameplay.Factories;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Assets.Scripts.Behaviours.TankBehaviours
 {
@@ -20,7 +23,14 @@ namespace Assets.Scripts.Behaviours.TankBehaviours
         private float m_ChargeSpeed;                // How fast the launch force increases, based on the max charge time.
         private bool m_Fired;                       // Whether or not the shell has been launched with this button press.
 
+        private IShellFactory _shellFactory;
         private IInputSource m_InputSource;
+
+        [Inject]
+        public void Construct(IShellFactory shellFactory)
+        {
+            _shellFactory = shellFactory;
+        }
 
         private void OnEnable()
         {
@@ -85,12 +95,9 @@ namespace Assets.Scripts.Behaviours.TankBehaviours
             // Set the fired flag so only Fire is only called once.
             m_Fired = true;
 
-            // Create an instance of the shell and store a reference to it's rigidbody.
-            Rigidbody shellInstance =
-                Instantiate (m_Shell, m_FireTransform.position, m_FireTransform.rotation) as Rigidbody;
 
-            // Set the shell's velocity to the launch force in the fire position's forward direction.
-            shellInstance.velocity = m_CurrentLaunchForce * m_FireTransform.forward; ;
+            IShell shell = _shellFactory.CreateShell(m_FireTransform.position, m_FireTransform.rotation);
+            shell.Lunch(m_FireTransform.forward, m_CurrentLaunchForce);
 
             // Change the clip to the firing clip and play it.
             m_ShootingAudio.clip = m_FireClip;

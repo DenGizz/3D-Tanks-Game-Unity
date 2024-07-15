@@ -6,7 +6,9 @@ namespace Assets.Scripts.Resources
     public class GameplayResourceBundle : ScriptableObject
     {
         public GameObject TankPrefab => _tankPrefab;
+        public GameObject ShellPrefab => _shellPrefab;
 
         [SerializeField] private GameObject _tankPrefab;
+        [SerializeField] private GameObject _shellPrefab;
     }
 }
