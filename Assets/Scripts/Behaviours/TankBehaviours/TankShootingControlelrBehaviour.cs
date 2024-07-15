@@ -8,18 +8,20 @@ using Zenject;
 
 namespace Assets.Scripts.Behaviours.TankBehaviours
 {
-    public class TankShootingControlelrBehaviour : MonoBehaviour, IInputReader
+    public class TankShootingControlelrBehaviour : MonoBehaviour, IInputReader, IShootable
     {
         public event Action OnFiered;
         public event Action OnStartCharge;
 
-        [SerializeField] private Transform _fireTransform;
-        [SerializeField] private Slider _aimSlider;
+        public float MinLaunchForce => _minLaunchForce;
+        public float MaxLaunchForce => _maxLaunchForce;
+        public float MaxChargeTime => _maxChargeTime;
+        public float CurrentLaunchForce => _currentLaunchForce;
 
- 
-        [SerializeField] private float m_MinLaunchForce = 15f;       
-        [SerializeField] private float m_MaxLaunchForce = 30f; 
-        [SerializeField] private float m_MaxChargeTime = 0.75f;
+        [SerializeField] private Transform _fireTransform;
+        [SerializeField] private float _minLaunchForce = 15f;       
+        [SerializeField] private float _maxLaunchForce = 30f; 
+        [SerializeField] private float _maxChargeTime = 0.75f;
 
         private float _currentLaunchForce;         // The force that will be given to the shell when the fire button is released.
         private float _chargeSpeed;                // How fast the launch force increases, based on the max charge time.
@@ -27,7 +29,8 @@ namespace Assets.Scripts.Behaviours.TankBehaviours
 
         private IShellFactory _shellFactory;
         private IInputSource _inputSource;
- 
+
+
 
         [Inject]
         public void Construct(IShellFactory shellFactory)
@@ -37,27 +40,22 @@ namespace Assets.Scripts.Behaviours.TankBehaviours
 
         private void OnEnable()
         {
-            // When the tank is turned on, reset the launch force and the UI
-            _currentLaunchForce = m_MinLaunchForce;
-            _aimSlider.value = m_MinLaunchForce;
+            _currentLaunchForce = _minLaunchForce;
         }
 
         private void Start ()
         {
             // The rate that the launch force charges up is the range of possible forces by the max charge time.
-            _chargeSpeed = (m_MaxLaunchForce - m_MinLaunchForce) / m_MaxChargeTime;
+            _chargeSpeed = (_maxLaunchForce - _minLaunchForce) / _maxChargeTime;
         }
 
         private void Update ()
         {
-            // The slider should have a default value of the minimum launch force.
-            _aimSlider.value = m_MinLaunchForce;
-
             // If the max force has been exceeded and the shell hasn't yet been launched...
-            if (_currentLaunchForce >= m_MaxLaunchForce && !_isFired)
+            if (_currentLaunchForce >= _maxLaunchForce && !_isFired)
             {
                 // ... use the max force and launch the shell.
-                _currentLaunchForce = m_MaxLaunchForce;
+                _currentLaunchForce = _maxLaunchForce;
                 Fire ();
             }
             // Otherwise, if the fire button has just started being pressed...
@@ -65,7 +63,7 @@ namespace Assets.Scripts.Behaviours.TankBehaviours
             {
                 // ... reset the fired flag and reset the launch force.
                 _isFired = false;
-                _currentLaunchForce = m_MinLaunchForce;
+                _currentLaunchForce = _minLaunchForce;
 
                 OnStartCharge?.Invoke();
             }
@@ -74,8 +72,6 @@ namespace Assets.Scripts.Behaviours.TankBehaviours
             {
                 // Increment the launch force and update the slider.
                 _currentLaunchForce += _chargeSpeed * Time.deltaTime;
-
-                _aimSlider.value = _currentLaunchForce;
             }
             // Otherwise, if the fire button is released and the shell hasn't been launched yet...
             else if (_inputSource.GetFireButtonUp && !_isFired)
@@ -98,7 +94,7 @@ namespace Assets.Scripts.Behaviours.TankBehaviours
             IShell shell = _shellFactory.CreateShell(_fireTransform.position, _fireTransform.rotation);
             shell.Lunch(_fireTransform.forward, _currentLaunchForce);
 
-            _currentLaunchForce = m_MinLaunchForce;
+            _currentLaunchForce = _minLaunchForce;
 
             OnFiered?.Invoke();
         }
