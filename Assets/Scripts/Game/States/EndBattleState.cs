@@ -17,11 +17,6 @@ namespace Assets.Scripts.Game.States
             _uiProvider.MessagesUi.ShowRoundWinnerText(_battleProvider.CurrentBattle.BattleWinner);
         }
 
-        public void Exit()
-        {
-
-        }
-
         private void DisableTankControl()
         {
             _battleProvider.CurrentBattle.Tank1.DisableControl();

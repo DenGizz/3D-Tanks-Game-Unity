@@ -20,8 +20,8 @@ namespace Assets.Scripts.StateMachines
 
         public void EnterState<TState>() where TState : IState
         {
-            if (_currentState != null)
-                _currentState.Exit();
+            if (_currentState != null && _currentState is IExitableState exitableState)
+                exitableState.Exit();
 
             _currentState = _states[typeof(TState)];
             _currentState.Enter();

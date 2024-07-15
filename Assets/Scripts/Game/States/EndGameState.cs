@@ -28,10 +28,6 @@ namespace Assets.Scripts.Game.States
             _coroutineRunner.DoAfterDelay(CloseGame, config.EndDelay);
         }
 
-        public void Exit()
-        {
-        }
-
         private void CloseGame()
         {
 #if UNITY_EDITOR

@@ -5,15 +5,15 @@ using Assets.Scripts.StateMachines;
 
 namespace Assets.Scripts.Game.States
 {
-    public class PerformRoundState : IState
+    public class PerformRoundState : IState, IExitableState
     {
-        private readonly StateMachines.StateMachine _stateMachine;
+        private readonly StateMachine _stateMachine;
         private readonly IUiProvider _uiProvider;
         private readonly IBattleProvider _battleProvider;
 
         Battle _battle;
 
-        public PerformRoundState(StateMachines.StateMachine stateMachine, IUiProvider uiProvider, IBattleProvider battleProvider)
+        public PerformRoundState(StateMachine stateMachine, IUiProvider uiProvider, IBattleProvider battleProvider)
         {
             _stateMachine = stateMachine;
             _uiProvider = uiProvider;

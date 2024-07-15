@@ -44,11 +44,6 @@ namespace Assets.Scripts.Game.States
                 config.EndDelay);
         }
 
-        public void Exit()
-        {
-  
-        }
-
         private void DisableTankControl()
         {
             _battle.Tank1.DisableControl();

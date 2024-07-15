@@ -75,10 +75,5 @@ namespace Assets.Scripts.Game.States
 
             _gameplayStateMachine.EnterState<PrepareNewRoundState>();
         }
-
-        public void Exit()
-        {
-
-        }
     }
 }

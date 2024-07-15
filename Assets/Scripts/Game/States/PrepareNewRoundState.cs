@@ -55,11 +55,6 @@ namespace Assets.Scripts.Game.States
                 () => _stateMachine.EnterState<PerformRoundState>(), battleRulesConfig.StartDelay);
         }
 
-        public void Exit()
-        {
-
-        }
-
         private void ResetAllTanks()
         {
             ResetTank(_battle.Tank1,_levelSpawnPointsProvider.SpawnPoints.ElementAt(0));

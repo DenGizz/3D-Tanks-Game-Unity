@@ -35,10 +35,5 @@ namespace Assets.Scripts.Game.States
             _uiProvider.MessagesUi = _uiFactory.CreateMessagesUi();
             _gameplayStateMachine.EnterState<CreateBattleSessionState>();
         }
-
-        public void Exit()
-        {
-
-        }
     }
 }
