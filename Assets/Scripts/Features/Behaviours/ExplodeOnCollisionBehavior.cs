@@ -1,25 +1,22 @@
+using Assets.Scripts.Infrasctucture.Gameplay.Factories;
 using UnityEngine;
+using Zenject;
 
 namespace Assets.Scripts.Features.Behaviours
 {
     public class ExplodeOnCollisionBehavior : MonoBehaviour
     {
-        [SerializeField] private ParticleSystem m_ExplosionParticles;        
-        [SerializeField] private AudioSource m_ExplosionAudio;
+        private IVFXFactory _vfxFactory;
+
+        [Inject]
+        public void Construct(IVFXFactory vfxFactory)
+        {
+            _vfxFactory = vfxFactory;
+        }
 
         private void OnTriggerEnter(Collider other)
         {
-            PlayExplosion();
-        }
-
-        private void PlayExplosion()
-        {
-            m_ExplosionParticles.transform.parent = null;
-
-            m_ExplosionParticles.Play();
-            m_ExplosionAudio.Play();
-
-            Destroy(m_ExplosionParticles.gameObject, m_ExplosionParticles.duration);
+            _vfxFactory.CreateShellExplosion(transform.position).Play();
         }
     }
 }

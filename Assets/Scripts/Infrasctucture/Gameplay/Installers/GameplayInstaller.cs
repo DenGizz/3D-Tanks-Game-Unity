@@ -22,6 +22,7 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.Installers
             Container.Bind<ITankDisplayDataProvider>().To<TankDisplayDataProvider>().AsSingle();
             Container.Bind<ITankColorizer>().To<TankColorizer>().AsSingle();
             Container.Bind<IShellFactory>().To<ShellFactory>().AsSingle();
+            Container.Bind<IVFXFactory>().To<VFXFactory>().AsSingle();
         }
     }
 }

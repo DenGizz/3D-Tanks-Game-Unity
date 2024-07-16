@@ -15,6 +15,13 @@ namespace Assets.Scripts.Infrasctucture.Core.Providers
                 ?? throw new Exception("BattleSessionConfig not found");
         }
 
+
+        public GameObject GetShellExplosionPrefab()
+        {
+            return UnityEngine.Resources.Load<GameObject>(ResourcePath.ShellExplosionPrefab)
+    ?? throw new Exception($"Tank explosion asset not found at {ResourcePath.ShellExplosionPrefab}");
+        }
+
         public GameObject GetTankExplosionPrefab()
         {
             return UnityEngine.Resources.Load<GameObject>(ResourcePath.TankExplosionPrefab)
@@ -59,6 +66,5 @@ namespace Assets.Scripts.Infrasctucture.Core.Providers
         {
             return UnityEngine.Resources.Load<UiResourceBundle>(ResourcePath.UiResourceBundle) ?? throw new Exception("UiResourceBundle not found");
         }
-
     }
 }

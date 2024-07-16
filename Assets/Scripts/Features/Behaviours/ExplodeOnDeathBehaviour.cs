@@ -1,6 +1,7 @@
 using Assets.Scripts.Domain;
 using Assets.Scripts.Infrasctucture.Core;
 using Assets.Scripts.Infrasctucture.Core.Providers;
+using Assets.Scripts.Infrasctucture.Gameplay.Factories;
 using UnityEngine;
 using Zenject;
 
@@ -11,12 +12,14 @@ namespace Assets.Scripts.Features.Behaviours
     {
         private IAssetsProvider _assetsProvider;
         private IDamagable _damagable;
+        private IVFXFactory _fxFactory;
 
         [Inject]
-        public void Construct(IAssetsProvider assetsProvider, IDamagable damagable)
+        public void Construct(IAssetsProvider assetsProvider, IDamagable damagable, IVFXFactory fxFactory)
         {
             _assetsProvider = assetsProvider;
             _damagable = damagable;
+            _fxFactory = fxFactory;
         }
 
         [Inject]
@@ -27,17 +30,7 @@ namespace Assets.Scripts.Features.Behaviours
 
         private void OnDeathEventHandler(IDamagable deadDamageable)
         {
-            GameObject explosionInstance = Instantiate(_assetsProvider.GetTankExplosionPrefab());
-            ParticleSystem m_ExplosionParticles = explosionInstance.GetComponent<ParticleSystem>();
-            AudioSource m_ExplosionAudio = m_ExplosionParticles.GetComponent<AudioSource>();
-
-            m_ExplosionParticles.gameObject.SetActive(false);
-
-            m_ExplosionParticles.transform.position = transform.position;
-            m_ExplosionParticles.gameObject.SetActive(true);
-
-            m_ExplosionParticles.Play();
-            m_ExplosionAudio.Play();
+            _fxFactory.CreateTankExplosion(transform.position).Play();
         }
     }
 }

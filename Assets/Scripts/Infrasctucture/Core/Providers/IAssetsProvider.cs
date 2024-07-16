@@ -13,5 +13,6 @@ namespace Assets.Scripts.Infrasctucture.Core.Providers
         LocalDeviceInputSchemesConfig GetLocalInputSchemesConfig();
         GameObject GetShellPrefab();
         ScenesConfig GetScenesConfig();
+        GameObject GetShellExplosionPrefab();
     }
 }
