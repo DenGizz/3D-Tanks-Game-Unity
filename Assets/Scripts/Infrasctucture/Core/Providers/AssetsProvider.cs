@@ -10,35 +10,17 @@ namespace Assets.Scripts.Infrasctucture.Core.Providers
     {
         public BattleRulesConfig GetBattleSessionConfig()
         {
-        
-            return UnityEngine.Resources.Load<BattleRulesConfig>(ResourcePath.BattleRulesConfig) 
-                ?? throw new Exception("BattleSessionConfig not found");
+            return LoadAsset<BattleRulesConfig>(ResourcePath.BattleRulesConfig);
         }
-
 
         public GameObject GetShellExplosionPrefab()
         {
-            return UnityEngine.Resources.Load<GameObject>(ResourcePath.ShellExplosionPrefab)
-    ?? throw new Exception($"Tank explosion asset not found at {ResourcePath.ShellExplosionPrefab}");
+            return LoadAsset<GameObject>(ResourcePath.ShellExplosionPrefab);
         }
 
         public GameObject GetTankExplosionPrefab()
         {
-            return UnityEngine.Resources.Load<GameObject>(ResourcePath.TankExplosionPrefab)
-                ?? throw new Exception($"Tank explosion asset not found at {ResourcePath.TankExplosionPrefab}");
-        }
-
-        public LocalDeviceInputSchemesConfig GetLocalInputSchemesConfig()
-        {
-            return UnityEngine.Resources.Load<LocalDeviceInputSchemesConfig>(ResourcePath.LocalInputSchemesConfig)
-                ?? throw new Exception($"LocalInputSchemesConfig asset not found at {ResourcePath.LocalInputSchemesConfig}");
-        }
-
-
-        public ScenesConfig GetScenesConfig()
-        {
-            return UnityEngine.Resources.Load<ScenesConfig>(ResourcePath.ScenesConfig)
-               ?? throw new Exception($"ScenesConfig asset not found at {ResourcePath.ScenesConfig}");
+            return LoadAsset<GameObject>(ResourcePath.TankExplosionPrefab);
         }
 
         public GameObject GetMessagesUiPrefab()
@@ -56,15 +38,31 @@ namespace Assets.Scripts.Infrasctucture.Core.Providers
             return GetOrLoadAndGetGameplayResourceBundle().ShellPrefab;
         }
 
+        public LocalDeviceInputSchemesConfig GetLocalInputSchemesConfig()
+        {
+            return LoadAsset<LocalDeviceInputSchemesConfig>(ResourcePath.LocalInputSchemesConfig);
+        }
+
+        public ScenesConfig GetScenesConfig()
+        {
+            return LoadAsset<ScenesConfig>(ResourcePath.ScenesConfig);
+        }
+
         private GameplayResourceBundle GetOrLoadAndGetGameplayResourceBundle()
         {
-            return UnityEngine.Resources.Load<GameplayResourceBundle>(ResourcePath.GameplayResourceBundle)
-                ?? throw new Exception("GameplayResourceBundle not found");
+            return LoadAsset<GameplayResourceBundle>(ResourcePath.GameplayResourceBundle);
         }
 
         private UiResourceBundle GetOrLoadAndGetUiResourceBundle()
         {
-            return UnityEngine.Resources.Load<UiResourceBundle>(ResourcePath.UiResourceBundle) ?? throw new Exception("UiResourceBundle not found");
+            return UnityEngine.Resources.Load<UiResourceBundle>(ResourcePath.UiResourceBundle) 
+                ?? throw new Exception("UiResourceBundle not found");
+        }
+
+        private TAsset LoadAsset<TAsset>(string path) where TAsset : UnityEngine.Object
+        {
+            return UnityEngine.Resources.Load<TAsset>(path)
+                ?? throw new Exception($"Can`t load asset at {path}");
         }
     }
 }
