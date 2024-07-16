@@ -8,7 +8,7 @@ namespace Assets.Scripts.Domain
         public ITank Tank1 { get; }
         public ITank Tank2 { get; }
 
-        public int CurrentRound { get; private set; } = -1;
+        public int CurrentRound { get; private set; }
         public int RoundsToWin { get; }
 
         public ITank BattleWinner { get; private set; }
@@ -20,6 +20,7 @@ namespace Assets.Scripts.Domain
         {
             Tank1 = tank1;
             Tank2 = tank2;
+            CurrentRound = -1;
             RoundsToWin = roundsToWin;
             _roundWinners = new List<ITank>();
         }
