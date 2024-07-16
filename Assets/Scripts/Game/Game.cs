@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Features.StateMachines;
 using Assets.Scripts.Game.States;
 using Assets.Scripts.Infrasctucture.Core;
+using Assets.Scripts.Infrasctucture.Core.Factories;
 
 namespace Assets.Scripts.Game
 {

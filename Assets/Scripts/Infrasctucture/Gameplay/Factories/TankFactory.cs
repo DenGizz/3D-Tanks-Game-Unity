@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Domain;
 using Assets.Scripts.Infrasctucture.Core;
+using Assets.Scripts.Infrasctucture.Core.Providers;
 using Assets.Scripts.Infrasctucture.Gameplay.Providers;
 using UnityEngine;
 using Zenject;

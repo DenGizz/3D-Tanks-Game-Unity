@@ -1,7 +1,11 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Infrasctucture.Core.Factories;
+using Assets.Scripts.Infrasctucture.Core.Providers;
+using Assets.Scripts.Infrasctucture.Core.Services;
+using Assets.Scripts.Infrasctucture.Core.Services.CoroutineRunners;
+using UnityEngine;
 using Zenject;
 
-namespace Assets.Scripts.Infrasctucture.Core
+namespace Assets.Scripts.Infrasctucture.Core.Installers
 {
     [CreateAssetMenu(fileName = "CoreInstaller", menuName = "Installers/CoreInstaller")]
     public class CoreInstaller : MonoInstaller

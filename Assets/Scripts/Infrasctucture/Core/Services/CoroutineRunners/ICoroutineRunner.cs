@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Assets.Scripts.Infrasctucture.Core
+namespace Assets.Scripts.Infrasctucture.Core.Services.CoroutineRunners
 {
     public interface ICoroutineRunner
     {

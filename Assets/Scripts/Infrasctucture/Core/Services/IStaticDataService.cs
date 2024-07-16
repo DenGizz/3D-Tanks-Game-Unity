@@ -1,6 +1,6 @@
 ﻿using Assets.Scripts.Configs;
 
-namespace Assets.Scripts.Infrasctucture.Core
+namespace Assets.Scripts.Infrasctucture.Core.Services
 {
     public interface IStaticDataService
     {

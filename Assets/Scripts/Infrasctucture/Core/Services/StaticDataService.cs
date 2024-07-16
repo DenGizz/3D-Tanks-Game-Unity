@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Configs;
+using Assets.Scripts.Infrasctucture.Core.Providers;
 
-namespace Assets.Scripts.Infrasctucture.Core
+namespace Assets.Scripts.Infrasctucture.Core.Services
 {
     public class StaticDataService : IStaticDataService
     {

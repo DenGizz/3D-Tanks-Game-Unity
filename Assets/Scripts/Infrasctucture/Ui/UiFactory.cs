@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Infrasctucture.Core;
+using Assets.Scripts.Infrasctucture.Core.Providers;
 using Assets.Scripts.UI;
 using Zenject;
 

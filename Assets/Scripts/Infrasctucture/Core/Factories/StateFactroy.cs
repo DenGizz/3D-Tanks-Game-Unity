@@ -1,7 +1,7 @@
 ﻿using Assets.Scripts.Features.StateMachines;
 using Zenject;
 
-namespace Assets.Scripts.Infrasctucture.Core
+namespace Assets.Scripts.Infrasctucture.Core.Factories
 {
     public class StateFactroy : IStateFactory
     {
