@@ -5,7 +5,7 @@ namespace Assets.Scripts.Infrasctucture.Gameplay.Factories
 {
     public class InputSourceFactory : IInputSourceFactory
     {
-        public IInputSource CreateLocalInputSource(LocalInputSchemeConfiguration config)
+        public IInputSource CreateLocalInputSource(LocalDeviceInputSchemeConfig config)
         {
             return new LocalDeviceInputSource(config);
         }

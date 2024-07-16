@@ -14,6 +14,6 @@ namespace Assets.Scripts.Infrasctucture.Core.Services
 
         public BattleRulesConfig BattleSessionConfig => _assetsProvider.GetBattleSessionConfig();
 
-        public LocalInputSchemesConfig LocalInputSchemesConfig => _assetsProvider.GetLocalInputSchemesConfig();
+        public LocalDeviceInputSchemesConfig LocalInputSchemesConfig => _assetsProvider.GetLocalInputSchemesConfig();
     }
 }

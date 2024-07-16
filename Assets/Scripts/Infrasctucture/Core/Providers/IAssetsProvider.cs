@@ -9,7 +9,7 @@ namespace Assets.Scripts.Infrasctucture.Core.Providers
         GameObject GetMessagesUiPrefab();
         GameObject GetTankPrefab();
         GameObject GetTankExplosionPrefab();
-        LocalInputSchemesConfig GetLocalInputSchemesConfig();
+        LocalDeviceInputSchemesConfig GetLocalInputSchemesConfig();
         GameObject GetShellPrefab();
     }
 }

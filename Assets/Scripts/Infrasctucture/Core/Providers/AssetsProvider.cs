@@ -20,9 +20,9 @@ namespace Assets.Scripts.Infrasctucture.Core.Providers
                 ?? throw new Exception($"Tank explosion asset not found at {ResourcePath.TankExplosionPrefab}");
         }
 
-        public LocalInputSchemesConfig GetLocalInputSchemesConfig()
+        public LocalDeviceInputSchemesConfig GetLocalInputSchemesConfig()
         {
-            return UnityEngine.Resources.Load<LocalInputSchemesConfig>(ResourcePath.LocalInputSchemesConfig)
+            return UnityEngine.Resources.Load<LocalDeviceInputSchemesConfig>(ResourcePath.LocalInputSchemesConfig)
                 ?? throw new Exception($"LocalInputSchemesConfig asset not found at {ResourcePath.LocalInputSchemesConfig}");
         }
 

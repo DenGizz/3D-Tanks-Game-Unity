@@ -9,6 +9,6 @@
         public const string ShellExplosionPrefab = "VFX/ShellExplosion";
         public const string TankExplosionPrefab = "VFX/TankExplosion";
 
-        public const string LocalInputSchemesConfig = "Configs/LocalInputSchemesConfig";
+        public const string LocalInputSchemesConfig = "Configs/LocalDeviceInputSchemesConfig";
     }
 }

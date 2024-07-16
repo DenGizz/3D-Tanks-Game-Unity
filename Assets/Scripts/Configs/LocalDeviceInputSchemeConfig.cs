@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Assets.Scripts.Configs
 {
     [Serializable]
-    public class LocalInputSchemeConfiguration
+    public class LocalDeviceInputSchemeConfig
     {
         public string MoveAxisName => _verticalAxisName;
         public string TurnAxisName => _horizontalAxisName;

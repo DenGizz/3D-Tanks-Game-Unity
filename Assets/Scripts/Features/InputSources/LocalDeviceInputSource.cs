@@ -19,7 +19,7 @@ namespace Assets.Scripts.Features.InputSources
             _fireButtonName = fireButtonName;
         }
 
-        public LocalDeviceInputSource(LocalInputSchemeConfiguration config) 
+        public LocalDeviceInputSource(LocalDeviceInputSchemeConfig config) 
             : this (config.MoveAxisName, config.TurnAxisName, config.FireButtonName) { }
 
         public float MovementInputValue => Input.GetAxis(_movementAxisName);

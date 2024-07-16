@@ -57,10 +57,10 @@ namespace Assets.Scripts.Game.States
             _tankColorizer.ColorizeTank(tank1, tank1DisplayData.Color);
             _tankColorizer.ColorizeTank(tank2, tank2DisplayData.Color);
 
-            LocalInputSchemesConfig inputsConfig = _staticDataService.LocalInputSchemesConfig;
+            LocalDeviceInputSchemesConfig inputsConfig = _staticDataService.LocalInputSchemesConfig;
 
-            LocalInputSchemeConfiguration tank1InputConfig = inputsConfig.LocalInputConfigurations.ElementAt(0);
-            LocalInputSchemeConfiguration tank2InputConfig = inputsConfig.LocalInputConfigurations.ElementAt(1);
+            LocalDeviceInputSchemeConfig tank1InputConfig = inputsConfig.LocalDeviceInputConfigurations.ElementAt(0);
+            LocalDeviceInputSchemeConfig tank2InputConfig = inputsConfig.LocalDeviceInputConfigurations.ElementAt(1);
 
             IInputSource inputSource1 = _inputSourceFactory.CreateLocalInputSource(tank1InputConfig);
             IInputSource inputSource2 = _inputSourceFactory.CreateLocalInputSource(tank2InputConfig);
