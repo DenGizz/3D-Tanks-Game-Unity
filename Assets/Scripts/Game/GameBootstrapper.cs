@@ -11,6 +11,7 @@ namespace Assets.Scripts.Game
         private void Construct(Game game)
         {
             _game = game;
+            DontDestroyOnLoad(gameObject);
         }
 
         private void Start()

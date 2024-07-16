@@ -1,5 +1,6 @@
 ﻿using System;
 using Assets.Scripts.Configs;
+using Assets.Scripts.Infrastructure.Gameplay.Configs;
 using Assets.Scripts.Resources;
 using UnityEngine;
 
@@ -26,6 +27,13 @@ namespace Assets.Scripts.Infrasctucture.Core.Providers
                 ?? throw new Exception($"LocalInputSchemesConfig asset not found at {ResourcePath.LocalInputSchemesConfig}");
         }
 
+
+        public ScenesConfig GetScenesConfig()
+        {
+            return UnityEngine.Resources.Load<ScenesConfig>(ResourcePath.ScenesConfig)
+               ?? throw new Exception($"ScenesConfig asset not found at {ResourcePath.ScenesConfig}");
+        }
+
         public GameObject GetMessagesUiPrefab()
         {
             return GetOrLoadAndGetUiResourceBundle().MessagesUiPrefab;
@@ -41,8 +49,6 @@ namespace Assets.Scripts.Infrasctucture.Core.Providers
             return GetOrLoadAndGetGameplayResourceBundle().ShellPrefab;
         }
 
-
-
         private GameplayResourceBundle GetOrLoadAndGetGameplayResourceBundle()
         {
             return UnityEngine.Resources.Load<GameplayResourceBundle>(ResourcePath.GameplayResourceBundle)
@@ -53,5 +59,6 @@ namespace Assets.Scripts.Infrasctucture.Core.Providers
         {
             return UnityEngine.Resources.Load<UiResourceBundle>(ResourcePath.UiResourceBundle) ?? throw new Exception("UiResourceBundle not found");
         }
+
     }
 }

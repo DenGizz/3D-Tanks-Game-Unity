@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Configs;
+using Assets.Scripts.Infrastructure.Gameplay.Configs;
 using UnityEngine;
 
 namespace Assets.Scripts.Infrasctucture.Core.Providers
@@ -11,5 +12,6 @@ namespace Assets.Scripts.Infrasctucture.Core.Providers
         GameObject GetTankExplosionPrefab();
         LocalDeviceInputSchemesConfig GetLocalInputSchemesConfig();
         GameObject GetShellPrefab();
+        ScenesConfig GetScenesConfig();
     }
 }

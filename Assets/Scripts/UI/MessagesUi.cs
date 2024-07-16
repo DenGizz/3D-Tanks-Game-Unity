@@ -51,6 +51,11 @@ namespace Assets.Scripts.UI
             Text = message;
         }
 
+        public void ShowLoadingText()
+        {
+            Text = "Loading...";
+        }
+
         public void ClearText()
         {
             Text = string.Empty;

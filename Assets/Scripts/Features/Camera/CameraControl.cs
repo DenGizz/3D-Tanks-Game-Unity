@@ -30,6 +30,9 @@ namespace Assets.Scripts.Features.Camera
 
         private void FixedUpdate()
         {
+            if (_targets == null)
+                return;
+
             Move();
             Zoom();
         }
