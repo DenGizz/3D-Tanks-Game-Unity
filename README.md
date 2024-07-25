@@ -17,6 +17,7 @@ The refactored code is in the staging branch.
 
 Unity version 2022.3.22f1
 
+Lunch game from Bootstrap scene
 
 # About source project
 
