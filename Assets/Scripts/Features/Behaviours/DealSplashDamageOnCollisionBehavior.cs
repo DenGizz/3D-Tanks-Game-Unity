@@ -4,15 +4,14 @@ using UnityEngine;
 namespace Assets.Scripts.Features.Behaviours
 {
     public class DealSplashDamageOnCollisionBehavior : MonoBehaviour
-    {
-        public LayerMask m_TankMask;                        
-        public float m_MaxDamage = 100f;                   
-        public float m_ExplosionForce = 1000f; 
-        public float m_ExplosionRadius = 5f; 
+    {                     
+        [SerializeField] private float _maxDamage = 100f;
+        [SerializeField] float _explosionForce = 1000f;
+        [SerializeField] float _explosionRadius = 5f; 
 
         private void OnTriggerEnter(Collider other)
         {
-            Collider[] colliders = Physics.OverlapSphere(transform.position, m_ExplosionRadius, m_TankMask);
+            Collider[] colliders = Physics.OverlapSphere(transform.position, _explosionRadius);
 
             for (int i = 0; i < colliders.Length; i++)
             {
@@ -21,7 +20,7 @@ namespace Assets.Scripts.Features.Behaviours
                 if (!targetRigidbody)
                     continue;
 
-                targetRigidbody.AddExplosionForce(m_ExplosionForce, transform.position, m_ExplosionRadius);
+                targetRigidbody.AddExplosionForce(_explosionForce, transform.position, _explosionRadius);
                 IDamagable damagable = targetRigidbody.GetComponent<IDamagable>();
 
                 if (damagable == null)
@@ -38,8 +37,8 @@ namespace Assets.Scripts.Features.Behaviours
         {
             Vector3 explosionToTarget = targetPosition - transform.position;
             float explosionDistance = explosionToTarget.magnitude;
-            float relativeDistance = (m_ExplosionRadius - explosionDistance) / m_ExplosionRadius;
-            float damage = relativeDistance * m_MaxDamage;
+            float relativeDistance = (_explosionRadius - explosionDistance) / _explosionRadius;
+            float damage = relativeDistance * _maxDamage;
             damage = Mathf.Max(0f, damage);
 
             return damage;
