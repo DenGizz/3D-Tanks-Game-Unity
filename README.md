@@ -10,6 +10,14 @@ This repository demonstrates the process of refactoring and rewriting highly con
 
 The project uses the Service-Oriented Architecture (SOA) approach and Zenject for Dependency Injection (DI). The main goal is to show how the source code can be transformed to become more maintainable and easily extensible to add new features.
 
+# ! IMPORTANT !
+You can see the unrefactored code in the master branch. 
+
+The refactored code is in the staging branch.
+
+Unity version 2022.3.22f1
+
+
 # About source project
 
 3D Tanks Game is a 2 player shooter game using one keyboard that uses simple game mechanics, integrating world and screen space UI, as well as game architecture and audio mixing...
