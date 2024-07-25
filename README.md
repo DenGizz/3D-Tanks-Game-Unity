@@ -10,23 +10,21 @@ This repository demonstrates the process of refactoring and rewriting highly con
 
 The project uses the Service-Oriented Architecture (SOA) approach and Zenject for Dependency Injection (DI). The main goal is to show how the source code can be transformed to become more maintainable and easily extensible to add new features.
 
-
-
-
-
 # About source project
 
 3D Tanks Game is a 2 player shooter game using one keyboard that uses simple game mechanics, integrating world and screen space UI, as well as game architecture and audio mixing...
 
 [Source repo](https://github.com/choubari/3D-Tanks-Game-Unity)
 
-## Images 
+# Conclusions
 
-<p align="center">
- <img  src="Images/tanks.jpg" width="600px" >
- </br>
- <img  src="Images/playing.jpg" width="600px" >
- </br>
- <img  src="Images/winner_annoucement.jpg" width="600px" >
- </br>
-</p>
+Refactoring of this project probably took more time than writing it, it follows from the fact that we had to create the architecture of the project from scratch. 
+
+Although the goal of the prototype is to get an answer to the question of the validity of a particular hypothesis as quickly and inexpensively as possible, if this prototype is not being developed by a game designer who has almost no coding skills and experience, it is worth thinking about a minimum level of architecture.
+For example, use the Singleton approach, using interfaces, caching references in the constructor or method Awake(), as well as with the prohibition at the level of skill of the team to use direct calls to Singleton.Instance not from the constructor or method Awake().
+
+In the future, this will make it easy to replace Singleton with services, and to implement DI, since references to the necessary managers and services can be obtained through injection into the constructor or method in the case of MonoBehaviour.
+
+You should also first create tests for the prototyped mechanics, and then start refactoring the code to make it easier to understand whether the rewritten code works correctly relative to the old one.
+
+When refactoring a prototype, you should first of all rewrite the elements that will require interaction with the project architecture, and only then the rest of the code. Some parts can be left unrefactorable until there is a need to change these parts to add new functionality.
