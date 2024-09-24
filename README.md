@@ -10,7 +10,7 @@ This repository demonstrates the process of refactoring and rewriting highly con
 
 The project uses the Service-Oriented Architecture (SOA) approach and Zenject for Dependency Injection (DI). The main goal is to show how the source code can be transformed to become more maintainable and easily extensible to add new features.
 
-# ! IMPORTANT !
+# How to run
 You can see the unrefactored code in the master branch. 
 
 The refactored code is in the staging branch.
