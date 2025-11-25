@@ -13,7 +13,7 @@ The project uses the Service-Oriented Architecture (SOA) approach and Zenject fo
 # ! IMPORTANT !
 Unity version 2022.3.22f1
 
-Lunch game from Bootstrap scene
+Launch game from Bootstrap scene
 
 
 # About source project
