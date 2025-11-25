@@ -10,7 +10,12 @@ This repository demonstrates the process of refactoring and rewriting highly con
 
 The project uses the Service-Oriented Architecture (SOA) approach and Zenject for Dependency Injection (DI). The main goal is to show how the source code can be transformed to become more maintainable and easily extensible to add new features.
 
-# ! IMPORTANT !
+
+You can see the unrefactored code in the Unrefactored-Codebase branch. 
+
+
+# How to run
+
 Unity version 2022.3.22f1
 
 Launch game from Bootstrap scene
